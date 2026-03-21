@@ -1,0 +1,18 @@
+"""Librería Física Común Centroamericana (LFCC)"""
+
+import numpy as np
+
+def derivada_d(f, x, h):
+    '''Derivada hacia delante'''
+    return (f(x+h)-f(x))/h 
+
+def derivada_c(f, x, h):
+	"""Derivada central"""
+	return (f(x + h/2) - f(x - h/2))/h #Derivada central
+
+def nderiv(f, x, n):
+	"""n-ésima derivada basada en la derivada central"""
+	if n == 0:
+		return f(x)
+	else: 
+		return nderiv(lambda y: derivada_c(f, y), x, n-1)
