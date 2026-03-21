@@ -108,3 +108,24 @@ def chi_cuadrada(y_observado, y_ajustado, sigma):
     '''Calculando el chi cuadrado para evaluar la calidad del ajuste'''
     chi2 = np.sum(((y_observado - y_ajustado) / sigma) ** 2)
     return chi2
+
+"""NEWTON-RAPHSON"""
+def newtonr(x, dx, eps, Nmax):
+
+	for it in range(0, Nmax +1):
+
+		F = f(x)
+
+		if (abs(F) <= eps):
+			print("\n  Root found, f(root) = ", F, ", eps = ", eps)
+			print("Iteration \# =", it, " x = ", x, " f(x) =", F)
+			break
+		else:
+			df = (f(x+dx/2) - f(x-dx/2))/dx
+			dx = -F/df
+			x += dx
+
+			if it == Nmax+1:
+				print("\n Newton Failed for Nmax = ", Nmax)
+
+	return x
