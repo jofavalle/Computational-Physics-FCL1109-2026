@@ -348,4 +348,63 @@ plt.show()
 print("  Gráfica guardada en test_minimos_cuadrados.png\n")
 
 print("=" * 40)
+print("Tests de mínimos cuadrados pasaron correctamente.")
+print("=" * 40)
+print()
+
+# =============================================
+# TESTS DE NEWTON-RAPHSON
+# =============================================
+
+# Test 1: raíz de x² - 4 = 0  →  x = ±2
+def f_nr1(x):
+    return x**2 - 4
+
+raiz1 = mt.newtonr(f_nr1, x=3.0, dx=1e-6, eps=1e-10, Nmax=100)
+print(f"newtonr(x²-4, x₀=3) = {raiz1:.10f}")
+print(f"  Valor exacto: 2.0")
+print(f"  Error: {abs(raiz1 - 2.0):.2e}")
+assert abs(raiz1 - 2.0) < 1e-8, "newtonr falló para x²-4 (raíz positiva)"
+print("  ✓ newtonr raíz de x²-4 OK\n")
+
+# Test 2: raíz negativa, partiendo de x₀ = -1
+raiz1b = mt.newtonr(f_nr1, x=-1.0, dx=1e-6, eps=1e-10, Nmax=100)
+print(f"newtonr(x²-4, x₀=-1) = {raiz1b:.10f}")
+print(f"  Valor exacto: -2.0")
+print(f"  Error: {abs(raiz1b - (-2.0)):.2e}")
+assert abs(raiz1b - (-2.0)) < 1e-8, "newtonr falló para x²-4 (raíz negativa)"
+print("  ✓ newtonr raíz negativa OK\n")
+
+# Test 3: raíz de sin(x) = 0 cerca de π
+raiz2 = mt.newtonr(np.sin, x=3.0, dx=1e-6, eps=1e-12, Nmax=100)
+print(f"newtonr(sin(x), x₀=3) = {raiz2:.10f}")
+print(f"  Valor exacto: π = {np.pi:.10f}")
+print(f"  Error: {abs(raiz2 - np.pi):.2e}")
+assert abs(raiz2 - np.pi) < 1e-10, "newtonr falló para sin(x)"
+print("  ✓ newtonr raíz de sin(x) OK\n")
+
+# Test 4: raíz de e^x - 3 = 0  →  x = ln(3)
+def f_nr3(x):
+    return np.exp(x) - 3
+
+raiz3 = mt.newtonr(f_nr3, x=1.0, dx=1e-6, eps=1e-10, Nmax=100)
+exacto_ln3 = np.log(3)
+print(f"newtonr(eˣ-3, x₀=1) = {raiz3:.10f}")
+print(f"  Valor exacto: ln(3) = {exacto_ln3:.10f}")
+print(f"  Error: {abs(raiz3 - exacto_ln3):.2e}")
+assert abs(raiz3 - exacto_ln3) < 1e-8, "newtonr falló para eˣ-3"
+print("  ✓ newtonr raíz de eˣ-3 OK\n")
+
+# Test 5: raíz de x³ - x - 2 = 0  (raíz real ≈ 1.5214)
+def f_nr4(x):
+    return x**3 - x - 2
+
+raiz4 = mt.newtonr(f_nr4, x=2.0, dx=1e-6, eps=1e-12, Nmax=100)
+# Verificar que f(raiz) ≈ 0
+print(f"newtonr(x³-x-2, x₀=2) = {raiz4:.10f}")
+print(f"  f(raíz) = {f_nr4(raiz4):.2e}")
+assert abs(f_nr4(raiz4)) < 1e-10, "newtonr falló para x³-x-2"
+print("  ✓ newtonr raíz de x³-x-2 OK\n")
+
+print("=" * 40)
 print("Todas las pruebas pasaron correctamente.")

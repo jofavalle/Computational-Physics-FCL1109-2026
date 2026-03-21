@@ -110,23 +110,22 @@ def chi_cuadrada(y_observado, y_ajustado, sigma):
     return chi2
 
 """NEWTON-RAPHSON"""
-f = 1 #Quitar esto al usarlo
-def newtonr(x, dx, eps, Nmax):
 
-	for it in range(0, Nmax +1):
+def newtonr(f, x, dx, eps, Nmax):
+	"""Método de Newton-Raphson con derivada numérica.
+	f: función, x: estimación inicial, dx: paso para derivada numérica,
+	eps: tolerancia, Nmax: máximo de iteraciones"""
+	for it in range(Nmax):
 
 		F = f(x)
 
-		if (abs(F) <= eps):
-			print("\n  Root found, f(root) = ", F, ", eps = ", eps)
-			print("Iteration \# =", it, " x = ", x, " f(x) =", F)
+		if abs(F) <= eps:
 			break
 		else:
-			df = (f(x+dx/2) - f(x-dx/2))/dx
-			dx = -F/df
-			x += dx
+			df = (f(x + dx/2) - f(x - dx/2)) / dx
+			x += -F / df
 
-			if it == Nmax+1:
-				print("\n Newton Failed for Nmax = ", Nmax)
+	else:
+		print("Newton Failed for Nmax =", Nmax)
 
 	return x
