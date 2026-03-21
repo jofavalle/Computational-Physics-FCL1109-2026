@@ -171,4 +171,108 @@ assert abs(I_inf - 1.0) < 1e-4, "Integral impropia falló"
 print("  ✓ Integral impropia OK\n")
 
 print("=" * 40)
+print("Tests de integrales pasaron correctamente.")
+print("=" * 40)
+print()
+
+# =============================================
+# TESTS DE INTEGRADORES NUMÉRICOS (EDOs)
+# =============================================
+
+# --- Test Euler: dx/dt = -x  =>  x(t) = x₀·e^(-t) ---
+# euler(f, x, h) aplica un paso: x_new = x + h*f(x)
+
+x_euler = 1.0       # condición inicial x(0) = 1
+dt = 0.001           # paso pequeño
+t_final = 1.0
+n_pasos = int(t_final / dt)
+
+for _ in range(n_pasos):
+    x_euler = mt.euler(lambda x: -x, x_euler, dt)
+
+exacto_euler = np.exp(-t_final)  # e^(-1) ≈ 0.3678794...
+print(f"euler(dx/dt=-x, x₀=1, t=1, dt={dt}) = {x_euler:.10f}")
+print(f"  Valor exacto: {exacto_euler:.10f}")
+print(f"  Error: {abs(x_euler - exacto_euler):.2e}")
+assert abs(x_euler - exacto_euler) < 1e-3, "euler falló para dx/dt = -x"
+print("  ✓ euler OK\n")
+
+# --- Test Euler: dx/dt = 2x  =>  x(t) = x₀·e^(2t) ---
+x_euler2 = 1.0
+t_final2 = 0.5
+n_pasos2 = int(t_final2 / dt)
+
+for _ in range(n_pasos2):
+    x_euler2 = mt.euler(lambda x: 2*x, x_euler2, dt)
+
+exacto_euler2 = np.exp(2 * t_final2)  # e^1
+print(f"euler(dx/dt=2x, x₀=1, t=0.5, dt={dt}) = {x_euler2:.10f}")
+print(f"  Valor exacto: {exacto_euler2:.10f}")
+print(f"  Error: {abs(x_euler2 - exacto_euler2):.2e}")
+assert abs(x_euler2 - exacto_euler2) < 1e-2, "euler falló para dx/dt = 2x"
+print("  ✓ euler con crecimiento exponencial OK\n")
+
+# --- Test RK4: dx/dt = -x  =>  x(t) = e^(-t) ---
+# rk4(t, h, x, f) con f(t, x)
+
+x_rk4 = 1.0
+dt_rk4 = 0.01  # paso más grande que Euler y aún así más preciso
+t = 0.0
+t_final_rk4 = 1.0
+n_pasos_rk4 = int(t_final_rk4 / dt_rk4)
+
+for i in range(n_pasos_rk4):
+    x_rk4 = mt.rk4(t, dt_rk4, x_rk4, lambda t, x: -x)
+    t += dt_rk4
+
+exacto_rk4 = np.exp(-t_final_rk4)
+print(f"rk4(dx/dt=-x, x₀=1, t=1, dt={dt_rk4}) = {x_rk4:.10f}")
+print(f"  Valor exacto: {exacto_rk4:.10f}")
+print(f"  Error: {abs(x_rk4 - exacto_rk4):.2e}")
+assert abs(x_rk4 - exacto_rk4) < 1e-9, "rk4 falló para dx/dt = -x"
+print("  ✓ rk4 OK\n")
+
+# --- Test RK4: sistema vectorial dx/dt = -x (2D) ---
+# x = [x1, x2], dx/dt = [-x1, -2*x2]
+# Solución: x1(t) = e^(-t), x2(t) = e^(-2t)
+
+x_vec = np.array([1.0, 1.0])
+t = 0.0
+
+def f_vec(t, x):
+    return np.array([-x[0], -2*x[1]])
+
+for i in range(n_pasos_rk4):
+    x_vec = mt.rk4(t, dt_rk4, x_vec, f_vec)
+    t += dt_rk4
+
+exacto_vec = np.array([np.exp(-1.0), np.exp(-2.0)])
+err_vec = np.abs(x_vec - exacto_vec)
+print(f"rk4 vectorial: x₁(1)={x_vec[0]:.10f}, x₂(1)={x_vec[1]:.10f}")
+print(f"  Exacto:      x₁(1)={exacto_vec[0]:.10f}, x₂(1)={exacto_vec[1]:.10f}")
+print(f"  Errores: {err_vec[0]:.2e}, {err_vec[1]:.2e}")
+assert np.all(err_vec < 1e-8), "rk4 vectorial falló"
+print("  ✓ rk4 vectorial OK\n")
+
+# --- Test RK4 vs Euler: RK4 debe ser mucho más preciso ---
+# Ambos con el mismo paso dt=0.01 para dx/dt = -x
+x_e = 1.0
+x_r = 1.0
+dt_comp = 0.01
+t = 0.0
+for i in range(100):
+    x_e = mt.euler(lambda x: -x, x_e, dt_comp)
+    x_r = mt.rk4(t, dt_comp, x_r, lambda t, x: -x)
+    t += dt_comp
+
+err_e = abs(x_e - np.exp(-1.0))
+err_r = abs(x_r - np.exp(-1.0))
+print(f"Comparación (dt={dt_comp}, t=1):")
+print(f"  Euler: error = {err_e:.2e}")
+print(f"  RK4:   error = {err_r:.2e}")
+print(f"  RK4 es {err_e/err_r:.0f}x más preciso que Euler")
+assert err_r < err_e, "RK4 debería ser más preciso que Euler"
+print("  ✓ RK4 más preciso que Euler OK\n")
+
+print("=" * 40)
 print("Todas las pruebas pasaron correctamente.")
