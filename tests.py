@@ -275,4 +275,77 @@ assert err_r < err_e, "RK4 debería ser más preciso que Euler"
 print("  ✓ RK4 más preciso que Euler OK\n")
 
 print("=" * 40)
+print("Tests de integradores numéricos pasaron correctamente.")
+print("=" * 40)
+print()
+
+# =============================================
+# TESTS DE MÍNIMOS CUADRADOS (polinomio grado 3)
+# =============================================
+import matplotlib.pyplot as plt
+
+# Datos: polinomio cúbico conocido y = 2 - 3x + 0.5x² + 0.8x³ + ruido
+np.random.seed(7)
+x_datos = np.linspace(-2, 3, 20)
+sigma = np.full_like(x_datos, 2.0)  # incertidumbre constante
+y_exactos = 2 - 3*x_datos + 0.5*x_datos**2 + 0.8*x_datos**3
+y_datos = y_exactos + np.random.normal(0, sigma)
+
+# Construir matriz normal A (4x4) y vector b (4x1)
+# Para y = a0 + a1*x + a2*x² + a3*x³
+# A_ij = sum( x^(i+j) / sigma² ),  b_i = sum( y * x^i / sigma² )
+w = 1.0 / sigma**2  # pesos
+
+A = np.zeros((4, 4))
+b = np.zeros(4)
+for i in range(4):
+    b[i] = np.sum(w * y_datos * x_datos**i)
+    for j in range(4):
+        A[i, j] = np.sum(w * x_datos**(i + j))
+
+# Resolver con minimos_cuadrados
+coefs = mt.minimos_cuadrados(A, b)  # [a0, a1, a2, a3]
+print(f"Coeficientes ajustados: a0={coefs[0]:.4f}, a1={coefs[1]:.4f}, a2={coefs[2]:.4f}, a3={coefs[3]:.4f}")
+print(f"Coeficientes reales:    a0=2.0000, a1=-3.0000, a2=0.5000, a3=0.8000")
+
+# Evaluar ajuste
+y_ajustado = coefs[0] + coefs[1]*x_datos + coefs[2]*x_datos**2 + coefs[3]*x_datos**3
+
+# Calcular chi cuadrada
+chi2 = mt.chi_cuadrada(y_datos, y_ajustado, sigma)
+ndof = len(x_datos) - 4  # grados de libertad = N - parámetros
+chi2_red = chi2 / ndof
+print(f"χ² = {chi2:.4f}")
+print(f"χ²/ndof = {chi2_red:.4f}  (ndof = {ndof})")
+assert chi2_red < 3.0, "chi² reducida demasiado alta, ajuste deficiente"
+print("  ✓ minimos_cuadrados OK")
+print("  ✓ chi_cuadrada OK\n")
+
+# --- Gráfica ---
+x_fino = np.linspace(x_datos.min() - 0.3, x_datos.max() + 0.3, 300)
+y_fino = coefs[0] + coefs[1]*x_fino + coefs[2]*x_fino**2 + coefs[3]*x_fino**3
+
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.errorbar(x_datos, y_datos, yerr=sigma, fmt='o', color='steelblue',
+            capsize=3, label='Datos con incertidumbre')
+ax.plot(x_fino, y_fino, '-', color='crimson', linewidth=2, label='Ajuste cúbico')
+
+# Ecuación y chi² en la gráfica
+ecuacion = (f"$y = {coefs[0]:.2f} + ({coefs[1]:.2f})x "
+            f"+ ({coefs[2]:.2f})x^2 + ({coefs[3]:.2f})x^3$")
+texto = ecuacion + f"\n$\\chi^2 = {chi2:.2f}$,  $\\chi^2/\\nu = {chi2_red:.2f}$"
+ax.text(0.05, 0.95, texto, transform=ax.transAxes, fontsize=10,
+        verticalalignment='top', bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.8))
+
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_title('Ajuste por Mínimos Cuadrados — Polinomio de grado 3')
+ax.legend(loc='lower right')
+ax.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.savefig('test_minimos_cuadrados.png', dpi=150)
+plt.show()
+print("  Gráfica guardada en test_minimos_cuadrados.png\n")
+
+print("=" * 40)
 print("Todas las pruebas pasaron correctamente.")

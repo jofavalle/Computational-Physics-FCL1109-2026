@@ -96,3 +96,15 @@ def rk4(t, h, x, f):
 	k3 = h * f(t + h/2, x + k2/2)
 	k4 = h * f(t + h, x + k3)
 	return x + (k1 + 2*k2 + 2*k3 + k4) / 6
+
+''' Mínimos Cuadrados '''
+
+def minimos_cuadrados(A,b):
+    '''Resolviendo donde A = [[ss, sx], [sx, sxx]] y b = [sy, sxy]'''
+    coeficientes = np.linalg.solve(A, b)
+    return coeficientes  # Retorna los coeficientes del ajuste (m, b) para un ajuste lineal
+
+def chi_cuadrada(y_observado, y_ajustado, sigma):
+    '''Calculando el chi cuadrado para evaluar la calidad del ajuste'''
+    chi2 = np.sum(((y_observado - y_ajustado) / sigma) ** 2)
+    return chi2
