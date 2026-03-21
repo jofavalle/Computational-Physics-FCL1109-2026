@@ -110,6 +110,7 @@ def chi_cuadrada(y_observado, y_ajustado, sigma):
     return chi2
 
 """NEWTON-RAPHSON"""
+f = 1 #Quitar esto al usarlo
 def newtonr(x, dx, eps, Nmax):
 
 	for it in range(0, Nmax +1):
