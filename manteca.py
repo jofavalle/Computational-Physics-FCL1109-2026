@@ -4,6 +4,8 @@ import numpy as np
 
 h=1e-5 #Paso para las derivadas numéricas, definido globalmente para nderiv
 
+#DERIVACIÓN NUMÉRICA
+
 def derivada_d(f, x, h):
     '''Derivada hacia delante'''
     return (f(x+h)-f(x))/h 
@@ -71,3 +73,26 @@ def integrando_z(f, z):
 	Incluso (h, 0.9999)"""
 	x = x_of_z(z)
 	return f(x)*jacobian(z)
+
+#INTEGRADORES NUMÉRICOS
+
+
+"""
+MÉTODO DE EULER
+"""
+
+def euler(f, x, h):
+	"""Método integrador de Euler"""
+	return x + h * f(x)
+
+"""
+MÉTODO RK4
+"""
+
+def rk4(t, h, x, f):
+	"""Función Runge-Kutta de orden 4, implementado vectorialmente"""
+	k1 = h * f(t, x)
+	k2 = h * f(t + h/2, x + k1/2)
+	k3 = h * f(t + h/2, x + k2/2)
+	k4 = h * f(t + h, x + k3)
+	return x + (k1 + 2*k2 + 2*k3 + k4) / 6
