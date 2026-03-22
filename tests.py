@@ -39,29 +39,29 @@ print(f"  Error: {abs(dc_sin - esperado_cos):.2e}")
 assert abs(dc_sin - esperado_cos) < 1e-8, "derivada_central falló para sin(x)"
 print("  ✓ derivada_central con sin(x) OK\n")
 
-# Test derivada_nesima — orden 0 (debe devolver f(x))
-nd0 = mt.derivada_nesima(f, x0, 0)
-print(f"derivada_nesima(x³, x={x0}, n=0) = {nd0}")
+# Test derivada_enesima — orden 0 (debe devolver f(x))
+nd0 = mt.derivada_enesima(f, x0, 0)
+print(f"derivada_enesima(x³, x={x0}, n=0) = {nd0}")
 print(f"  Valor esperado: {f(x0)}")
-assert nd0 == f(x0), "derivada_nesima n=0 falló"
-print("  ✓ derivada_nesima n=0 OK\n")
+assert nd0 == f(x0), "derivada_enesima n=0 falló"
+print("  ✓ derivada_enesima n=0 OK\n")
 
-# Test derivada_nesima — primera derivada
-nd1 = mt.derivada_nesima(f, x0, 1)
-print(f"derivada_nesima(x³, x={x0}, n=1) = {nd1:.10f}")
+# Test derivada_enesima — primera derivada
+nd1 = mt.derivada_enesima(f, x0, 1)
+print(f"derivada_enesima(x³, x={x0}, n=1) = {nd1:.10f}")
 print(f"  Valor esperado: {esperado_d}")
 print(f"  Error: {abs(nd1 - esperado_d):.2e}")
-assert abs(nd1 - esperado_d) < 1e-4, "derivada_nesima n=1 falló"
-print("  ✓ derivada_nesima n=1 OK\n")
+assert abs(nd1 - esperado_d) < 1e-4, "derivada_enesima n=1 falló"
+print("  ✓ derivada_enesima n=1 OK\n")
 
-# Test derivada_nesima — segunda derivada
-nd2 = mt.derivada_nesima(f, x0, 2)
+# Test derivada_enesima — segunda derivada
+nd2 = mt.derivada_enesima(f, x0, 2)
 esperado_2 = 6 * x0  # f''(2) = 12
-print(f"derivada_nesima(x³, x={x0}, n=2) = {nd2:.6f}")
+print(f"derivada_enesima(x³, x={x0}, n=2) = {nd2:.6f}")
 print(f"  Valor esperado: {esperado_2}")
 print(f"  Error: {abs(nd2 - esperado_2):.2e}")
-assert abs(nd2 - esperado_2) < 1e-2, "derivada_nesima n=2 falló"
-print("  ✓ derivada_nesima n=2 OK\n")
+assert abs(nd2 - esperado_2) < 1e-2, "derivada_enesima n=2 falló"
+print("  ✓ derivada_enesima n=2 OK\n")
 
 print("=" * 40)
 print("Tests de derivadas pasaron correctamente.")
@@ -169,6 +169,69 @@ print(f"  Valor exacto: 1.0")
 print(f"  Error: {abs(I_inf - 1.0):.2e}")
 assert abs(I_inf - 1.0) < 1e-4, "Integral impropia falló"
 print("  ✓ Integral impropia OK\n")
+
+# =============================================
+# TESTS DE integral_impropia (función general)
+# =============================================
+
+# Test 1: ∫₀^∞ e^(-x) dx = 1  (reproduce el test anterior con la nueva función)
+I1 = mt.integral_impropia(lambda x: np.exp(-x), 0, np.inf)
+print(f"integral_impropia(e^(-x), 0, ∞) = {I1:.10f}")
+print(f"  Valor exacto: 1.0")
+print(f"  Error: {abs(I1 - 1.0):.2e}")
+assert abs(I1 - 1.0) < 1e-4, "integral_impropia [0, ∞) falló"
+print("  ✓ integral_impropia [0, ∞) OK\n")
+
+# Test 2: ∫₋∞^0 e^(x) dx = 1
+I2 = mt.integral_impropia(lambda x: np.exp(x), -np.inf, 0)
+print(f"integral_impropia(e^(x), -∞, 0) = {I2:.10f}")
+print(f"  Valor exacto: 1.0")
+print(f"  Error: {abs(I2 - 1.0):.2e}")
+assert abs(I2 - 1.0) < 1e-4, "integral_impropia (-∞, 0] falló"
+print("  ✓ integral_impropia (-∞, 0] OK\n")
+
+# Test 3: ∫₋∞^∞ e^(-x²) dx = √π
+I3 = mt.integral_impropia(lambda x: np.exp(-x**2), -np.inf, np.inf, n=2000)
+exacto3 = np.sqrt(np.pi)
+print(f"integral_impropia(e^(-x²), -∞, ∞) = {I3:.10f}")
+print(f"  Valor exacto (√π): {exacto3:.10f}")
+print(f"  Error: {abs(I3 - exacto3):.2e}")
+assert abs(I3 - exacto3) < 1e-3, "integral_impropia (-∞, ∞) gaussiana falló"
+print("  ✓ integral_impropia (-∞, ∞) gaussiana OK\n")
+
+# Test 4: ∫₅^∞ 1/(1+x²) dx = π/2 - arctan(5)
+I4 = mt.integral_impropia(lambda x: 1/(1 + x**2), 5, np.inf)
+exacto4 = np.pi/2 - np.arctan(5)
+print(f"integral_impropia(1/(1+x²), 5, ∞) = {I4:.10f}")
+print(f"  Valor exacto (π/2 - arctan(5)): {exacto4:.10f}")
+print(f"  Error: {abs(I4 - exacto4):.2e}")
+assert abs(I4 - exacto4) < 1e-4, "integral_impropia [5, ∞) falló"
+print("  ✓ integral_impropia [5, ∞) OK\n")
+
+# Test 5: ∫₋∞^-2 1/(1+x²) dx = π/2 - arctan(2)
+I5 = mt.integral_impropia(lambda x: 1/(1 + x**2), -np.inf, -2)
+exacto5 = np.pi/2 - np.arctan(2)
+print(f"integral_impropia(1/(1+x²), -∞, -2) = {I5:.10f}")
+print(f"  Valor exacto (π/2 - arctan(2)): {exacto5:.10f}")
+print(f"  Error: {abs(I5 - exacto5):.2e}")
+assert abs(I5 - exacto5) < 1e-4, "integral_impropia (-∞, -2] falló"
+print("  ✓ integral_impropia (-∞, -2] OK\n")
+
+# Test 6: ∫₋∞^∞ 1/(1+x²) dx = π  (Lorentziana)
+I6 = mt.integral_impropia(lambda x: 1/(1 + x**2), -np.inf, np.inf, n=2000)
+print(f"integral_impropia(1/(1+x²), -∞, ∞) = {I6:.10f}")
+print(f"  Valor exacto (π): {np.pi:.10f}")
+print(f"  Error: {abs(I6 - np.pi):.2e}")
+assert abs(I6 - np.pi) < 1e-3, "integral_impropia (-∞, ∞) Lorentziana falló"
+print("  ✓ integral_impropia (-∞, ∞) Lorentziana OK\n")
+
+# Test 7: caso finito — integral_impropia debe delegar a simpson
+I7 = mt.integral_impropia(lambda x: x**2, 0, 1)
+print(f"integral_impropia(x², 0, 1) = {I7:.10f}")
+print(f"  Valor exacto: 0.3333333333")
+print(f"  Error: {abs(I7 - 1/3):.2e}")
+assert abs(I7 - 1/3) < 1e-6, "integral_impropia caso finito falló"
+print("  ✓ integral_impropia caso finito OK\n")
 
 print("=" * 40)
 print("Tests de integrales pasaron correctamente.")

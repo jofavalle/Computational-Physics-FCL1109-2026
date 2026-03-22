@@ -87,7 +87,7 @@ def derivada_central(f, x, h):
     return (f(x + h/2) - f(x - h/2)) / h
 
 
-def derivada_nesima(f, x, n):
+def derivada_enesima(f, x, n):
     """
     Calcula la n-ésima derivada de f en el punto x de forma recursiva.
 
@@ -110,9 +110,9 @@ def derivada_nesima(f, x, n):
         se acumulan en cada nivel de recursión.
 
     Ejemplo:
-        >>> derivada_nesima(lambda x: x**3, 2.0, 1)   # Primera derivada: 3x² = 12
+        >>> derivada_enesima(lambda x: x**3, 2.0, 1)   # Primera derivada: 3x² = 12
         12.0
-        >>> derivada_nesima(lambda x: x**3, 2.0, 2)   # Segunda derivada: 6x = 12
+        >>> derivada_enesima(lambda x: x**3, 2.0, 2)   # Segunda derivada: 6x = 12
         12.0
     """
     if n == 0:
@@ -121,7 +121,7 @@ def derivada_nesima(f, x, n):
     else:
         # Caso recursivo: construimos g(y) = f'(y) usando derivada central,
         # y luego calculamos la (n-1)-ésima derivada de g
-        return derivada_nesima(lambda y: derivada_central(f, y, _h_default), x, n - 1)
+        return derivada_enesima(lambda y: derivada_central(f, y, _h_default), x, n - 1)
 
 
 # ============================================================================
@@ -324,6 +324,83 @@ def integrando_transformado(f, z):
     """
     x = cambio_variable(z)
     return f(x) * jacobiano(z)
+
+
+def integral_impropia(f, a, b, n=1000, metodo=None):
+    """
+    Calcula integrales impropias (con límites infinitos) de forma automática.
+
+    Detecta si alguno de los límites es ±∞ y aplica el cambio de variable
+    adecuado para transformar la integral en una integral sobre [0, 1], que
+    luego se evalúa con el método numérico indicado (Simpson por defecto).
+
+    Casos soportados:
+        1. ∫ₐ^∞  f(x)dx   — Solo el límite superior es infinito.
+           Cambio: x = a + z/(1-z),  dx = 1/(1-z)² dz,  z ∈ [0, 1]
+
+        2. ∫₋∞^b  f(x)dx  — Solo el límite inferior es infinito.
+           Cambio: x = b - z/(1-z),  dx = 1/(1-z)² dz,  z ∈ [0, 1]
+           (se refleja el eje, recorriendo de b hacia -∞)
+
+        3. ∫₋∞^∞  f(x)dx  — Ambos límites son infinitos.
+           Se parte en dos: ∫₋∞^0 f(x)dx + ∫₀^∞ f(x)dx
+           y se aplican los casos 2 y 1 respectivamente.
+
+    Parámetros:
+        f      : función — La función a integrar. Debe aceptar float/array.
+        a      : float   — Límite inferior. Usar -np.inf para -∞.
+        b      : float   — Límite superior. Usar np.inf para +∞.
+        n      : int     — Número de subintervalos para el método numérico (default: 1000).
+        metodo : función — Método de integración a usar (default: simpson).
+                           Debe tener firma metodo(f, a, b, n).
+
+    Retorna:
+        float — Aproximación numérica de la integral.
+
+    Ejemplos:
+        >>> integral_impropia(lambda x: np.exp(-x), 0, np.inf)
+        1.0                    # ∫₀^∞ e^(-x) dx = 1
+
+        >>> integral_impropia(lambda x: np.exp(x), -np.inf, 0)
+        1.0                    # ∫₋∞^0 e^(x) dx = 1
+
+        >>> integral_impropia(lambda x: np.exp(-x**2), -np.inf, np.inf)
+        1.7724538509           # ∫₋∞^∞ e^(-x²) dx = √π
+
+        >>> integral_impropia(lambda x: 1/(1+x**2), 5, np.inf)
+        0.19739555985          # ∫₅^∞ 1/(1+x²) dx = π/2 - arctan(5)
+    """
+    if metodo is None:
+        metodo = simpson
+
+    eps = 1e-10  # para evitar singularidades en z=0 y z=1
+
+    a_inf = (a == -np.inf)
+    b_inf = (b == np.inf)
+
+    if a_inf and b_inf:
+        # Caso 3: ∫₋∞^∞ — partir en ∫₋∞^0 + ∫₀^∞
+        I1 = integral_impropia(f, -np.inf, 0, n, metodo)
+        I2 = integral_impropia(f, 0, np.inf, n, metodo)
+        return I1 + I2
+
+    elif b_inf:
+        # Caso 1: ∫ₐ^∞ — cambio x = a + z/(1-z)
+        def g(z):
+            x = a + z / (1.0 - z)
+            return f(x) / (1.0 - z)**2
+        return metodo(g, eps, 1 - eps, n)
+
+    elif a_inf:
+        # Caso 2: ∫₋∞^b — cambio x = b - z/(1-z)
+        def g(z):
+            x = b - z / (1.0 - z)
+            return f(x) / (1.0 - z)**2
+        return metodo(g, eps, 1 - eps, n)
+
+    else:
+        # Caso sin infinitos: integral ordinaria
+        return metodo(f, a, b, n)
 
 
 # ============================================================================
@@ -701,3 +778,195 @@ def ifft(X):
     resultado = fft(conjugada)
     # Paso 3: conjugar de nuevo y dividir entre N para normalizar
     return [val.conjugate() / N for val in resultado]
+
+
+# ============================================================================
+# PLANTILLA: CARGA DE DATOS DESDE ARCHIVOS
+# ============================================================================
+#
+# --- Con NumPy ---
+#
+#   # .txt o .dat (columnas separadas por espacios o tabuladores)
+#   datos = np.loadtxt("archivo.txt")
+#   datos = np.loadtxt("archivo.dat")
+#
+#   # .csv (separado por comas)
+#   datos = np.loadtxt("archivo.csv", delimiter=",")
+#
+#   # Si tiene encabezado (saltarse la primera fila)
+#   datos = np.loadtxt("archivo.txt", skiprows=1)
+#
+#   # Extraer columnas individuales
+#   x = datos[:, 0]       # primera columna
+#   y = datos[:, 1]       # segunda columna
+#   sigma = datos[:, 2]   # tercera columna (incertidumbres)
+#
+#   # Desempaquetar varias columnas a la vez
+#   x, y, sigma = np.loadtxt("archivo.csv", delimiter=",", skiprows=1, unpack=True)
+#
+#
+# --- Con Pandas ---
+#
+#   import pandas as pd
+#
+#   # .csv
+#   df = pd.read_csv("archivo.csv")
+#
+#   # .txt o .dat (separado por espacios/tabs)
+#   df = pd.read_csv("archivo.txt", sep=r"\s+")
+#   df = pd.read_csv("archivo.dat", sep=r"\s+")
+#
+#   # Si no tiene encabezado
+#   df = pd.read_csv("archivo.csv", header=None, names=["x", "y", "sigma"])
+#
+#   # Extraer columnas como arrays de NumPy
+#   x = df["x"].values
+#   y = df["y"].values
+#   sigma = df["sigma"].values
+#
+#   # O por posición
+#   x = df.iloc[:, 0].values
+#   y = df.iloc[:, 1].values
+#
+#
+# --- Ejemplo completo ---
+#
+#   import numpy as np
+#   import manteca as mt
+#
+#   # Cargar datos
+#   x, y, sigma = np.loadtxt("datos.csv", delimiter=",", skiprows=1, unpack=True)
+#
+#   # Ajuste lineal y = a0 + a1*x
+#   S   = np.sum(1 / sigma**2)
+#   Sx  = np.sum(x / sigma**2)
+#   Sxx = np.sum(x**2 / sigma**2)
+#   Sy  = np.sum(y / sigma**2)
+#   Sxy = np.sum(x * y / sigma**2)
+#
+#   A = np.array([[S, Sx], [Sx, Sxx]])
+#   b = np.array([Sy, Sxy])
+#   a0, a1 = mt.minimos_cuadrados(A, b)
+#
+#   y_ajuste = a0 + a1 * x
+#   chi2 = mt.chi_cuadrada(y, y_ajuste, sigma)
+#   print(f"y = {a0:.4f} + {a1:.4f}·x,  χ² = {chi2:.4f}")
+
+
+# ============================================================================
+# PLANTILLA: GRÁFICAS CON MATPLOTLIB
+# ============================================================================
+#
+# import matplotlib.pyplot as plt
+#
+#
+# --- Gráfica básica (línea) ---
+#
+#   plt.figure(figsize=(8, 5))
+#   plt.plot(x, y, "b-", linewidth=1.5, label="Datos")
+#   plt.xlabel("Tiempo $t$ [s]", fontsize=13)
+#   plt.ylabel("Posición $x$ [m]", fontsize=13)
+#   plt.title("Posición vs Tiempo", fontsize=14)
+#   plt.legend(fontsize=12)
+#   plt.grid(True, alpha=0.3)
+#   plt.tight_layout()
+#   plt.savefig("grafica.png", dpi=150)
+#   plt.show()
+#
+#
+# --- Datos experimentales con barras de error + ajuste ---
+#
+#   plt.figure(figsize=(8, 5))
+#   plt.errorbar(x, y, yerr=sigma, fmt="ko", markersize=4,
+#                capsize=3, label="Datos experimentales")
+#   plt.plot(x, y_ajuste, "r-", linewidth=1.5,
+#            label=f"Ajuste: $y = {a0:.3f} + {a1:.3f}x$")
+#   plt.xlabel("$x$ [unidad]", fontsize=13)
+#   plt.ylabel("$y$ [unidad]", fontsize=13)
+#   plt.title("Ajuste por mínimos cuadrados", fontsize=14)
+#   plt.legend(fontsize=12)
+#   plt.grid(True, alpha=0.3)
+#   plt.tight_layout()
+#   plt.savefig("ajuste.png", dpi=150)
+#   plt.show()
+#
+#
+# --- Varias curvas en una gráfica ---
+#
+#   plt.figure(figsize=(8, 5))
+#   plt.plot(t, x1, "b-", linewidth=1.5, label="$x_1(t)$")
+#   plt.plot(t, x2, "r--", linewidth=1.5, label="$x_2(t)$")
+#   plt.plot(t, x3, "g:", linewidth=1.5, label="$x_3(t)$")
+#   plt.xlabel("Tiempo $t$ [s]", fontsize=13)
+#   plt.ylabel("Amplitud [m]", fontsize=13)
+#   plt.title("Comparación de soluciones", fontsize=14)
+#   plt.legend(fontsize=12)
+#   plt.grid(True, alpha=0.3)
+#   plt.tight_layout()
+#   plt.savefig("comparacion.png", dpi=150)
+#   plt.show()
+#
+#
+# --- Subplots (varias gráficas en una figura) ---
+#
+#   fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+#
+#   ax1.plot(t, x, "b-", linewidth=1.5)
+#   ax1.set_xlabel("$t$ [s]", fontsize=13)
+#   ax1.set_ylabel("$x$ [m]", fontsize=13)
+#   ax1.set_title("Posición", fontsize=14)
+#   ax1.grid(True, alpha=0.3)
+#
+#   ax2.plot(t, v, "r-", linewidth=1.5)
+#   ax2.set_xlabel("$t$ [s]", fontsize=13)
+#   ax2.set_ylabel("$v$ [m/s]", fontsize=13)
+#   ax2.set_title("Velocidad", fontsize=14)
+#   ax2.grid(True, alpha=0.3)
+#
+#   fig.suptitle("Oscilador armónico", fontsize=15)
+#   fig.tight_layout()
+#   fig.savefig("subplots.png", dpi=150)
+#   plt.show()
+#
+#
+# --- Espectro de frecuencias (DFT/FFT) ---
+#
+#   X = mt.dft(señal)               # o mt.fft(señal)
+#   freqs = np.arange(len(X)) / N   # frecuencias normalizadas (ciclos/muestra)
+#   # freqs = np.arange(len(X)) * fs / N   # si se conoce la tasa de muestreo fs [Hz]
+#
+#   plt.figure(figsize=(8, 5))
+#   plt.stem(freqs, np.abs(X), linefmt="b-", markerfmt="bo", basefmt="k-")
+#   plt.xlabel("Frecuencia [Hz]", fontsize=13)
+#   plt.ylabel("$|X(f)|$", fontsize=13)
+#   plt.title("Espectro de frecuencias", fontsize=14)
+#   plt.grid(True, alpha=0.3)
+#   plt.tight_layout()
+#   plt.savefig("espectro.png", dpi=150)
+#   plt.show()
+#
+#
+# --- Diagrama de fase (EDOs vectoriales) ---
+#
+#   plt.figure(figsize=(6, 6))
+#   plt.plot(x_lista, v_lista, "b-", linewidth=1)
+#   plt.plot(x_lista[0], v_lista[0], "go", markersize=8, label="Inicio")
+#   plt.xlabel("Posición $x$ [m]", fontsize=13)
+#   plt.ylabel("Velocidad $v$ [m/s]", fontsize=13)
+#   plt.title("Espacio de fases", fontsize=14)
+#   plt.legend(fontsize=12)
+#   plt.grid(True, alpha=0.3)
+#   plt.axis("equal")
+#   plt.tight_layout()
+#   plt.savefig("fase.png", dpi=150)
+#   plt.show()
+#
+#
+# --- Referencia rápida de formatos ---
+#
+#   Colores:  "b" azul, "r" rojo, "g" verde, "k" negro, "m" magenta, "c" cyan
+#   Líneas:   "-" sólida, "--" discontinua, ":" punteada, "-." punto-raya
+#   Marcas:   "o" círculo, "s" cuadrado, "^" triángulo, "x" cruz, "+" más
+#   Combinar: "bo-" = azul + círculos + línea,  "r--" = rojo + discontinua
+#
+#   Texto con LaTeX: usar $ $ para ecuaciones → "$F = ma$", "$\\alpha$", "$x^2$"
