@@ -13,55 +13,55 @@ def g(x):
 x0 = 2.0
 h = 1e-5
 
-# Test derivada_d (derivada hacia delante)
-dd = mt.derivada_d(f, x0, h)
+# Test derivada_adelante (derivada hacia delante)
+dd = mt.derivada_adelante(f, x0, h)
 esperado_d = 3 * x0**2  # f'(2) = 12
-print(f"derivada_d(x³, x={x0}, h={h}) = {dd:.10f}")
+print(f"derivada_adelante(x³, x={x0}, h={h}) = {dd:.10f}")
 print(f"  Valor esperado: {esperado_d}")
 print(f"  Error: {abs(dd - esperado_d):.2e}")
-assert abs(dd - esperado_d) < 1e-4, "derivada_d falló para x³"
-print("  ✓ derivada_d OK\n")
+assert abs(dd - esperado_d) < 1e-4, "derivada_adelante falló para x³"
+print("  ✓ derivada_adelante OK\n")
 
-# Test derivada_c (derivada central)
-dc = mt.derivada_c(f, x0, h)
-print(f"derivada_c(x³, x={x0}, h={h}) = {dc:.10f}")
+# Test derivada_central (derivada central)
+dc = mt.derivada_central(f, x0, h)
+print(f"derivada_central(x³, x={x0}, h={h}) = {dc:.10f}")
 print(f"  Valor esperado: {esperado_d}")
 print(f"  Error: {abs(dc - esperado_d):.2e}")
-assert abs(dc - esperado_d) < 1e-8, "derivada_c falló para x³"
-print("  ✓ derivada_c OK\n")
+assert abs(dc - esperado_d) < 1e-8, "derivada_central falló para x³"
+print("  ✓ derivada_central OK\n")
 
-# Test derivada_c con sin(x)
-dc_sin = mt.derivada_c(g, np.pi/4, h)
+# Test derivada_central con sin(x)
+dc_sin = mt.derivada_central(g, np.pi/4, h)
 esperado_cos = np.cos(np.pi/4)
-print(f"derivada_c(sin, x=π/4, h={h}) = {dc_sin:.10f}")
+print(f"derivada_central(sin, x=π/4, h={h}) = {dc_sin:.10f}")
 print(f"  Valor esperado: {esperado_cos:.10f}")
 print(f"  Error: {abs(dc_sin - esperado_cos):.2e}")
-assert abs(dc_sin - esperado_cos) < 1e-8, "derivada_c falló para sin(x)"
-print("  ✓ derivada_c con sin(x) OK\n")
+assert abs(dc_sin - esperado_cos) < 1e-8, "derivada_central falló para sin(x)"
+print("  ✓ derivada_central con sin(x) OK\n")
 
-# Test nderiv — orden 0 (debe devolver f(x))
-nd0 = mt.nderiv(f, x0, 0)
-print(f"nderiv(x³, x={x0}, n=0) = {nd0}")
+# Test derivada_nesima — orden 0 (debe devolver f(x))
+nd0 = mt.derivada_nesima(f, x0, 0)
+print(f"derivada_nesima(x³, x={x0}, n=0) = {nd0}")
 print(f"  Valor esperado: {f(x0)}")
-assert nd0 == f(x0), "nderiv n=0 falló"
-print("  ✓ nderiv n=0 OK\n")
+assert nd0 == f(x0), "derivada_nesima n=0 falló"
+print("  ✓ derivada_nesima n=0 OK\n")
 
-# Test nderiv — primera derivada
-nd1 = mt.nderiv(f, x0, 1)
-print(f"nderiv(x³, x={x0}, n=1) = {nd1:.10f}")
+# Test derivada_nesima — primera derivada
+nd1 = mt.derivada_nesima(f, x0, 1)
+print(f"derivada_nesima(x³, x={x0}, n=1) = {nd1:.10f}")
 print(f"  Valor esperado: {esperado_d}")
 print(f"  Error: {abs(nd1 - esperado_d):.2e}")
-assert abs(nd1 - esperado_d) < 1e-4, "nderiv n=1 falló"
-print("  ✓ nderiv n=1 OK\n")
+assert abs(nd1 - esperado_d) < 1e-4, "derivada_nesima n=1 falló"
+print("  ✓ derivada_nesima n=1 OK\n")
 
-# Test nderiv — segunda derivada
-nd2 = mt.nderiv(f, x0, 2)
+# Test derivada_nesima — segunda derivada
+nd2 = mt.derivada_nesima(f, x0, 2)
 esperado_2 = 6 * x0  # f''(2) = 12
-print(f"nderiv(x³, x={x0}, n=2) = {nd2:.6f}")
+print(f"derivada_nesima(x³, x={x0}, n=2) = {nd2:.6f}")
 print(f"  Valor esperado: {esperado_2}")
 print(f"  Error: {abs(nd2 - esperado_2):.2e}")
-assert abs(nd2 - esperado_2) < 1e-2, "nderiv n=2 falló"
-print("  ✓ nderiv n=2 OK\n")
+assert abs(nd2 - esperado_2) < 1e-2, "derivada_nesima n=2 falló"
+print("  ✓ derivada_nesima n=2 OK\n")
 
 print("=" * 40)
 print("Tests de derivadas pasaron correctamente.")
@@ -133,37 +133,37 @@ print("  ✓ simpson con n impar OK\n")
 # TESTS DE CAMBIO DE VARIABLE (integrales al ∞)
 # =============================================
 
-# Test x_of_z: z/(1-z)
-assert mt.x_of_z(0) == 0.0, "x_of_z(0) falló"
-assert mt.x_of_z(0.5) == 1.0, "x_of_z(0.5) falló"
-assert abs(mt.x_of_z(0.75) - 3.0) < 1e-10, "x_of_z(0.75) falló"
-print("x_of_z(0)=0, x_of_z(0.5)=1, x_of_z(0.75)=3")
-print("  ✓ x_of_z OK\n")
+# Test cambio_variable: z/(1-z)
+assert mt.cambio_variable(0) == 0.0, "cambio_variable(0) falló"
+assert mt.cambio_variable(0.5) == 1.0, "cambio_variable(0.5) falló"
+assert abs(mt.cambio_variable(0.75) - 3.0) < 1e-10, "cambio_variable(0.75) falló"
+print("cambio_variable(0)=0, cambio_variable(0.5)=1, cambio_variable(0.75)=3")
+print("  ✓ cambio_variable OK\n")
 
-# Test jacobian: 1/(1-z)²
-assert mt.jacobian(0) == 1.0, "jacobian(0) falló"
-assert mt.jacobian(0.5) == 4.0, "jacobian(0.5) falló"
-assert abs(mt.jacobian(0.75) - 16.0) < 1e-10, "jacobian(0.75) falló"
-print("jacobian(0)=1, jacobian(0.5)=4, jacobian(0.75)=16")
-print("  ✓ jacobian OK\n")
+# Test jacobiano: 1/(1-z)²
+assert mt.jacobiano(0) == 1.0, "jacobiano(0) falló"
+assert mt.jacobiano(0.5) == 4.0, "jacobiano(0.5) falló"
+assert abs(mt.jacobiano(0.75) - 16.0) < 1e-10, "jacobiano(0.75) falló"
+print("jacobiano(0)=1, jacobiano(0.5)=4, jacobiano(0.75)=16")
+print("  ✓ jacobiano OK\n")
 
 # Test integrando_z con e^(-x): ∫₀^∞ e^(-x) dx = 1
 def exp_neg(x):
     return np.exp(-x)
 
-# integrando_z debe dar f(z/(1-z)) * 1/(1-z)²
+# integrando_transformado debe dar f(z/(1-z)) * 1/(1-z)²
 z_test = 0.5
-iz = mt.integrando_z(exp_neg, z_test)
-esperado_iz = np.exp(-1.0) * 4.0  # e^(-1) * jacobian(0.5)
-print(f"integrando_z(e^(-x), z=0.5) = {iz:.10f}")
+iz = mt.integrando_transformado(exp_neg, z_test)
+esperado_iz = np.exp(-1.0) * 4.0  # e^(-1) * jacobiano(0.5)
+print(f"integrando_transformado(e^(-x), z=0.5) = {iz:.10f}")
 print(f"  Valor esperado: {esperado_iz:.10f}")
-assert abs(iz - esperado_iz) < 1e-10, "integrando_z falló"
-print("  ✓ integrando_z OK\n")
+assert abs(iz - esperado_iz) < 1e-10, "integrando_transformado falló"
+print("  ✓ integrando_transformado OK\n")
 
 # Test integral impropia completa: ∫₀^∞ e^(-x) dx = 1
 # Usando simpson con cambio de variable en [ε, 1-ε]
 eps = 1e-6
-I_inf = mt.simpson(lambda z: mt.integrando_z(exp_neg, z), eps, 1 - eps, 1000)
+I_inf = mt.simpson(lambda z: mt.integrando_transformado(exp_neg, z), eps, 1 - eps, 1000)
 print(f"∫₀^∞ e^(-x) dx (Simpson + cambio var) = {I_inf:.10f}")
 print(f"  Valor exacto: 1.0")
 print(f"  Error: {abs(I_inf - 1.0):.2e}")
@@ -360,51 +360,141 @@ print()
 def f_nr1(x):
     return x**2 - 4
 
-raiz1 = mt.newtonr(f_nr1, x=3.0, dx=1e-6, eps=1e-10, Nmax=100)
-print(f"newtonr(x²-4, x₀=3) = {raiz1:.10f}")
+raiz1 = mt.newton_raphson(f_nr1, x=3.0, dx=1e-6, eps=1e-10, Nmax=100)
+print(f"newton_raphson(x²-4, x₀=3) = {raiz1:.10f}")
 print(f"  Valor exacto: 2.0")
 print(f"  Error: {abs(raiz1 - 2.0):.2e}")
-assert abs(raiz1 - 2.0) < 1e-8, "newtonr falló para x²-4 (raíz positiva)"
-print("  ✓ newtonr raíz de x²-4 OK\n")
+assert abs(raiz1 - 2.0) < 1e-8, "newton_raphson falló para x²-4 (raíz positiva)"
+print("  ✓ newton_raphson raíz de x²-4 OK\n")
 
 # Test 2: raíz negativa, partiendo de x₀ = -1
-raiz1b = mt.newtonr(f_nr1, x=-1.0, dx=1e-6, eps=1e-10, Nmax=100)
-print(f"newtonr(x²-4, x₀=-1) = {raiz1b:.10f}")
+raiz1b = mt.newton_raphson(f_nr1, x=-1.0, dx=1e-6, eps=1e-10, Nmax=100)
+print(f"newton_raphson(x²-4, x₀=-1) = {raiz1b:.10f}")
 print(f"  Valor exacto: -2.0")
 print(f"  Error: {abs(raiz1b - (-2.0)):.2e}")
-assert abs(raiz1b - (-2.0)) < 1e-8, "newtonr falló para x²-4 (raíz negativa)"
-print("  ✓ newtonr raíz negativa OK\n")
+assert abs(raiz1b - (-2.0)) < 1e-8, "newton_raphson falló para x²-4 (raíz negativa)"
+print("  ✓ newton_raphson raíz negativa OK\n")
 
 # Test 3: raíz de sin(x) = 0 cerca de π
-raiz2 = mt.newtonr(np.sin, x=3.0, dx=1e-6, eps=1e-12, Nmax=100)
-print(f"newtonr(sin(x), x₀=3) = {raiz2:.10f}")
+raiz2 = mt.newton_raphson(np.sin, x=3.0, dx=1e-6, eps=1e-12, Nmax=100)
+print(f"newton_raphson(sin(x), x₀=3) = {raiz2:.10f}")
 print(f"  Valor exacto: π = {np.pi:.10f}")
 print(f"  Error: {abs(raiz2 - np.pi):.2e}")
-assert abs(raiz2 - np.pi) < 1e-10, "newtonr falló para sin(x)"
-print("  ✓ newtonr raíz de sin(x) OK\n")
+assert abs(raiz2 - np.pi) < 1e-10, "newton_raphson falló para sin(x)"
+print("  ✓ newton_raphson raíz de sin(x) OK\n")
 
 # Test 4: raíz de e^x - 3 = 0  →  x = ln(3)
 def f_nr3(x):
     return np.exp(x) - 3
 
-raiz3 = mt.newtonr(f_nr3, x=1.0, dx=1e-6, eps=1e-10, Nmax=100)
+raiz3 = mt.newton_raphson(f_nr3, x=1.0, dx=1e-6, eps=1e-10, Nmax=100)
 exacto_ln3 = np.log(3)
-print(f"newtonr(eˣ-3, x₀=1) = {raiz3:.10f}")
+print(f"newton_raphson(eˣ-3, x₀=1) = {raiz3:.10f}")
 print(f"  Valor exacto: ln(3) = {exacto_ln3:.10f}")
 print(f"  Error: {abs(raiz3 - exacto_ln3):.2e}")
-assert abs(raiz3 - exacto_ln3) < 1e-8, "newtonr falló para eˣ-3"
-print("  ✓ newtonr raíz de eˣ-3 OK\n")
+assert abs(raiz3 - exacto_ln3) < 1e-8, "newton_raphson falló para eˣ-3"
+print("  ✓ newton_raphson raíz de eˣ-3 OK\n")
 
 # Test 5: raíz de x³ - x - 2 = 0  (raíz real ≈ 1.5214)
 def f_nr4(x):
     return x**3 - x - 2
 
-raiz4 = mt.newtonr(f_nr4, x=2.0, dx=1e-6, eps=1e-12, Nmax=100)
+raiz4 = mt.newton_raphson(f_nr4, x=2.0, dx=1e-6, eps=1e-12, Nmax=100)
 # Verificar que f(raiz) ≈ 0
-print(f"newtonr(x³-x-2, x₀=2) = {raiz4:.10f}")
+print(f"newton_raphson(x³-x-2, x₀=2) = {raiz4:.10f}")
 print(f"  f(raíz) = {f_nr4(raiz4):.2e}")
-assert abs(f_nr4(raiz4)) < 1e-10, "newtonr falló para x³-x-2"
-print("  ✓ newtonr raíz de x³-x-2 OK\n")
+assert abs(f_nr4(raiz4)) < 1e-10, "newton_raphson falló para x³-x-2"
+print("  ✓ newton_raphson raíz de x³-x-2 OK\n")
+
+print("=" * 40)
+print("Tests de Newton-Raphson pasaron correctamente.")
+print("=" * 40)
+print()
+
+# =============================================
+# TESTS DE DFT, IDFT, FFT e IFFT
+# =============================================
+
+# --- Señal de prueba: suma de dos senoidales ---
+N = 64
+n_arr = np.arange(N)
+freq1, freq2 = 5, 13  # frecuencias en bins
+señal = 3.0 * np.cos(2 * np.pi * freq1 * n_arr / N) + 1.5 * np.sin(2 * np.pi * freq2 * n_arr / N)
+
+# Test DFT: comparar con np.fft.rfft
+X_dft = mt.dft(señal)
+X_np = np.fft.rfft(señal)
+err_dft = np.max(np.abs(np.array(X_dft) - X_np))
+print(f"dft vs np.fft.rfft (señal de {N} puntos)")
+print(f"  Error máximo: {err_dft:.2e}")
+assert err_dft < 1e-8, "dft no coincide con np.fft.rfft"
+print("  ✓ dft OK\n")
+
+# Test DFT: picos en las frecuencias correctas
+magnitudes = np.abs(X_dft)
+# freq1=5 debe tener amplitud N*3/2 = 96, freq2=13 debe tener amplitud N*1.5/2 = 48
+pico5 = magnitudes[freq1]
+pico13 = magnitudes[freq2]
+print(f"  |DFT[{freq1}]| = {pico5:.2f} (esperado: {N*3.0/2:.2f})")
+print(f"  |DFT[{freq2}]| = {pico13:.2f} (esperado: {N*1.5/2:.2f})")
+assert abs(pico5 - N * 3.0 / 2) < 1e-8, "dft: pico en freq1 incorrecto"
+assert abs(pico13 - N * 1.5 / 2) < 1e-8, "dft: pico en freq2 incorrecto"
+print("  ✓ dft picos correctos OK\n")
+
+# Test IDFT: reconstruir la señal original
+señal_rec = mt.idft(X_dft)
+err_idft = np.max(np.abs(np.array(señal_rec).real - señal))
+print(f"idft(dft(señal)) vs señal original")
+print(f"  Error máximo: {err_idft:.2e}")
+assert err_idft < 1e-8, "idft no reconstruye la señal original"
+# Parte imaginaria debe ser ~0
+imag_max = np.max(np.abs(np.array(señal_rec).imag))
+print(f"  Parte imaginaria máxima: {imag_max:.2e}")
+assert imag_max < 1e-8, "idft produce parte imaginaria no despreciable"
+print("  ✓ idft OK\n")
+
+# Test FFT: comparar con np.fft.fft
+X_fft = mt.fft(señal)
+X_np_full = np.fft.fft(señal)
+err_fft = np.max(np.abs(np.array(X_fft) - X_np_full))
+print(f"fft vs np.fft.fft (señal de {N} puntos)")
+print(f"  Error máximo: {err_fft:.2e}")
+assert err_fft < 1e-8, "fft no coincide con np.fft.fft"
+print("  ✓ fft OK\n")
+
+# Test IFFT: reconstruir la señal original
+señal_ifft = mt.ifft(X_fft)
+err_ifft = np.max(np.abs(np.array(señal_ifft) - señal))
+print(f"ifft(fft(señal)) vs señal original")
+print(f"  Error máximo: {err_ifft:.2e}")
+assert err_ifft < 1e-8, "ifft no reconstruye la señal original"
+print("  ✓ ifft OK\n")
+
+# Test FFT con señal constante: DFT de [c, c, ..., c] = [c*N, 0, 0, ..., 0]
+c = 7.0
+señal_cte = np.full(16, c)
+X_cte = mt.fft(señal_cte)
+assert abs(X_cte[0] - c * 16) < 1e-10, "fft de constante: DC incorrecto"
+assert all(abs(X_cte[k]) < 1e-10 for k in range(1, 16)), "fft de constante: componentes no-DC no son cero"
+print(f"fft([{c}]*16): DC={X_cte[0]:.1f}, resto ≈ 0")
+print("  ✓ fft señal constante OK\n")
+
+# Test FFT con delta: DFT de [1, 0, 0, ..., 0] = [1, 1, 1, ..., 1]
+delta = np.zeros(16)
+delta[0] = 1.0
+X_delta = mt.fft(delta)
+assert all(abs(X_delta[k] - 1.0) < 1e-10 for k in range(16)), "fft de delta incorrecta"
+print("fft([1,0,...,0]) = [1,1,...,1]")
+print("  ✓ fft delta OK\n")
+
+# Test consistencia: DFT y FFT deben dar el mismo resultado (primera mitad + 1)
+X_fft_arr = np.array(X_fft)
+X_dft_arr = np.array(X_dft)
+err_dft_fft = np.max(np.abs(X_fft_arr[:N//2+1] - X_dft_arr))
+print(f"Consistencia dft vs fft (primeros N/2+1 coeficientes)")
+print(f"  Error máximo: {err_dft_fft:.2e}")
+assert err_dft_fft < 1e-8, "dft y fft no son consistentes"
+print("  ✓ Consistencia dft/fft OK\n")
 
 print("=" * 40)
 print("Todas las pruebas pasaron correctamente.")
