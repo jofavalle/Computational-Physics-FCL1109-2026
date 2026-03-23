@@ -445,9 +445,9 @@ def rk4(t, h, x, f):
     """
     Realiza UN paso del método de Runge-Kutta de orden 4 (RK4) para resolver una EDO.
 
-    RK4 es el «caballo de batalla» de los integradores numéricos. Evalúa la función
-    f en 4 puntos estratégicos dentro del paso y combina esos valores para lograr
-    un error por paso de orden O(h⁵), mucho mayor que Euler.
+    RK4 es el método de referencia para la integración numérica de EDOs. Evalúa la
+    función f en 4 puntos dentro del paso y combina esos valores para obtener
+    un error por paso de orden O(h⁵), considerablemente menor que el de Euler.
 
     Dada una EDO de la forma dx/dt = f(t, x), el algoritmo calcula:
         k₁ = h · f(t, x)
@@ -754,7 +754,7 @@ def ifft(X):
     Calcula la Transformada Rápida de Fourier Inversa (IFFT).
 
     Reconstruye la señal original a partir de sus N coeficientes de Fourier completos
-    (la salida de fft()). Usa un truco elegante: la IFFT se puede calcular
+    (la salida de fft()). Se basa en la identidad de que la IFFT puede calcularse
     conjugando la entrada, aplicando la FFT, conjugando la salida y dividiendo entre N.
 
     Fórmula: x[n] = (1/N) · FFT(X*)* 
@@ -970,3 +970,176 @@ def ifft(X):
 #   Combinar: "bo-" = azul + círculos + línea,  "r--" = rojo + discontinua
 #
 #   Texto con LaTeX: usar $ $ para ecuaciones → "$F = ma$", "$\\alpha$", "$x^2$"
+
+
+# ============================================================================
+# REFERENCIA: LISTAS DE PYTHON vs ARRAYS DE NUMPY
+# ============================================================================
+#
+# En física computacional se trabaja casi siempre con arrays de NumPy, no con
+# listas de Python. La diferencia no es solo de rendimiento: las operaciones
+# aritméticas se comportan de manera distinta en cada caso.
+#
+#
+# --- Diferencia fundamental en aritmética ---
+#
+#   lista = [1, 2, 3]
+#   array = np.array([1, 2, 3])
+#
+#   lista * 2          →  [1, 2, 3, 1, 2, 3]   # duplica la lista (concatenación)
+#   array * 2          →  array([2, 4, 6])       # multiplica cada elemento
+#
+#   lista + lista      →  [1, 2, 3, 1, 2, 3]   # concatena
+#   array + array      →  array([2, 4, 6])       # suma elemento a elemento
+#
+#   lista ** 2         →  TypeError              # no soportado
+#   array ** 2         →  array([1, 4, 9])       # potencia elemento a elemento
+#
+#   np.sin(lista)      →  funciona (NumPy convierte la lista internamente)
+#   np.sin(array)      →  funciona, y es más eficiente
+#
+# Regla: si vas a hacer aritmética con los datos, usa arrays desde el principio.
+#
+#
+# --- Construcción de arrays ---
+#
+#   # Desde una lista (conversión explícita)
+#   x = np.array([1.0, 2.0, 3.0])
+#
+#   # N puntos equiespaciados en [a, b] — el más usado para grillas de tiempo/espacio
+#   t = np.linspace(0.0, 10.0, 1000)    # incluye ambos extremos
+#
+#   # Array de ceros para pre-asignar (ver patrón de integración abajo)
+#   x = np.zeros(N)
+#   x = np.zeros(N, complex)            # si los valores son complejos
+#
+#   # Array de índices enteros
+#   k = np.arange(N)                    # [0, 1, 2, ..., N-1]
+#   k = np.arange(1, N+1)              # [1, 2, ..., N]
+#
+#
+# --- Patrón correcto para integrar EDOs (pre-asignación) ---
+#
+# Al integrar una EDO con Euler o RK4, el tamaño del resultado se conoce antes
+# del bucle. Pre-asignar el array con np.zeros es más eficiente y claro que
+# ir acumulando resultados con list.append().
+#
+#   N = int((tf - t0) / dt)
+#   t_vals = np.zeros(N + 1)
+#   x_vals = np.zeros(N + 1)
+#   v_vals = np.zeros(N + 1)
+#
+#   estado = np.array([x0, v0])    # vector de estado inicial
+#   t_vals[0] = t0
+#   x_vals[0] = x0
+#   v_vals[0] = v0
+#
+#   for i in range(N):
+#       estado = mt.rk4(t_vals[i], dt, estado, f)
+#       t_vals[i+1] = t_vals[i] + dt
+#       x_vals[i+1] = estado[0]
+#       v_vals[i+1] = estado[1]
+#
+# Evitar el patrón con append:
+#
+#   t_vals = []
+#   x_vals = []
+#   for i in range(N):             # ← más lento: reasigna memoria en cada paso
+#       x_vals.append(...)
+#
+#
+# --- Vectores de estado para sistemas de EDOs ---
+#
+# Cuando la EDO describe un sistema con varias variables (posición + velocidad,
+# o múltiples osciladores), el estado se representa como un array y la función
+# f(t, s) devuelve un array de la misma forma:
+#
+#   def f(t, s):
+#       x, v = s[0], s[1]                         # desempaquetar
+#       return np.array([v, -omega**2 * x])        # [dx/dt, dv/dt]
+#
+#   estado = np.array([x0, v0])
+#   estado = mt.rk4(t, dt, estado, f)             # rk4 acepta arrays directamente
+#   x_vals[i+1] = estado[0]
+#   v_vals[i+1] = estado[1]
+#
+#
+# --- Operaciones vectorizadas post-integración ---
+#
+# Una vez que los arrays están llenos, las cantidades derivadas (energía, módulo,
+# fase, etc.) se calculan sobre el array completo, sin loops:
+#
+#   E_cin = 0.5 * m * v_vals**2              # energía cinética en cada instante
+#   E_pot = 0.5 * k * x_vals**2             # energía potencial
+#   E_tot = E_cin + E_pot                    # energía total (array completo)
+#
+#   amplitud = np.sqrt(x_vals**2 + y_vals**2)
+#   fase     = np.arctan2(y_vals, x_vals)
+#
+# Esto es más rápido y legible que calcular la energía dentro del bucle de integración.
+#
+#
+# --- Indexación y slicing ---
+#
+#   a = np.array([10, 20, 30, 40, 50])
+#
+#   a[0]        →  10            # primer elemento
+#   a[-1]       →  50            # último elemento
+#   a[1:3]      →  [20, 30]     # desde índice 1 hasta 2 (el 3 no se incluye)
+#   a[::2]      →  [10, 30, 50] # uno de cada dos (stride)
+#   a[1::2]     →  [20, 40]     # impares (stride desde índice 1)
+#
+# Para arrays 2D (por ejemplo, datos cargados de un archivo):
+#
+#   D = np.loadtxt("datos.dat")
+#   t     = D[:, 0]    # toda la primera columna
+#   y     = D[:, 1]    # toda la segunda columna
+#   sigma = D[:, 2]    # toda la tercera columna
+#
+#   D[0, :]    # primera fila completa
+#   D[:, -1]   # última columna completa
+#
+#
+# --- Funciones de agregación ---
+#
+#   np.sum(a)       # suma de todos los elementos
+#   np.mean(a)      # promedio
+#   np.max(a)       # valor máximo
+#   np.min(a)       # valor mínimo
+#   np.abs(a)       # valor absoluto elemento a elemento
+#   np.sqrt(a)      # raíz cuadrada elemento a elemento
+#
+#   np.sum(a**2)            # suma de cuadrados
+#   np.sum(a / sigma**2)    # suma ponderada (aparece en mínimos cuadrados)
+#
+#
+# --- Error frecuente: pasar una lista donde se espera un array ---
+#
+# Las funciones de manteca.py (trapecio, simpson, etc.) evalúan f(x) donde x
+# puede ser un array de NumPy. Si f está definida con operaciones de lista,
+# puede fallar o dar resultados incorrectos:
+#
+#   # Incorrecto — no acepta arrays:
+#   def f(x):
+#       return x**2 + 1              # esto sí funciona con arrays (NumPy lo maneja)
+#
+#   def f(x):
+#       return [xi**2 + 1 for xi in x]   # devuelve lista, no array — puede romper
+#                                          # operaciones posteriores
+#
+#   # Correcto — retorna array directamente:
+#   f = lambda x: x**2 + 1               # NumPy extiende ** y + a arrays
+#   f = lambda x: np.exp(-x**2)          # np.exp acepta arrays
+#
+# Si la función tiene ramas condicionales, usar np.where en lugar de if/else:
+#
+#   # Incorrecto para arrays:
+#   def f(x):
+#       if x > 0:
+#           return x**2
+#       else:
+#           return 0.0
+#
+#   # Correcto:
+#   def f(x):
+#       return np.where(x > 0, x**2, 0.0)
