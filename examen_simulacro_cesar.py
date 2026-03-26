@@ -49,6 +49,37 @@ import fcl1109 as fc
 
 
 # --- Escriba su código aquí ---
+#Parametros
+eps = 0.0103
+sig = 3.40
+#a)
+def V(r):
+    return 4*eps*((sig/r)**12 - (sig/r)**6)
+#b)
+def dV(r):
+    return fc.derivada_enesima(V, r, 1)
+
+r_eq = fc.newton_raphson(dV, 3.5, 1e-6, 1e-6, 1000)
+print(f"El punto donde la fuerza F(r) = 0 es: {r_eq:.6f} A")
+#c)
+dV2 = fc.derivada_enesima(V, r_eq, 2)
+print(f"La constante de resorte efectiva es: {dV2:.6f} eV/A**2") 
+#d)
+r_values = np.linspace(3.0, 7.0, 100)
+
+r_min = V(r_eq)
+
+plt.figure(figsize=(8, 5))
+plt.plot(r_values, V(r_values), "b-", linewidth=1.5, label="$V(r)$")
+plt.plot(r_eq, r_min, "ro")
+plt.xlabel("Distancia equilibrio r_eq", fontsize=13)
+plt.ylabel("Potencial V(r_eq)", fontsize=13)
+plt.title("r_eq vs. V(r_eq)", fontsize=14)
+plt.legend(fontsize=12)
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+
 
 
 # ====================================================================
@@ -83,8 +114,39 @@ import fcl1109 as fc
 
 
 # --- Escriba su código aquí ---
+#a)
+m = 6.63e-26
+T = 300
+k_B = 1.381e-23
+def f(v):
+    return 4 * np.pi * (m / (2 * np.pi * k_B * T))**(3/2) * v**2 * np.exp((-m * v**2) / (2 * k_B * T))
+norm = fc.integral_impropia(f, 0, np.inf, 100000)
+print(f"La integral de normalización es: {norm:.6f}")
 
+#b)
+def df(v):
+    return fc.derivada_enesima(f,v, 1)
+v_p = fc.newton_raphson(df, 300, 1e-6, 1e-6, 1000)
+v_pn = np.sqrt((2 * k_B * T)/m)
+print(f"El valor númerico de la velocidad más probable es: {v_p:.6f} m/s, mientras que el valor análitico es {v_pn:.6f} m/s")
 
+#c)
+P = fc.integral_impropia(f, 600, np.inf)
+print(f"La probabilidad de que una partícula tenga rapidez v > 600 es: {P}")
+
+#d)
+v_vals = np.linspace(0, 1000, 100)
+plt.figure(figsize=(8, 5))
+plt.plot(v_vals, f(v_vals), "b-", linewidth=1.5, label="$f(v)$")
+plt.fill_between(v_vals, f(v_vals), where = (v_vals > 600))
+plt.axvline(v_p, label = "v_p", linestyle = "--")
+plt.xlabel("Velocidad promedio", fontsize=13)
+plt.ylabel("Probabilidad", fontsize=13)
+plt.title("P vs. V", fontsize=14)
+plt.legend(fontsize=12)
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
 # ====================================================================
 # PROBLEMA 3 — Oscilador armónico amortiguado      (25 pts · ~25 min)
 # ====================================================================
@@ -120,7 +182,54 @@ import fcl1109 as fc
 
 
 # --- Escriba su código aquí ---
+#a)
+w0 = 2*np.pi
+gamma = 0.3
+N = 1000
+# Condiciones iniciales
+x0 = 1
+v0 = 0
+estado = [x0, v0]
+def f(t, estado):
+    dxdt = estado[1]
+    dvdt = -2*gamma*estado[1] - w0**2 * estado[0]
+    return np.array([dxdt, dvdt], float)
 
+#b)
+x_points = np.zeros(N)
+v_points = np.zeros(N)
+t_points = np.linspace(0, 15, N)
+
+for i in range(N):
+    x_points[i] = estado[0]
+    v_points[i] = estado[1]
+
+    estado = fc.rk4(t_points[i], 0.01, estado, f)
+#c)
+w_d = np.sqrt(w0**2 - gamma**2)
+f_an = np.exp(-gamma*t_points) * (np.cos(w_d * t_points) + (gamma/w_d)*np.sin(w_d*t_points))
+
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 5))
+ax1.plot(t_points, x_points, "b-", linewidth=1.5, label = "Posición con RK4")
+ax1.plot(t_points, f_an, color = "orange", linewidth=1.5, label = "Posición analitica")
+ax1.set_xlabel("$t$ [s]", fontsize=13)
+ax1.set_ylabel("$x$ [m]", fontsize=13)
+ax1.set_title("Posición", fontsize=14)
+ax1.legend()
+ax1.grid(True, alpha=0.3)
+
+ax2.plot(t_points, v_points, "r-", linewidth=1.5, label = "Velocidad con RK4")
+ax2.set_xlabel("$t$ [s]", fontsize=13)
+ax2.set_ylabel("$v$ [m/s]", fontsize=13)
+ax2.set_title("Velocidad", fontsize=14)
+ax2.legend()
+ax2.grid(True, alpha=0.3)
+
+fig.suptitle("Oscilador armónico amortiguado", fontsize=15)
+fig.tight_layout()
+plt.show()
+
+print(f"El error máximo cometido es {np.max(x_points - f_an)}")
 
 # ====================================================================
 # PROBLEMA 4 — Ajuste de datos + Análisis de Fourier (25 pts · ~25 min)
@@ -168,7 +277,51 @@ import fcl1109 as fc
 
 
 # --- Escriba su código aquí ---
+#Parte A
+#a)
+datos = np.loadtxt("datos_decaimiento.csv", delimiter=",", skiprows=1)
 
+t = datos[:, 0]       # primera columna
+N = datos[:, 1]       # segunda columna
+sigma = datos[:, 2]   # tercera columna
+
+Y = np.log(N)
+sigy = sigma/abs(N)
+#b)
+A = np.zeros((2,2))
+b = np.zeros(2)
+
+A[0,0] = np.sum(1/sigy**2)
+A[0,1] = A[1,0] = np.sum(t/sigy**2)
+A[1,1] = np.sum(t**2/sigy**2)
+
+b[0] = np.sum(Y/sigy**2)
+b[1] = np.sum(Y*t/sigy**2)
+
+coef = fc.minimos_cuadrados(A, b)
+print(f"El número de núcleos iniciales es: {np.exp(coef[0])}, con una constante de decaimiento {coef[1]}")
+#A = np.array([[A00, A01], [A10, A11]])
+#b = np.array([b0, b1])
+
+#c)
+chi2 = fc.chi_cuadrada(Y,(coef[0]+coef[1]*t),sigy)
+chindof = chi2/(len(N)-2)
+print(f"El chi**2 es: {chi2} y el chino rmalizado {chindof}")
+#d)
+N0 = (np.exp(coef[0]))
+plt.figure(figsize=(8, 5))
+plt.errorbar(t, N, yerr = sigma, label="LA DATA")
+plt.plot(t,N0*np.exp(t*coef[1]),label="Ajuste" )
+plt.xlabel("tiempo", fontsize=13)
+plt.ylabel("Nucleos", fontsize=13)
+plt.title("N vs. t", fontsize=14)
+plt.legend(fontsize=12)
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+
+#Parte B
+#e)
 
 print("\n" + "=" * 50)
 print("  FIN DEL EXAMEN — Verifique sus gráficas y salidas")
