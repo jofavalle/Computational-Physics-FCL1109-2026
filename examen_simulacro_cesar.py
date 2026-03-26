@@ -185,7 +185,9 @@ plt.show()
 #a)
 w0 = 2*np.pi
 gamma = 0.3
-N = 1000
+# N pasos = diferencia entre tiempo / dt
+# N points = N pasos + 1
+N_pasos = int((15-0)/0.01)
 # Condiciones iniciales
 x0 = 1
 v0 = 0
@@ -196,20 +198,20 @@ def f(t, estado):
     return np.array([dxdt, dvdt], float)
 
 #b)
-x_points = np.zeros(N)
-v_points = np.zeros(N)
-t_points = np.linspace(0, 15, N)
+x_points = np.zeros(N_pasos+1)
+v_points = np.zeros(N_pasos+1)
+t_points = np.linspace(0, 15, N_pasos+1)
 
-for i in range(N):
+for i in range(N_pasos):
     x_points[i] = estado[0]
     v_points[i] = estado[1]
 
-    estado = fc.rk4(t_points[i], 0.01, estado, f)
+    estado = fc.rk4(f, t_points[i], estado, 0.01)
 #c)
 w_d = np.sqrt(w0**2 - gamma**2)
 f_an = np.exp(-gamma*t_points) * (np.cos(w_d * t_points) + (gamma/w_d)*np.sin(w_d*t_points))
 
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 5))
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8))
 ax1.plot(t_points, x_points, "b-", linewidth=1.5, label = "Posición con RK4")
 ax1.plot(t_points, f_an, color = "orange", linewidth=1.5, label = "Posición analitica")
 ax1.set_xlabel("$t$ [s]", fontsize=13)
@@ -310,7 +312,7 @@ print(f"El chi**2 es: {chi2} y el chino rmalizado {chindof}")
 #d)
 N0 = (np.exp(coef[0]))
 plt.figure(figsize=(8, 5))
-plt.errorbar(t, N, yerr = sigma, label="LA DATA")
+plt.errorbar(t, N, yerr = sigma, fmt='o', label="LA DATA")
 plt.plot(t,N0*np.exp(t*coef[1]),label="Ajuste" )
 plt.xlabel("tiempo", fontsize=13)
 plt.ylabel("Nucleos", fontsize=13)
@@ -321,7 +323,43 @@ plt.tight_layout()
 plt.show()
 
 #Parte B
-#e)
+#e) 
+señal = np.loadtxt("senal_ruido.csv", delimiter=",", skiprows=1)
+
+t = señal[:, 0]       # primera columna
+V = señal[:, 1]       # segunda columna
+
+fourier = fc.fft(V)
+dt = 0.01
+k = 0.0
+N = len(V)
+
+freq_k = np.zeros(N//2 + 1)
+fourier_mag = np.zeros(N//2 +1)
+
+#f)
+for k in range(N//2+1):
+    freq_k[k] = k/(N*dt)
+    fourier_mag[k] = np.abs(fourier[k])
+    print(f"Frecuencia k={k}: {freq_k[k]:.2f} Hz")
+    print(f"FFT[{k}] = {fourier[k]:.4f} + {fourier[k].imag:.4f}j, |FFT| = {fourier_mag[k]:.4f}")
+
+plt.figure(figsize=(8, 5))
+plt.stem(freq_k, fourier_mag, "o-")
+plt.xlabel("Frecuencia (Hz)", fontsize=13)
+plt.ylabel("FFT", fontsize=13)
+plt.title("FFT vs. Frecuencia", fontsize=14)
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+
+#g)
+indices = (np.diff(np.sign(np.diff(fourier_mag))) < 0).nonzero()[0] + 1
+print(f"Índices de máximos locales: {indices}")
+picos = [(k, fourier_mag[k]) for k in indices if k != 0]
+picos_ordenados = sorted(picos, key=lambda x: x[1], reverse=True)
+frecuencias_dominantes = [freq_k[k] for k, mag in picos_ordenados[:2]]
+print(f"Frecuencias dominantes: {frecuencias_dominantes[0]:.2f} Hz, {frecuencias_dominantes[1]:.2f} Hz")
 
 print("\n" + "=" * 50)
 print("  FIN DEL EXAMEN — Verifique sus gráficas y salidas")

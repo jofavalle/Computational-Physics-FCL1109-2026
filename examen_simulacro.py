@@ -192,8 +192,8 @@ x_vals[0] = estado[0]
 v_vals[0] = estado[1]
 
 for i in range(N_pasos):
-    #estado = fc.rk4(fs, t_vals[i], estado, 0.01)
-    estado = fc.euler(fs, t_vals[i], estado, 0.01)
+    estado = fc.rk4(fs, t_vals[i], estado, 0.01)
+    #estado = fc.euler(fs, t_vals[i], estado, 0.01)
     t_vals[i+1] = t_vals[i] + 0.01
     x_vals[i+1] = estado[0]
     v_vals[i+1] = estado[1]
