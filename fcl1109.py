@@ -402,41 +402,55 @@ def integral_impropia(f, a, b, n=1000, metodo=None):
 # 3. RESOLUCIÓN DE ECUACIONES DIFERENCIALES ORDINARIAS (EDOs)
 # ============================================================================
 
-def euler(f, x, h):
+def euler(f, t, x, h):
     """
     Realiza UN paso del método de Euler para resolver una EDO.
 
     El método de Euler es el integrador numérico más simple. Dada una EDO
-    de la forma dx/dt = f(x), avanza la solución un paso temporal h usando:
+    de la forma dx/dt = f(t, x), avanza la solución un paso temporal h usando:
 
-        x(t + h) ≈ x(t) + h · f(x(t))
+        x(t + h) ≈ x(t) + h · f(t, x(t))
 
     Es un método de orden 1: el error por paso es O(h²) y el error acumulado es O(h).
     Para mayor precisión, usar rk4().
+
+    Funciona tanto para EDOs escalares (x es un float) como para sistemas de EDOs
+    (x es un array de NumPy), lo que permite resolver sistemas acoplados.
+    La firma f(t, x) es idéntica a la de rk4(), por lo que ambos integradores
+    son intercambiables.
 
     Nota: esta función da UN solo paso. Para integrar en un intervalo completo,
     hay que llamarla repetidamente en un bucle.
 
     Parámetros:
-        f : función    — El lado derecho de la EDO dx/dt = f(x). Recibe x, devuelve dx/dt.
-        x : float o array — El estado actual del sistema.
-        h : float      — El tamaño del paso temporal.
+        f : función        — El lado derecho de la EDO dx/dt = f(t, x).
+                             Debe tener firma f(t, x) → dx/dt.
+        t : float          — El tiempo actual.
+        x : float o array  — El estado actual (escalar para 1 EDO, array para sistemas).
+        h : float          — El tamaño del paso temporal.
 
     Retorna:
         float o array — El nuevo estado x(t + h).
 
-    Ejemplo:
+    Ejemplo (EDO escalar):
         Para dx/dt = -x con x(0) = 1, integrar hasta t = 1 con dt = 0.001:
-        >>> x = 1.0
+        >>> x, t = 1.0, 0.0
         >>> for _ in range(1000):
-        ...     x = euler(lambda x: -x, x, 0.001)
+        ...     x = euler(lambda t, x: -x, t, x, 0.001)
+        ...     t += 0.001
         >>> print(x)
         0.3677   # ≈ e^(-1) = 0.3679
+
+    Ejemplo (sistema de EDOs):
+        Para el oscilador armónico: d/dt [x, v] = [v, -x]
+        >>> estado = np.array([1.0, 0.0])  # x(0)=1, v(0)=0
+        >>> f = lambda t, s: np.array([s[1], -s[0]])
+        >>> estado = euler(f, 0.0, estado, 0.01)
     """
-    return x + h * f(x)
+    return x + h * f(t, x)
 
 
-def rk4(t, h, x, f):
+def rk4(f, t, x, h):
     """
     Realiza UN paso del método de Runge-Kutta de orden 4 (RK4) para resolver una EDO.
 
