@@ -1,5 +1,5 @@
 """
-Librería Física Común Centroamericana (LFCC) — «manteca.py»
+Librería Física Computacional Común (LFCC) — «fcl1109.py»
 ============================================================
 
 Librería de métodos numéricos desarrollada para el curso FCL1109.
@@ -11,14 +11,9 @@ Contiene herramientas para:
   4. Ajuste de datos (mínimos cuadrados, chi cuadrada)
   5. Búsqueda de raíces (Newton-Raphson)
   6. Análisis de Fourier (DFT, IDFT, FFT, IFFT)
-
-Uso básico:
-    import manteca as mt
-    resultado = mt.derivada_central(np.sin, 1.0, 1e-5)
 """
 
 import numpy as np
-
 
 # ============================================================================
 # CONSTANTES GLOBALES
@@ -832,7 +827,7 @@ def ifft(X):
 # --- Ejemplo completo ---
 #
 #   import numpy as np
-#   import manteca as mt
+#   import fcl1109 as fc
 #
 #   # Cargar datos
 #   x, y, sigma = np.loadtxt("datos.csv", delimiter=",", skiprows=1, unpack=True)
@@ -1115,7 +1110,7 @@ def ifft(X):
 #
 # --- Error frecuente: pasar una lista donde se espera un array ---
 #
-# Las funciones de manteca.py (trapecio, simpson, etc.) evalúan f(x) donde x
+# Las funciones de fcl1109.py (trapecio, simpson, etc.) evalúan f(x) donde x
 # puede ser un array de NumPy. Si f está definida con operaciones de lista,
 # puede fallar o dar resultados incorrectos:
 #

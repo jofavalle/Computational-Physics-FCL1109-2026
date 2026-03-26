@@ -1,5 +1,5 @@
-''' Script para testear el funcionamimiento de la librería manteca.py '''
-import manteca as mt
+''' Script para testear el funcionamimiento de la librería fcl1109.py '''
+import fcl1109 as fc
 import numpy as np
 
 # --- Funciones de prueba ---
@@ -14,7 +14,7 @@ x0 = 2.0
 h = 1e-5
 
 # Test derivada_adelante (derivada hacia delante)
-dd = mt.derivada_adelante(f, x0, h)
+dd = fc.derivada_adelante(f, x0, h)
 esperado_d = 3 * x0**2  # f'(2) = 12
 print(f"derivada_adelante(x³, x={x0}, h={h}) = {dd:.10f}")
 print(f"  Valor esperado: {esperado_d}")
@@ -23,7 +23,7 @@ assert abs(dd - esperado_d) < 1e-4, "derivada_adelante falló para x³"
 print("  ✓ derivada_adelante OK\n")
 
 # Test derivada_central (derivada central)
-dc = mt.derivada_central(f, x0, h)
+dc = fc.derivada_central(f, x0, h)
 print(f"derivada_central(x³, x={x0}, h={h}) = {dc:.10f}")
 print(f"  Valor esperado: {esperado_d}")
 print(f"  Error: {abs(dc - esperado_d):.2e}")
@@ -31,7 +31,7 @@ assert abs(dc - esperado_d) < 1e-8, "derivada_central falló para x³"
 print("  ✓ derivada_central OK\n")
 
 # Test derivada_central con sin(x)
-dc_sin = mt.derivada_central(g, np.pi/4, h)
+dc_sin = fc.derivada_central(g, np.pi/4, h)
 esperado_cos = np.cos(np.pi/4)
 print(f"derivada_central(sin, x=π/4, h={h}) = {dc_sin:.10f}")
 print(f"  Valor esperado: {esperado_cos:.10f}")
@@ -40,14 +40,14 @@ assert abs(dc_sin - esperado_cos) < 1e-8, "derivada_central falló para sin(x)"
 print("  ✓ derivada_central con sin(x) OK\n")
 
 # Test derivada_enesima — orden 0 (debe devolver f(x))
-nd0 = mt.derivada_enesima(f, x0, 0)
+nd0 = fc.derivada_enesima(f, x0, 0)
 print(f"derivada_enesima(x³, x={x0}, n=0) = {nd0}")
 print(f"  Valor esperado: {f(x0)}")
 assert nd0 == f(x0), "derivada_enesima n=0 falló"
 print("  ✓ derivada_enesima n=0 OK\n")
 
 # Test derivada_enesima — primera derivada
-nd1 = mt.derivada_enesima(f, x0, 1)
+nd1 = fc.derivada_enesima(f, x0, 1)
 print(f"derivada_enesima(x³, x={x0}, n=1) = {nd1:.10f}")
 print(f"  Valor esperado: {esperado_d}")
 print(f"  Error: {abs(nd1 - esperado_d):.2e}")
@@ -55,7 +55,7 @@ assert abs(nd1 - esperado_d) < 1e-4, "derivada_enesima n=1 falló"
 print("  ✓ derivada_enesima n=1 OK\n")
 
 # Test derivada_enesima — segunda derivada
-nd2 = mt.derivada_enesima(f, x0, 2)
+nd2 = fc.derivada_enesima(f, x0, 2)
 esperado_2 = 6 * x0  # f''(2) = 12
 print(f"derivada_enesima(x³, x={x0}, n=2) = {nd2:.6f}")
 print(f"  Valor esperado: {esperado_2}")
@@ -80,7 +80,7 @@ def h_cuad(x):
 exacta_cuad = 1.0/3.0
 
 # Test trapecio
-trap = mt.trapecio(h_cuad, 0, 1, 1000)
+trap = fc.trapecio(h_cuad, 0, 1, 1000)
 print(f"trapecio(x², 0, 1, n=1000) = {trap:.10f}")
 print(f"  Valor exacto: {exacta_cuad:.10f}")
 print(f"  Error: {abs(trap - exacta_cuad):.2e}")
@@ -88,7 +88,7 @@ assert abs(trap - exacta_cuad) < 1e-6, "trapecio falló para x²"
 print("  ✓ trapecio OK\n")
 
 # Test simpson
-simp = mt.simpson(h_cuad, 0, 1, 1000)
+simp = fc.simpson(h_cuad, 0, 1, 1000)
 print(f"simpson(x², 0, 1, n=1000) = {simp:.10f}")
 print(f"  Valor exacto: {exacta_cuad:.10f}")
 print(f"  Error: {abs(simp - exacta_cuad):.2e}")
@@ -97,7 +97,7 @@ print("  ✓ simpson OK\n")
 
 # Test montecarlo
 np.random.seed(42)
-mc = mt.montecarlo(h_cuad, 0, 1, 100000)
+mc = fc.montecarlo(h_cuad, 0, 1, 100000)
 print(f"montecarlo(x², 0, 1, N=100000) = {mc:.6f}")
 print(f"  Valor exacto: {exacta_cuad:.6f}")
 print(f"  Error: {abs(mc - exacta_cuad):.2e}")
@@ -108,14 +108,14 @@ print("  ✓ montecarlo OK\n")
 
 exacta_sin = 2.0
 
-trap_sin = mt.trapecio(np.sin, 0, np.pi, 1000)
+trap_sin = fc.trapecio(np.sin, 0, np.pi, 1000)
 print(f"trapecio(sin, 0, π, n=1000) = {trap_sin:.10f}")
 print(f"  Valor exacto: {exacta_sin}")
 print(f"  Error: {abs(trap_sin - exacta_sin):.2e}")
 assert abs(trap_sin - exacta_sin) < 1e-5, "trapecio falló para sin(x)"
 print("  ✓ trapecio con sin(x) OK\n")
 
-simp_sin = mt.simpson(np.sin, 0, np.pi, 1000)
+simp_sin = fc.simpson(np.sin, 0, np.pi, 1000)
 print(f"simpson(sin, 0, π, n=1000) = {simp_sin:.10f}")
 print(f"  Valor exacto: {exacta_sin}")
 print(f"  Error: {abs(simp_sin - exacta_sin):.2e}")
@@ -123,7 +123,7 @@ assert abs(simp_sin - exacta_sin) < 1e-10, "simpson falló para sin(x)"
 print("  ✓ simpson con sin(x) OK\n")
 
 # Test simpson con n impar (debe ajustar a par automáticamente)
-simp_impar = mt.simpson(h_cuad, 0, 1, 999)
+simp_impar = fc.simpson(h_cuad, 0, 1, 999)
 print(f"simpson(x², 0, 1, n=999→1000) = {simp_impar:.10f}")
 print(f"  Valor exacto: {exacta_cuad:.10f}")
 assert abs(simp_impar - exacta_cuad) < 1e-10, "simpson con n impar falló"
@@ -134,16 +134,16 @@ print("  ✓ simpson con n impar OK\n")
 # =============================================
 
 # Test cambio_variable: z/(1-z)
-assert mt.cambio_variable(0) == 0.0, "cambio_variable(0) falló"
-assert mt.cambio_variable(0.5) == 1.0, "cambio_variable(0.5) falló"
-assert abs(mt.cambio_variable(0.75) - 3.0) < 1e-10, "cambio_variable(0.75) falló"
+assert fc.cambio_variable(0) == 0.0, "cambio_variable(0) falló"
+assert fc.cambio_variable(0.5) == 1.0, "cambio_variable(0.5) falló"
+assert abs(fc.cambio_variable(0.75) - 3.0) < 1e-10, "cambio_variable(0.75) falló"
 print("cambio_variable(0)=0, cambio_variable(0.5)=1, cambio_variable(0.75)=3")
 print("  ✓ cambio_variable OK\n")
 
 # Test jacobiano: 1/(1-z)²
-assert mt.jacobiano(0) == 1.0, "jacobiano(0) falló"
-assert mt.jacobiano(0.5) == 4.0, "jacobiano(0.5) falló"
-assert abs(mt.jacobiano(0.75) - 16.0) < 1e-10, "jacobiano(0.75) falló"
+assert fc.jacobiano(0) == 1.0, "jacobiano(0) falló"
+assert fc.jacobiano(0.5) == 4.0, "jacobiano(0.5) falló"
+assert abs(fc.jacobiano(0.75) - 16.0) < 1e-10, "jacobiano(0.75) falló"
 print("jacobiano(0)=1, jacobiano(0.5)=4, jacobiano(0.75)=16")
 print("  ✓ jacobiano OK\n")
 
@@ -153,7 +153,7 @@ def exp_neg(x):
 
 # integrando_transformado debe dar f(z/(1-z)) * 1/(1-z)²
 z_test = 0.5
-iz = mt.integrando_transformado(exp_neg, z_test)
+iz = fc.integrando_transformado(exp_neg, z_test)
 esperado_iz = np.exp(-1.0) * 4.0  # e^(-1) * jacobiano(0.5)
 print(f"integrando_transformado(e^(-x), z=0.5) = {iz:.10f}")
 print(f"  Valor esperado: {esperado_iz:.10f}")
@@ -163,7 +163,7 @@ print("  ✓ integrando_transformado OK\n")
 # Test integral impropia completa: ∫₀^∞ e^(-x) dx = 1
 # Usando simpson con cambio de variable en [ε, 1-ε]
 eps = 1e-6
-I_inf = mt.simpson(lambda z: mt.integrando_transformado(exp_neg, z), eps, 1 - eps, 1000)
+I_inf = fc.simpson(lambda z: fc.integrando_transformado(exp_neg, z), eps, 1 - eps, 1000)
 print(f"∫₀^∞ e^(-x) dx (Simpson + cambio var) = {I_inf:.10f}")
 print(f"  Valor exacto: 1.0")
 print(f"  Error: {abs(I_inf - 1.0):.2e}")
@@ -175,7 +175,7 @@ print("  ✓ Integral impropia OK\n")
 # =============================================
 
 # Test 1: ∫₀^∞ e^(-x) dx = 1  (reproduce el test anterior con la nueva función)
-I1 = mt.integral_impropia(lambda x: np.exp(-x), 0, np.inf)
+I1 = fc.integral_impropia(lambda x: np.exp(-x), 0, np.inf)
 print(f"integral_impropia(e^(-x), 0, ∞) = {I1:.10f}")
 print(f"  Valor exacto: 1.0")
 print(f"  Error: {abs(I1 - 1.0):.2e}")
@@ -183,7 +183,7 @@ assert abs(I1 - 1.0) < 1e-4, "integral_impropia [0, ∞) falló"
 print("  ✓ integral_impropia [0, ∞) OK\n")
 
 # Test 2: ∫₋∞^0 e^(x) dx = 1
-I2 = mt.integral_impropia(lambda x: np.exp(x), -np.inf, 0)
+I2 = fc.integral_impropia(lambda x: np.exp(x), -np.inf, 0)
 print(f"integral_impropia(e^(x), -∞, 0) = {I2:.10f}")
 print(f"  Valor exacto: 1.0")
 print(f"  Error: {abs(I2 - 1.0):.2e}")
@@ -191,7 +191,7 @@ assert abs(I2 - 1.0) < 1e-4, "integral_impropia (-∞, 0] falló"
 print("  ✓ integral_impropia (-∞, 0] OK\n")
 
 # Test 3: ∫₋∞^∞ e^(-x²) dx = √π
-I3 = mt.integral_impropia(lambda x: np.exp(-x**2), -np.inf, np.inf, n=2000)
+I3 = fc.integral_impropia(lambda x: np.exp(-x**2), -np.inf, np.inf, n=2000)
 exacto3 = np.sqrt(np.pi)
 print(f"integral_impropia(e^(-x²), -∞, ∞) = {I3:.10f}")
 print(f"  Valor exacto (√π): {exacto3:.10f}")
@@ -200,7 +200,7 @@ assert abs(I3 - exacto3) < 1e-3, "integral_impropia (-∞, ∞) gaussiana falló
 print("  ✓ integral_impropia (-∞, ∞) gaussiana OK\n")
 
 # Test 4: ∫₅^∞ 1/(1+x²) dx = π/2 - arctan(5)
-I4 = mt.integral_impropia(lambda x: 1/(1 + x**2), 5, np.inf)
+I4 = fc.integral_impropia(lambda x: 1/(1 + x**2), 5, np.inf)
 exacto4 = np.pi/2 - np.arctan(5)
 print(f"integral_impropia(1/(1+x²), 5, ∞) = {I4:.10f}")
 print(f"  Valor exacto (π/2 - arctan(5)): {exacto4:.10f}")
@@ -209,7 +209,7 @@ assert abs(I4 - exacto4) < 1e-4, "integral_impropia [5, ∞) falló"
 print("  ✓ integral_impropia [5, ∞) OK\n")
 
 # Test 5: ∫₋∞^-2 1/(1+x²) dx = π/2 - arctan(2)
-I5 = mt.integral_impropia(lambda x: 1/(1 + x**2), -np.inf, -2)
+I5 = fc.integral_impropia(lambda x: 1/(1 + x**2), -np.inf, -2)
 exacto5 = np.pi/2 - np.arctan(2)
 print(f"integral_impropia(1/(1+x²), -∞, -2) = {I5:.10f}")
 print(f"  Valor exacto (π/2 - arctan(2)): {exacto5:.10f}")
@@ -218,7 +218,7 @@ assert abs(I5 - exacto5) < 1e-4, "integral_impropia (-∞, -2] falló"
 print("  ✓ integral_impropia (-∞, -2] OK\n")
 
 # Test 6: ∫₋∞^∞ 1/(1+x²) dx = π  (Lorentziana)
-I6 = mt.integral_impropia(lambda x: 1/(1 + x**2), -np.inf, np.inf, n=2000)
+I6 = fc.integral_impropia(lambda x: 1/(1 + x**2), -np.inf, np.inf, n=2000)
 print(f"integral_impropia(1/(1+x²), -∞, ∞) = {I6:.10f}")
 print(f"  Valor exacto (π): {np.pi:.10f}")
 print(f"  Error: {abs(I6 - np.pi):.2e}")
@@ -226,7 +226,7 @@ assert abs(I6 - np.pi) < 1e-3, "integral_impropia (-∞, ∞) Lorentziana falló
 print("  ✓ integral_impropia (-∞, ∞) Lorentziana OK\n")
 
 # Test 7: caso finito — integral_impropia debe delegar a simpson
-I7 = mt.integral_impropia(lambda x: x**2, 0, 1)
+I7 = fc.integral_impropia(lambda x: x**2, 0, 1)
 print(f"integral_impropia(x², 0, 1) = {I7:.10f}")
 print(f"  Valor exacto: 0.3333333333")
 print(f"  Error: {abs(I7 - 1/3):.2e}")
@@ -251,7 +251,7 @@ t_final = 1.0
 n_pasos = int(t_final / dt)
 
 for _ in range(n_pasos):
-    x_euler = mt.euler(lambda x: -x, x_euler, dt)
+    x_euler = fc.euler(lambda x: -x, x_euler, dt)
 
 exacto_euler = np.exp(-t_final)  # e^(-1) ≈ 0.3678794...
 print(f"euler(dx/dt=-x, x₀=1, t=1, dt={dt}) = {x_euler:.10f}")
@@ -266,7 +266,7 @@ t_final2 = 0.5
 n_pasos2 = int(t_final2 / dt)
 
 for _ in range(n_pasos2):
-    x_euler2 = mt.euler(lambda x: 2*x, x_euler2, dt)
+    x_euler2 = fc.euler(lambda x: 2*x, x_euler2, dt)
 
 exacto_euler2 = np.exp(2 * t_final2)  # e^1
 print(f"euler(dx/dt=2x, x₀=1, t=0.5, dt={dt}) = {x_euler2:.10f}")
@@ -285,7 +285,7 @@ t_final_rk4 = 1.0
 n_pasos_rk4 = int(t_final_rk4 / dt_rk4)
 
 for i in range(n_pasos_rk4):
-    x_rk4 = mt.rk4(t, dt_rk4, x_rk4, lambda t, x: -x)
+    x_rk4 = fc.rk4(t, dt_rk4, x_rk4, lambda t, x: -x)
     t += dt_rk4
 
 exacto_rk4 = np.exp(-t_final_rk4)
@@ -306,7 +306,7 @@ def f_vec(t, x):
     return np.array([-x[0], -2*x[1]])
 
 for i in range(n_pasos_rk4):
-    x_vec = mt.rk4(t, dt_rk4, x_vec, f_vec)
+    x_vec = fc.rk4(t, dt_rk4, x_vec, f_vec)
     t += dt_rk4
 
 exacto_vec = np.array([np.exp(-1.0), np.exp(-2.0)])
@@ -324,8 +324,8 @@ x_r = 1.0
 dt_comp = 0.01
 t = 0.0
 for i in range(100):
-    x_e = mt.euler(lambda x: -x, x_e, dt_comp)
-    x_r = mt.rk4(t, dt_comp, x_r, lambda t, x: -x)
+    x_e = fc.euler(lambda x: -x, x_e, dt_comp)
+    x_r = fc.rk4(t, dt_comp, x_r, lambda t, x: -x)
     t += dt_comp
 
 err_e = abs(x_e - np.exp(-1.0))
@@ -367,7 +367,7 @@ for i in range(4):
         A[i, j] = np.sum(w * x_datos**(i + j))
 
 # Resolver con minimos_cuadrados
-coefs = mt.minimos_cuadrados(A, b)  # [a0, a1, a2, a3]
+coefs = fc.minimos_cuadrados(A, b)  # [a0, a1, a2, a3]
 print(f"Coeficientes ajustados: a0={coefs[0]:.4f}, a1={coefs[1]:.4f}, a2={coefs[2]:.4f}, a3={coefs[3]:.4f}")
 print(f"Coeficientes reales:    a0=2.0000, a1=-3.0000, a2=0.5000, a3=0.8000")
 
@@ -375,7 +375,7 @@ print(f"Coeficientes reales:    a0=2.0000, a1=-3.0000, a2=0.5000, a3=0.8000")
 y_ajustado = coefs[0] + coefs[1]*x_datos + coefs[2]*x_datos**2 + coefs[3]*x_datos**3
 
 # Calcular chi cuadrada
-chi2 = mt.chi_cuadrada(y_datos, y_ajustado, sigma)
+chi2 = fc.chi_cuadrada(y_datos, y_ajustado, sigma)
 ndof = len(x_datos) - 4  # grados de libertad = N - parámetros
 chi2_red = chi2 / ndof
 print(f"χ² = {chi2:.4f}")
@@ -423,7 +423,7 @@ print()
 def f_nr1(x):
     return x**2 - 4
 
-raiz1 = mt.newton_raphson(f_nr1, x=3.0, dx=1e-6, eps=1e-10, Nmax=100)
+raiz1 = fc.newton_raphson(f_nr1, x=3.0, dx=1e-6, eps=1e-10, Nmax=100)
 print(f"newton_raphson(x²-4, x₀=3) = {raiz1:.10f}")
 print(f"  Valor exacto: 2.0")
 print(f"  Error: {abs(raiz1 - 2.0):.2e}")
@@ -431,7 +431,7 @@ assert abs(raiz1 - 2.0) < 1e-8, "newton_raphson falló para x²-4 (raíz positiv
 print("  ✓ newton_raphson raíz de x²-4 OK\n")
 
 # Test 2: raíz negativa, partiendo de x₀ = -1
-raiz1b = mt.newton_raphson(f_nr1, x=-1.0, dx=1e-6, eps=1e-10, Nmax=100)
+raiz1b = fc.newton_raphson(f_nr1, x=-1.0, dx=1e-6, eps=1e-10, Nmax=100)
 print(f"newton_raphson(x²-4, x₀=-1) = {raiz1b:.10f}")
 print(f"  Valor exacto: -2.0")
 print(f"  Error: {abs(raiz1b - (-2.0)):.2e}")
@@ -439,7 +439,7 @@ assert abs(raiz1b - (-2.0)) < 1e-8, "newton_raphson falló para x²-4 (raíz neg
 print("  ✓ newton_raphson raíz negativa OK\n")
 
 # Test 3: raíz de sin(x) = 0 cerca de π
-raiz2 = mt.newton_raphson(np.sin, x=3.0, dx=1e-6, eps=1e-12, Nmax=100)
+raiz2 = fc.newton_raphson(np.sin, x=3.0, dx=1e-6, eps=1e-12, Nmax=100)
 print(f"newton_raphson(sin(x), x₀=3) = {raiz2:.10f}")
 print(f"  Valor exacto: π = {np.pi:.10f}")
 print(f"  Error: {abs(raiz2 - np.pi):.2e}")
@@ -450,7 +450,7 @@ print("  ✓ newton_raphson raíz de sin(x) OK\n")
 def f_nr3(x):
     return np.exp(x) - 3
 
-raiz3 = mt.newton_raphson(f_nr3, x=1.0, dx=1e-6, eps=1e-10, Nmax=100)
+raiz3 = fc.newton_raphson(f_nr3, x=1.0, dx=1e-6, eps=1e-10, Nmax=100)
 exacto_ln3 = np.log(3)
 print(f"newton_raphson(eˣ-3, x₀=1) = {raiz3:.10f}")
 print(f"  Valor exacto: ln(3) = {exacto_ln3:.10f}")
@@ -462,7 +462,7 @@ print("  ✓ newton_raphson raíz de eˣ-3 OK\n")
 def f_nr4(x):
     return x**3 - x - 2
 
-raiz4 = mt.newton_raphson(f_nr4, x=2.0, dx=1e-6, eps=1e-12, Nmax=100)
+raiz4 = fc.newton_raphson(f_nr4, x=2.0, dx=1e-6, eps=1e-12, Nmax=100)
 # Verificar que f(raiz) ≈ 0
 print(f"newton_raphson(x³-x-2, x₀=2) = {raiz4:.10f}")
 print(f"  f(raíz) = {f_nr4(raiz4):.2e}")
@@ -485,7 +485,7 @@ freq1, freq2 = 5, 13  # frecuencias en bins
 señal = 3.0 * np.cos(2 * np.pi * freq1 * n_arr / N) + 1.5 * np.sin(2 * np.pi * freq2 * n_arr / N)
 
 # Test DFT: comparar con np.fft.rfft
-X_dft = mt.dft(señal)
+X_dft = fc.dft(señal)
 X_np = np.fft.rfft(señal)
 err_dft = np.max(np.abs(np.array(X_dft) - X_np))
 print(f"dft vs np.fft.rfft (señal de {N} puntos)")
@@ -505,7 +505,7 @@ assert abs(pico13 - N * 1.5 / 2) < 1e-8, "dft: pico en freq2 incorrecto"
 print("  ✓ dft picos correctos OK\n")
 
 # Test IDFT: reconstruir la señal original
-señal_rec = mt.idft(X_dft)
+señal_rec = fc.idft(X_dft)
 err_idft = np.max(np.abs(np.array(señal_rec).real - señal))
 print(f"idft(dft(señal)) vs señal original")
 print(f"  Error máximo: {err_idft:.2e}")
@@ -517,7 +517,7 @@ assert imag_max < 1e-8, "idft produce parte imaginaria no despreciable"
 print("  ✓ idft OK\n")
 
 # Test FFT: comparar con np.fft.fft
-X_fft = mt.fft(señal)
+X_fft = fc.fft(señal)
 X_np_full = np.fft.fft(señal)
 err_fft = np.max(np.abs(np.array(X_fft) - X_np_full))
 print(f"fft vs np.fft.fft (señal de {N} puntos)")
@@ -526,7 +526,7 @@ assert err_fft < 1e-8, "fft no coincide con np.fft.fft"
 print("  ✓ fft OK\n")
 
 # Test IFFT: reconstruir la señal original
-señal_ifft = mt.ifft(X_fft)
+señal_ifft = fc.ifft(X_fft)
 err_ifft = np.max(np.abs(np.array(señal_ifft) - señal))
 print(f"ifft(fft(señal)) vs señal original")
 print(f"  Error máximo: {err_ifft:.2e}")
@@ -536,7 +536,7 @@ print("  ✓ ifft OK\n")
 # Test FFT con señal constante: DFT de [c, c, ..., c] = [c*N, 0, 0, ..., 0]
 c = 7.0
 señal_cte = np.full(16, c)
-X_cte = mt.fft(señal_cte)
+X_cte = fc.fft(señal_cte)
 assert abs(X_cte[0] - c * 16) < 1e-10, "fft de constante: DC incorrecto"
 assert all(abs(X_cte[k]) < 1e-10 for k in range(1, 16)), "fft de constante: componentes no-DC no son cero"
 print(f"fft([{c}]*16): DC={X_cte[0]:.1f}, resto ≈ 0")
@@ -545,7 +545,7 @@ print("  ✓ fft señal constante OK\n")
 # Test FFT con delta: DFT de [1, 0, 0, ..., 0] = [1, 1, 1, ..., 1]
 delta = np.zeros(16)
 delta[0] = 1.0
-X_delta = mt.fft(delta)
+X_delta = fc.fft(delta)
 assert all(abs(X_delta[k] - 1.0) < 1e-10 for k in range(16)), "fft de delta incorrecta"
 print("fft([1,0,...,0]) = [1,1,...,1]")
 print("  ✓ fft delta OK\n")
