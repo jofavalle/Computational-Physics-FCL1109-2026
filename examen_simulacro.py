@@ -366,9 +366,9 @@ plt.show()
 #    Guarde la gráfica como "p4b_espectro.png".
 #
 
-maximos = (np.diff(np.sign(np.diff(FFT_magnitude))) < 0).nonzero()[0] + 1
-print(f"Índices de máximos locales: {maximos}")
-picos = [(k, FFT_magnitude[k]) for k in maximos if k != 0]
+maximos_indices = (np.diff(np.sign(np.diff(FFT_magnitude))) < 0).nonzero()[0] + 1
+print(f"Índices de máximos locales: {maximos_indices}")
+picos = [(k, FFT_magnitude[k]) for k in maximos_indices if k != 0]
 picos_ordenados = sorted(picos, key=lambda x: x[1], reverse=True)
 frecuencias_dominantes = [freq_k[k] for k, mag in picos_ordenados[:2]]
 print(f"Frecuencias dominantes: {frecuencias_dominantes[0]:.2f} Hz, {frecuencias_dominantes[1]:.2f} Hz")
