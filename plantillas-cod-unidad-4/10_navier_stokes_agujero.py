@@ -18,7 +18,8 @@ Condiciones de contorno especiales:
 
 Parámetro R:  R = V₀*h/ν  (Reynolds de la grilla)
 
-Fuente: clase_08-05-26.py
+Fuente: clase_08-05-26.py  |  Landau Listing 4.10 (Torricelli.py)
+Algoritmo: ψ y ω con SOR; condiciones de frontera copiadas del Listing 4.10.
 Solo usa: numpy, matplotlib
 """
 

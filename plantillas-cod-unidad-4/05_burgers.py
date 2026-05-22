@@ -21,6 +21,8 @@ Condiciones iniciales posibles:
   - ruido aleatorio     (se verá cómo evoluciona a un frente)
 
 Fuente: clase_24-04-26_animated.py
+Relación con Landau: el Listing 4.5 (AdvecLax.py) resuelve advección lineal vía Lax-Wendroff;
+esta plantilla usa el esquema de la clase: difusión + advección no lineal en diferencias explícitas.
 Solo usa: numpy, matplotlib
 """
 

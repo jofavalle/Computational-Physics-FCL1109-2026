@@ -19,7 +19,8 @@ MODELOS disponibles:
   - "exponencial": T(x) = T₀ exp(αx),  ρ(x) = ρ₀ exp(αx)
   - "catenaria":   T(x) = T₀ cosh(ρ₀gx/T₀),  ρ(x) = ρ₀ (uniforme)
 
-Fuente: clase_21-04-26.py
+Fuente: clase_21-04-26.py  |  Landau Listing 4.2 (CatFriction.py — caso catenaria)
+Algoritmo: T en semipuntos y amortiguamiento κ son la transcripción directa del Listing 4.2.
 Solo usa: numpy, matplotlib
 """
 

@@ -14,7 +14,8 @@ Discretización en 2D (diferencias finitas, grilla NxN):
 
 Condiciones de frontera: Dirichlet u=0 en todos los bordes (membrana fija).
 
-Fuente: clase_23-04-26.py
+Fuente: clase_23-04-26.py  |  Landau Listing 4.4 (Waves2D.py)
+Algoritmo: leapfrog 2D con vecinos i±1, j±1; u[i,j,2]↔u_next, [1]↔u, [0]↔u_prev.
 Solo usa: numpy, matplotlib
 """
 

@@ -25,7 +25,9 @@ Número de Reynolds:
     R = V₀ * h / ν   (donde V₀ es la velocidad de referencia)
 
 Problema: flujo en un canal con tapa superior deslizante (lid-driven cavity)
-Fuente: clase_05-05-26.py
+Fuente: clase_05-05-26.py  |  Landau Listing 4.9 (Beam.py) — versión simplificada sin viga
+Algoritmo SOR: r1 = ω*((Σψ + h²·w)/4 − ψ)  equivale al relax() de Landau.
+Nota: clase_05-05-26 usa r1 = ω*(Σu − 4u + h²w) sin el /4; es el mismo SOR con ω_eff 4×.
 Solo usa: numpy, matplotlib
 """
 

@@ -13,7 +13,9 @@ Ecuaciones de frontera en la viga:
   - ψ en la viga = ψ[x0, y0]  (superficie sólida: línea de corriente)
   - ω en la superficie de la viga: calculada desde el Laplaciano de ψ
 
-Fuente: clase_07-05-26.py
+Fuente: clase_07-05-26.py  |  Landau Listing 4.9 (Beam.py)
+⚠ El signo del término convectivo sigue a Landau Listing 4.9 y clase_08-05-26.py,
+  no a clase_07-05-26.py (que tiene un error de signo en ese término).
 Solo usa: numpy, matplotlib
 """
 
@@ -90,12 +92,12 @@ def relajar():
             # --- ω: ecuación de transporte de vorticidad ---
             a1 = w[i+1,j] + w[i-1,j] + w[i,j+1] + w[i,j-1]
 
-            # término de arrastre convectivo (no lineal)
-            a3 = (R / 4.0) * (
-                (psi[i, j+1] - psi[i, j-1]) * (w[i+1, j] - w[i-1, j])
-                - (psi[i+1, j] - psi[i-1, j]) * (w[i, j+1] - w[i, j-1])
-            )
-            w_nuevo = 0.25 * (a1 + a3)
+            # término convectivo — signo según Landau Listing 4.9 y clase_08-05-26.py
+            # de ∂ω/∂t + ψ_y·∂ω/∂x − ψ_x·∂ω/∂y = ν·∇²ω se obtiene:
+            # ω_GS = (Σω − (R/4)·(a2 − a3)) / 4  ≡  (Σω + (R/4)·(a3 − a2)) / 4
+            a2 = (psi[i, j+1] - psi[i, j-1]) * (w[i+1, j] - w[i-1, j])  # ψ_y · ω_x (×4h²)
+            a3 = (psi[i+1, j] - psi[i-1, j]) * (w[i, j+1] - w[i, j-1])  # ψ_x · ω_y (×4h²)
+            w_nuevo = 0.25 * (a1 + (R / 4.0) * (a3 - a2))
             rw = w_nuevo - w[i, j]
             w[i, j] += omega * rw
 

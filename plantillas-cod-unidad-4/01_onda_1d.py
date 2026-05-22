@@ -16,7 +16,8 @@ Con amortiguamiento (fricción viscosa):
                 + r²*(y[i+1,n] - 2*y[i,n] + y[i-1,n])]
     — o equivalentemente, ver la sección de amortiguamiento abajo —
 
-Fuente: clase_14-04-26.ipynb, clase_16-04-26.ipynb
+Fuente: clase_14-04-26.ipynb, clase_16-04-26.ipynb  |  Landau Listing 4.1 (EqStringMovMat.py)
+Algoritmo: leapfrog idéntico al de Landau; xi[i,2] ↔ y_nuevo, xi[i,1] ↔ y_actual, xi[i,0] ↔ y_anterior.
 Solo usa: numpy, matplotlib
 """
 
