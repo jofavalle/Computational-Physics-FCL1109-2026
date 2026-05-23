@@ -51,7 +51,7 @@ B = np.zeros(N_modo + 1)    # B[n] = coeficiente del modo n
 for n in range(1, N_modo + 1):
     integrando = y_inicial * np.sin(n * np.pi * x / L)
     # regla del trapecio manual:
-    B[n] = (2.0 / L) * np.trapz(integrando, x)
+    B[n] = (2.0 / L) * np.trapezoid(integrando, x)
 
 print("Coeficientes Bₙ (primeros 10):")
 for n in range(1, min(11, N_modo + 1)):
