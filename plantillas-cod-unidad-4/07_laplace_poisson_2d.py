@@ -63,8 +63,8 @@ fila_top = int(0.7 * N)
 fila_bot = int(0.3 * N)
 col_ini  = N // 4
 col_fin  = col_ini + ancho_placa
-placa_top = (fila_top, slice(col_ini, col_fin))
-placa_bot = (fila_bot, slice(col_ini, col_fin))
+placa_top = (slice(col_ini, col_fin), fila_top)
+placa_bot = (slice(col_ini, col_fin), fila_bot)
 
 V[placa_top] = V_top
 V[placa_bot] = V_bot
