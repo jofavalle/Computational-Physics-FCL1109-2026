@@ -11,6 +11,7 @@
 | [`cap03_dinamica_clasica_no_lineal.md`](cap03_dinamica_clasica_no_lineal.md) | Cap. 3 | Oscilador, péndulo, caos, Poincaré, mapa logístico, RK4 |
 | [`cap04_ecuaciones_onda_fluidos.md`](cap04_ecuaciones_onda_fluidos.md) | Cap. 4 | Onda 1D, calor, Laplace, Poisson, FTCS, Crank-Nicolson, FFT |
 | [`cap05_electricidad_magnetismo.md`](cap05_electricidad_magnetismo.md) | Cap. 5 | Potencial, relajación, Biot-Savart, FDTD, capacitancia |
+| [`cap06_mecanica_cuantica.md`](cap06_mecanica_cuantica.md) | Cap. 6 | Estados ligados, Numerov, Schrödinger t-dependiente, dispersión, QM matricial, qubits, Feynman |
 
 ---
 
@@ -25,6 +26,10 @@
 | Diferencias finitas onda | Ecuación de onda | O(dt², dx²) |
 | Jacobi/Gauss-Seidel/SOR | Laplace, Poisson | Iterativo |
 | FDTD (Yee) | Maxwell en el tiempo | O(dt², dx²) |
+| Numerov | EDO sin 1ª derivada (Schrödinger) | O(h⁶) |
+| Leapfrog Schrödinger (R/I escalonados) | Schrödinger dependiente del tiempo | O(dt², dx²) |
+| Cuadratura de Gauss + autovalores | QM en espacio de momentos (ec. integral) | Espectral |
+| Metropolis | Integral de camino de Feynman, estado base | Monte Carlo |
 
 ---
 
