@@ -1,28 +1,45 @@
 """
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║        UNIVERSIDAD DE EL SALVADOR — FACULTAD DE CIENCIAS NATURALES          ║
-║                    FÍSICA COMPUTACIONAL  —  FCO4101                          ║
+║        UNIVERSIDAD DE EL SALVADOR — FACULTAD DE CIENCIAS NATURALES            ║
+║                    FÍSICA COMPUTACIONAL  —  FCO4101                            ║
 ║                    PARCIAL III  ·  SIMULACRO  E                              ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
-  PROBLEMA: Potencial Eléctrico de un Cuadrupolo en Caja Conductora
+  PROBLEMA: Cuadrupolo de Placas + Electrodo Central a Potencial Fijo
   ──────────────────────────────────────────────────────────────────
 
   Se tiene una caja cuadrada conductora de lado L, aterrizada (V = 0 en todas
-  sus paredes). En el interior se colocan cuatro placas cuadradas con densidad
-  de carga superficial uniforme, dispuestas en configuración de cuadrupolo:
+  sus paredes).  En su interior coexisten DOS tipos de fuente:
+
+    (A) Cuatro placas cuadradas con densidad de carga superficial uniforme,
+        dispuestas en configuración de CUADRUPOLO:
 
           ┌──────────────────────────┐
-          │   [+ρ₀]      [−ρ₀]      │
-          │                          │   V = 0 en todo el borde
-          │   [−ρ₀]      [+ρ₀]      │
+          │   [+ρ₀]        [−ρ₀]    │
+          │          ╭───╮           │   V = 0 en todo el borde (tierra)
+          │          │+V_e│          │   ← electrodo central conductor
+          │          ╰───╯           │
+          │   [−ρ₀]        [+ρ₀]    │
           └──────────────────────────┘
 
-  El potencial eléctrico V(x,y) satisface la ecuación de Poisson:
+    (B) Un ELECTRODO circular conductor en el centro, de radio R_e, mantenido
+        a un potencial FIJO V_e = 500 V (p.ej. conectado a una batería).
+
+  Esta es la situación típica de un CAPACITOR / problema de electrostática con
+  conductores: parte de la frontera tiene carga prescrita (las placas, vía ρ)
+  y parte tiene POTENCIAL prescrito (la caja a 0 V y el electrodo a 500 V).
+  El electrodo y la caja aterrizada forman, de hecho, las dos "armaduras" de un
+  condensador cuya región intermedia contiene además el cuadrupolo de carga.
+
+  El potencial V(x,y) satisface la ecuación de Poisson:
 
               ∇²V(x,y) = −ρ(x,y)/ε₀                              (Poisson)
 
-  y ∇²V = 0 en las regiones sin carga (ecuación de Laplace).
+  con ∇²V = 0 donde no hay carga (Laplace), SUJETA a las condiciones de
+  contorno de Dirichlet:
+
+        V = 0     en las paredes de la caja
+        V = V_e   en toda la superficie (y el interior) del electrodo central
 
   ──────────────────────────────────────────────────────────────
   DISCRETIZACIÓN: Diferencias Finitas Centrales
@@ -33,74 +50,81 @@
       V[i,j] = ¼ (V[i+1,j] + V[i-1,j] + V[i,j+1] + V[i,j-1])
                + Δ²·ρ[i,j] / (4ε₀)                               (*)
 
+  Los nodos donde V está prescrito (paredes y electrodo) NO se actualizan: se
+  mantienen fijos en su valor de Dirichlet durante toda la iteración.
+
   MÉTODO: Sobrerelajación Sucesiva (SOR)
   ──────────────────────────────────────────────────────────────
 
-  En el método de Gauss-Seidel se usa el valor (*) directamente. En SOR se
-  combina con el valor anterior mediante el factor de sobrerelajación ω:
+  Gauss-Seidel usa el valor (*) directamente.  SOR lo combina con el valor
+  anterior mediante el factor de sobrerelajación ω:
 
       V[i,j]  ←  (1−ω)·V[i,j]  +  ω·V_GS[i,j]                   (**)
 
-  donde V_GS[i,j] es el valor de Gauss-Seidel dado por (*).
   Para una malla N×N, el valor óptimo teórico es ω_opt ≈ 2/(1 + π/N).
-  Se recomienda ω ∈ (1.5, 1.95) en la práctica.
+  Se recomienda ω ∈ (1.5, 1.95).  Si ω ≥ 2 el método DIVERGE.
 
-  Condición de convergencia:  max|V^{k+1} − V^k| < tolerancia
-
-  Condiciones de frontera:
-      V[0, :] = V[N−1, :] = V[:, 0] = V[:, N−1] = 0   (caja aterrizada)
+  Condición de convergencia:  max|V^{k+1} − V^k| < tol
 
   Campo eléctrico (diferencias centrales):
-      E_x[i,j] = −(V[i+1,j] − V[i−1,j]) / (2Δ)
-      E_y[i,j] = −(V[i,j+1] − V[i,j−1]) / (2Δ)
+      E_x[i,j] = −(V[i,j+1] − V[i,j−1]) / (2Δ)
+      E_y[i,j] = −(V[i+1,j] − V[i−1,j]) / (2Δ)
 
-  Parámetros:  N = 100,  Δ = 1,  ε₀ = 1,  ρ₀ = 100,  ω = 1.85,  tol = 10⁻⁵
+  Parámetros:  N = 100,  Δ = 1,  ε₀ = 1,  ρ₀ = 10,  ω = 1.85,  tol = 10⁻⁵
 
-  Coordenadas de las placas (índices de nodos):
+  Geometría (índices de nodos):
       Placa 1  (+ρ₀): filas [15:35], columnas [15:35]
       Placa 2  (−ρ₀): filas [15:35], columnas [65:85]
       Placa 3  (−ρ₀): filas [65:85], columnas [15:35]
       Placa 4  (+ρ₀): filas [65:85], columnas [65:85]
+      Electrodo central (V_e = 500): círculo de radio R_e = 8 centrado en (50,50)
 
   ─────────────────────────────────────────────────────────────────────────────
   TAREAS
   ─────────────────────────────────────────────────────────────────────────────
 
-  1. Construya la matriz de densidad de carga ρ[i,j] de tamaño N×N.
-     Asigne +ρ₀ a las placas 1 y 4 y −ρ₀ a las placas 2 y 3.
-     Inicialice V = 0 en toda la malla y aplique las CC de frontera.
-     Describa el sistema físico: ¿a qué configuración multipolar corresponde?
-     ¿Cuál sería la solución analítica aproximada a gran distancia de las placas?
+  1. Construya la matriz de densidad de carga ρ[i,j] (cuadrupolo) y la MÁSCARA
+     booleana del electrodo central.  Inicialice V = 0 e imponga las dos CC de
+     Dirichlet: paredes a 0 V y electrodo a V_e = 500 V.
+     Describa el sistema físico: ¿qué papel juega el electrodo central frente a
+     la caja aterrizada (analogía de capacitor)?  Argumente, usando la linealidad
+     de Poisson, que V = V_cuadrupolo + V_capacitor (descomposición por
+     superposición de la parte antisimétrica y la parte simétrica).
 
-  2. Implemente la actualización SOR dada por (**). Para cada punto interior
-     (i, j) calcule primero V_GS usando (*) y luego aplique la sobrerelajación.
-     Explique la diferencia entre Jacobi, Gauss-Seidel y SOR: ¿por qué SOR
-     converge más rápido? ¿Qué ocurre si ω > 2 (sobre-sobre-relajación)?
+  2. Implemente la actualización SOR (**).  CLAVE: los nodos prescritos (paredes
+     y electrodo) deben permanecer FIJOS — nunca se actualizan.  Explique la
+     diferencia entre Jacobi, Gauss-Seidel y SOR, por qué SOR converge más
+     rápido, y qué ocurre si ω ≥ 2.  ¿Por qué fijar el electrodo equivale a la
+     condición física de un conductor a potencial constante (E = 0 en su seno)?
 
-  3. Ejecute el esquema SOR hasta convergencia con tol = 10⁻⁵.
-     Registre el error máximo |V^{k+1} − V^k| en cada iteración.
-     Grafique el historial de convergencia en escala semilogarítmica.
-     ¿Cuántas iteraciones son necesarias? Compare cualitativamente con el
-     número esperado para Gauss-Seidel puro (≈ 2×N²/π² pasos extra).
+  3. Ejecute SOR hasta convergencia con tol = 10⁻⁵, registrando el error máximo
+     |V^{k+1} − V^k| por iteración.  Grafique el historial en escala semilog.
+     ¿Cuántas iteraciones se necesitan?  Compárelas con Gauss-Seidel puro.
 
   4. Grafique el potencial V(x,y):
-        a) Superficie 3D con colormap 'coolwarm'.
-        b) Mapa 2D con líneas equipotenciales superpuestas.
-        c) Marque la posición de cada placa en el mapa 2D.
-     Describa la forma del potencial: ¿es simétrico? ¿Dónde es máximo/mínimo?
-     ¿Por qué V = 0 exactamente en la diagonal que pasa entre placas opuestas?
+        a) Superficie 3D (colormap 'coolwarm').
+        b) Mapa 2D con líneas equipotenciales.
+        c) Marque las cuatro placas y el electrodo central.
+     ¿Es el potencial simétrico?  ¿Sigue siendo V = 0 en las diagonales como en
+     el cuadrupolo puro, o el electrodo lo modifica?  ¿Dónde es máximo y mínimo?
 
-  5. Calcule el campo eléctrico E = −∇V usando diferencias centrales.
-     Grafique las líneas de campo usando quiver (diezmado) o streamplot.
-     Superponga las equipotenciales. Describa:
-        — ¿Hacia dónde apuntan las líneas de campo cerca de cada placa?
-        — ¿Qué ocurre en el punto central de la caja?
-        — ¿Cómo se relacionan las líneas de campo con las equipotenciales?
+  5. Calcule el campo eléctrico E = −∇V (diferencias centrales) y grafique sus
+     líneas (quiver diezmado o streamplot) sobre las equipotenciales.  Describa:
+        — ¿Hacia dónde apuntan las líneas cerca del electrodo (+500 V) y cerca
+          de cada placa?
+        — ¿Cuánto vale E dentro del electrodo?  ¿Por qué?
+        — Relación entre líneas de campo y equipotenciales.
 
-  6. Repita la simulación con ω = 1.0 (Gauss-Seidel puro) y con ω = 1.95.
-     Grafique los tres historiales de convergencia en una misma figura.
-     Tabule el número de iteraciones para cada ω.
-     ¿Qué valor de ω resulta más eficiente para esta malla?
+  6. (Capacitor) Estime la carga total sobre el electrodo central aplicando la
+     ley de Gauss en 2D sobre un lazo rectangular que lo rodee (sin encerrar las
+     placas):
+            Q_e = ε₀ ∮ E·n̂ dl
+     A partir de ella estime la "capacitancia" C = Q_e / V_e entre el electrodo
+     y la caja aterrizada.  Comente el resultado.
+
+  7. Repita la simulación con ω = 1.0 (Gauss-Seidel puro) y ω = 1.95.
+     Grafique los tres historiales de convergencia juntos y tabule el número de
+     iteraciones.  ¿Qué ω es más eficiente?  Compárelo con ω_opt ≈ 2/(1+π/N).
 """
 
 import numpy as np
@@ -110,63 +134,41 @@ import matplotlib.pyplot as plt
 N        = 100
 delta    = 1.0
 epsilon0 = 1.0
-rho0     = 100.0
+rho0     = 10.0
 omega    = 1.85
 tol      = 1e-5
 N_iter   = 10000
 
-# ─── ÍTEM 1: Densidad de carga y condiciones iniciales ───────────────────────
+# Electrodo central a potencial fijo
+cx = cy  = N // 2     # centro de la caja
+R_elec   = 8          # [nodos] radio del electrodo
+V_elec   = 500.0      # [V] potencial fijo del electrodo
+
+# ─── ÍTEM 1: Densidad de carga, electrodo y condiciones iniciales ────────────
 rho = np.zeros((N, N))
-
 # TODO: asignar +rho0 a placas 1 y 4, -rho0 a placas 2 y 3
-# rho[15:35, 15:35] = ...
-# rho[15:35, 65:85] = ...
-# rho[65:85, 15:35] = ...
-# rho[65:85, 65:85] = ...
 
-V = np.zeros((N, N))
-# CC: V en bordes = 0 (ya inicializado, no actualizar i=0, i=N-1, j=0, j=N-1)
+# TODO: máscara booleana del electrodo circular (radio R_elec, centro (cx,cy))
+# TODO: V = 0 en toda la malla; V[electrodo] = V_elec; bordes a 0 (Dirichlet)
 
-# ─── ÍTEM 2 y 3: Iteración SOR hasta convergencia ────────────────────────────
+# ─── ÍTEM 2 y 3: Iteración SOR (sin actualizar nodos fijos) ──────────────────
 historial_error = []
 
-for iteracion in range(N_iter):
-    V_old = V.copy()
-
-    for i in range(1, N - 1):
-        for j in range(1, N - 1):
-            # TODO: calcular V_GS (Poisson discretizada)
-            # V_GS = 0.25 * (...) + delta**2 * rho[i,j] / (4 * epsilon0)
-            # TODO: actualización SOR
-            # V[i, j] = (1 - omega) * V[i, j] + omega * V_GS
-            pass
-
-    error = np.max(np.abs(V - V_old))
-    historial_error.append(error)
-
-    if iteracion % 200 == 0:
-        print(f"  Iter {iteracion:5d}   error = {error:.3e}")
-
-    if error < tol:
-        print(f"Convergencia en iteración {iteracion}")
-        break
+# TODO: bucle SOR que NO toque paredes ni electrodo; registrar el error
 
 # ─── ÍTEM 4: Gráfica del potencial ───────────────────────────────────────────
 x = np.arange(N) * delta
 y = np.arange(N) * delta
 X, Y = np.meshgrid(x, y)
-
-# TODO: superficie 3D + mapa 2D con equipotenciales + posición de placas
+# TODO: superficie 3D + mapa 2D con equipotenciales + placas + electrodo
 
 # ─── ÍTEM 5: Campo eléctrico ─────────────────────────────────────────────────
-Ex = np.zeros_like(V)
-Ey = np.zeros_like(V)
+# TODO: Ex, Ey por diferencias centrales; quiver/streamplot + equipotenciales
 
-# TODO: Ex[1:-1, 1:-1] = -(V[2:, 1:-1] - V[:-2, 1:-1]) / (2*delta)
-# TODO: Ey[1:-1, 1:-1] = -(V[1:-1, 2:] - V[1:-1, :-2]) / (2*delta)
-# TODO: graficar quiver/streamplot superpuesto con equipotenciales
+# ─── ÍTEM 6: Carga y capacitancia del electrodo (ley de Gauss 2D) ────────────
+# TODO: flujo de E sobre un lazo que rodee el electrodo → Q_e → C = Q_e/V_elec
 
-# ─── ÍTEM 6: Comparación de ω ────────────────────────────────────────────────
-# TODO: repetir con omega = 1.0 y omega = 1.95, graficar historiales
+# ─── ÍTEM 7: Comparación de ω ────────────────────────────────────────────────
+# TODO: repetir con omega = 1.0 y 1.95; graficar los tres historiales
 
 plt.show()
