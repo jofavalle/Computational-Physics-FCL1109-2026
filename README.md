@@ -18,7 +18,7 @@ Este repositorio documenta el trabajo de tres estudiantes a lo largo de todo el 
 |---|---|---|---|
 | 1–5 | Fundamentos computacionales y análisis de datos | Cap. 1–2 | [notebooks/00-fundamentos-computacionales](notebooks/00-fundamentos-computacionales/) |
 | 6–8 | Dinámica clásica y no lineal (osciladores, caos, órbitas) | Cap. 3 | [notebooks/01-dinamica-clasica-no-lineal](notebooks/01-dinamica-clasica-no-lineal/), [referencias/cap03_dinamica_clasica_no_lineal.md](referencias/cap03_dinamica_clasica_no_lineal.md) |
-| 9–13 | Ecuaciones de onda y dinámica de fluidos (FTCS, Crank-Nicolson, FFT) | Cap. 4 | [notebooks/02-ecuaciones-onda-fluidos](notebooks/02-ecuaciones-onda-fluidos/), [plantillas-cod-unidad-4/](plantillas-cod-unidad-4/), [referencias/cap04_ecuaciones_onda_fluidos.md](referencias/cap04_ecuaciones_onda_fluidos.md) |
+| 9–13 | Ecuaciones de onda y dinámica de fluidos (FTCS, Crank-Nicolson, FFT) | Cap. 4 | [notebooks/02-ecuaciones-onda-fluidos](notebooks/02-ecuaciones-onda-fluidos/), [extras/plantillas-cod-unidad-4/](extras/plantillas-cod-unidad-4/), [referencias/cap04_ecuaciones_onda_fluidos.md](referencias/cap04_ecuaciones_onda_fluidos.md) |
 | 14–15 | Electricidad y magnetismo (Laplace, Poisson, FDTD, SOR) | Cap. 5 | [notebooks/03-electricidad-magnetismo](notebooks/03-electricidad-magnetismo/), [referencias/cap05_electricidad_magnetismo.md](referencias/cap05_electricidad_magnetismo.md) |
 | 16–17 | Mecánica cuántica | Cap. 6 | [notebooks/04-mecanica-cuantica](notebooks/04-mecanica-cuantica/), [referencias/cap06_mecanica_cuantica.md](referencias/cap06_mecanica_cuantica.md) |
 | 18 | Termodinámica y física estadística | Cap. 7 | [parciales/parcial-3-...](parciales/parcial-3-examen-integrador-cuantica-electromagnetismo/) |
@@ -34,9 +34,8 @@ Evaluación: 4 prácticas numéricas (40 %) + 3 exámenes parciales (60 %). Prog
 | [parciales/](parciales/) | Exámenes parciales (onda 1D, examen integrador de cuántica y electromagnetismo) |
 | [notebooks/](notebooks/) | Notebooks de cada clase, organizados por unidad temática ([índice](notebooks/INDEX.md)) |
 | [scripts/](scripts/) | Scripts equivalentes a las clases, organizados por unidad temática ([índice](scripts/INDEX.md)) |
-| [plantillas-cod-unidad-4/](plantillas-cod-unidad-4/) | Biblioteca de plantillas reutilizables para ondas y fluidos (onda 1D, membrana 2D, calor, Laplace/Poisson, Navier-Stokes, FFT), fieles a los algoritmos de Landau |
 | [referencias/](referencias/) | Resúmenes ejecutivos de cada capítulo del libro guía, con los listings originales de Landau como autoridad algorítmica |
-| [extras/](extras/) | Exámenes simulacro y ejercicios adicionales de repaso |
+| [extras/](extras/) | Material de repaso y apoyo: exámenes simulacro, datasets (`datos_decaimiento.csv`, `senal_ruido.csv`) y [plantillas-cod-unidad-4/](extras/plantillas-cod-unidad-4/) (biblioteca de plantillas reutilizables para ondas y fluidos, fieles a los algoritmos de Landau) |
 | [fcl1109.py](fcl1109.py) | Biblioteca numérica propia del curso (derivadas, integración, EDOs, ajuste de datos, raíces, Fourier) |
 
 ## Habilidades técnicas demostradas
