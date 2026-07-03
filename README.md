@@ -1,6 +1,6 @@
-# Física Computacional (FCO4101) - Portafolio del curso
+# Física Computacional (FCL1109) - Portafolio del curso
 
-Repositorio del curso **FCO4101 (Física Computacional)**, Escuela de Física, Facultad de Ciencias Naturales y Matemática, Universidad de El Salvador, Ciclo I 2026. Libro de referencia principal: Landau & Páez, *Computational Problems for Physics* (CRC Press, 2018).
+Repositorio del curso **FCL1109 (Física Computacional)**, Escuela de Física, Facultad de Ciencias Naturales y Matemática, Universidad de El Salvador, Ciclo I 2026. Libro de referencia principal: Landau & Páez, *Computational Problems for Physics* (CRC Press, 2018).
 
 Este repositorio documenta el trabajo de tres estudiantes a lo largo de todo el curso: implementaciones de métodos numéricos, simulaciones de sistemas físicos, prácticas numéricas formales, exámenes parciales y proyectos finales de investigación. Se organiza como un portafolio técnico que demuestra experiencia práctica en **física computacional, métodos numéricos, simulación de sistemas dinámicos, ecuaciones diferenciales parciales, y métodos de Monte Carlo/cadenas de Markov**.
 
