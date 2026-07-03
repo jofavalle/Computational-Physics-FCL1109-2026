@@ -1,8 +1,8 @@
 """
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║        UNIVERSIDAD DE EL SALVADOR — FACULTAD DE CIENCIAS NATURALES            ║
-║                    FÍSICA COMPUTACIONAL  —  FCO4101                            ║
-║                    PARCIAL III  ·  SIMULACRO  F  —  SOLUCIÓN                   ║
+║        UNIVERSIDAD DE EL SALVADOR - FACULTAD DE CIENCIAS NATURALES            ║
+║                    FÍSICA COMPUTACIONAL  -  FCO4101                            ║
+║                    PARCIAL III  ·  SIMULACRO  F  -  SOLUCIÓN                   ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
   Propagación de ondas electromagnéticas en 1D con el método FDTD
@@ -49,7 +49,7 @@ def pulso_gaussiano():
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 1 — Paso de actualización FDTD (esquema leapfrog)
+# ÍTEM 1 - Paso de actualización FDTD (esquema leapfrog)
 # ══════════════════════════════════════════════════════════════════════════════
 # ¿Por qué se actualizan E y B de forma ALTERNADA?
 # ------------------------------------------------
@@ -102,14 +102,14 @@ eps_vacio = np.ones(Nz)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 2 — Pulso gaussiano con B = 0: se divide en dos
+# ÍTEM 2 - Pulso gaussiano con B = 0: se divide en dos
 # ══════════════════════════════════════════════════════════════════════════════
 # Estado inicial: E_x gaussiano, B_y = 0. Físicamente, un campo con E≠0 y B=0 NO
 # es una onda viajera pura, sino la SUMA de dos ondas iguales que viajan en +z y
 # en −z. Por eso el pulso se parte en dos jorobas de la MITAD de amplitud que se
 # alejan en sentidos opuestos.
 print("═" * 64)
-print("ÍTEM 2 — Pulso gaussiano con B=0 (se divide en dos)")
+print("ÍTEM 2 - Pulso gaussiano con B=0 (se divide en dos)")
 print("═" * 64)
 
 E_x = pulso_gaussiano()              # E inicial = gaussiana
@@ -128,20 +128,20 @@ for n in instantes2:
     E_snap = snaps2[n][0]            # [0] toma E_x del par (E_x, B_y)
     plt.plot(z, E_snap, label=f'paso {n}  (t = {n*dt:.1f})')   # dibuja E(z) en ese instante
 plt.axhline(0, color='k', lw=0.6)    # eje horizontal en 0
-plt.title('ÍTEM 2 — Pulso con B=0: se separa en dos ondas (±z) de media amplitud')
+plt.title('ÍTEM 2 - Pulso con B=0: se separa en dos ondas (±z) de media amplitud')
 plt.xlabel('z'); plt.ylabel(r'$E_x$')
 plt.legend(); plt.grid(alpha=0.3)
 plt.tight_layout()
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 3 — Condición de Courant: estable (β=0.4) vs inestable (β=1.05)
+# ÍTEM 3 - Condición de Courant: estable (β=0.4) vs inestable (β=1.05)
 # ══════════════════════════════════════════════════════════════════════════════
 # Repetimos la simulación con dos β. Con β≤1 el pico de |E| se mantiene acotado;
 # con β>1 crece exponencialmente (el esquema "explota"): pura inestabilidad
 # numérica, no física.
 print("\n" + "═" * 64)
-print("ÍTEM 3 — Condición de Courant (estabilidad)")
+print("ÍTEM 3 - Condición de Courant (estabilidad)")
 print("═" * 64)
 
 plt.figure(figsize=(11, 5))
@@ -153,14 +153,14 @@ for b, color in [(0.4, 'tab:blue'), (1.05, 'tab:red')]:
     print(f"  β = {b}: max|E| final = {max_E[-1]:.3e}  → {estado}")
     # semilogy: eje Y logarítmico. Ideal para ver crecer/decaer en órdenes de magnitud.
     plt.semilogy(max_E, color=color, lw=2, label=f'β = {b}  ({estado})')
-plt.title('ÍTEM 3 — Estabilidad de Courant:  β ≤ 1 acotado,  β > 1 diverge')
+plt.title('ÍTEM 3 - Estabilidad de Courant:  β ≤ 1 acotado,  β > 1 diverge')
 plt.xlabel('paso de tiempo'); plt.ylabel(r'$\max|E_x|$  (escala log)')
 plt.legend(); plt.grid(alpha=0.3, which='both')
 plt.tight_layout()
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 4 — Reflexión en una pared conductora (PEC)
+# ÍTEM 4 - Reflexión en una pared conductora (PEC)
 # ══════════════════════════════════════════════════════════════════════════════
 # Ahora lanzamos una onda VIAJERA pura hacia la derecha. El truco para que viaje
 # sólo en +z es arrancar con B_y = E_x (los dos campos en fase): así una de las
@@ -168,7 +168,7 @@ plt.tight_layout()
 # se obliga E=0, el pulso se refleja INVIRTIENDO su signo (como una cuerda atada
 # a un extremo fijo).
 print("\n" + "═" * 64)
-print("ÍTEM 4 — Reflexión en pared conductora (inversión de signo)")
+print("ÍTEM 4 - Reflexión en pared conductora (inversión de signo)")
 print("═" * 64)
 
 E_x = pulso_gaussiano()
@@ -185,14 +185,14 @@ for n in instantes4:
     plt.plot(z, snaps4[n][0], label=f'paso {n}')
 plt.axhline(0, color='k', lw=0.6)
 plt.axvline(Nz - 1, color='gray', ls='--', label='pared conductora')
-plt.title('ÍTEM 4 — El pulso rebota en la pared y se INVIERTE (E=0 en el conductor)')
+plt.title('ÍTEM 4 - El pulso rebota en la pared y se INVIERTE (E=0 en el conductor)')
 plt.xlabel('z'); plt.ylabel(r'$E_x$')
 plt.legend(); plt.grid(alpha=0.3)
 plt.tight_layout()
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 5 — Lámina dieléctrica: reflexión y transmisión
+# ÍTEM 5 - Lámina dieléctrica: reflexión y transmisión
 # ══════════════════════════════════════════════════════════════════════════════
 # Colocamos un medio con ε_r = 4 en una franja central. Cuando la onda viajera
 # llega a la interfaz:
@@ -200,7 +200,7 @@ plt.tight_layout()
 #   · parte se TRANSMITE (sigue en +z) pero más LENTA: v = c/√ε_r = c/2,
 #     y con menor longitud de onda (se "comprime" dentro del dieléctrico).
 print("\n" + "═" * 64)
-print("ÍTEM 5 — Lámina dieléctrica (reflexión + transmisión)")
+print("ÍTEM 5 - Lámina dieléctrica (reflexión + transmisión)")
 print("═" * 64)
 
 eps_r = np.ones(Nz)                  # arrancamos en vacío (ε_r = 1) en todos lados
@@ -228,14 +228,14 @@ plt.axvspan(ini_diel, fin_diel, color='gold', alpha=0.25, label='dieléctrico ε
 for n in instantes5:
     plt.plot(z, snaps5[n][0], label=f'paso {n}')
 plt.axhline(0, color='k', lw=0.6)
-plt.title('ÍTEM 5 — Onda contra dieléctrico: parte se refleja, parte se transmite (más lenta)')
+plt.title('ÍTEM 5 - Onda contra dieléctrico: parte se refleja, parte se transmite (más lenta)')
 plt.xlabel('z'); plt.ylabel(r'$E_x$')
 plt.legend(fontsize=8); plt.grid(alpha=0.3)
 plt.tight_layout()
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 6 — Energía y vector de Poynting
+# ÍTEM 6 - Energía y vector de Poynting
 # ══════════════════════════════════════════════════════════════════════════════
 # Densidad de energía:  u(z) = ½(ε_r E² + B²)   (eléctrica + magnética).
 # Flujo de Poynting:     S_z = E_x · B_y  → su SIGNO dice hacia dónde fluye la
@@ -243,7 +243,7 @@ plt.tight_layout()
 # Con paredes PEC ideales la energía total ∫u dz se conserva (la onda rebota sin
 # perderse). La medimos a lo largo del tiempo para comprobarlo.
 print("\n" + "═" * 64)
-print("ÍTEM 6 — Energía total y vector de Poynting")
+print("ÍTEM 6 - Energía total y vector de Poynting")
 print("═" * 64)
 
 E_x = pulso_gaussiano()
@@ -262,7 +262,7 @@ print(f"  Poynting medio  <S_z> = {np.mean(S_z):+.3f}  → signo + = propagació
 fig, ax = plt.subplots(1, 2, figsize=(13, 5))
 ax[0].plot(energias, 'tab:green', lw=2)
 ax[0].set(xlabel='paso de tiempo', ylabel='energía total',
-          title='ÍTEM 6 — Energía total (se conserva con paredes PEC)')
+          title='ÍTEM 6 - Energía total (se conserva con paredes PEC)')
 # ylim ajustado para apreciar que la curva es esencialmente plana:
 ax[0].set_ylim(0, max(energias) * 1.3)
 ax[0].grid(alpha=0.3)

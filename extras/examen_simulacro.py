@@ -1,6 +1,6 @@
 """
 ╔══════════════════════════════════════════════════════════════════════╗
-║              EXAMEN SIMULACRO — FÍSICA COMPUTACIONAL               ║
+║              EXAMEN SIMULACRO - FÍSICA COMPUTACIONAL               ║
 ║                         FCL1109 · 2026                             ║
 ╠══════════════════════════════════════════════════════════════════════╣
 ║  Duración : 1 hora 30 minutos                                     ║
@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 import fcl1109 as fc
 
 # ====================================================================
-# PROBLEMA 1 — Potencial de Lennard-Jones          (25 pts · ~20 min)
+# PROBLEMA 1 - Potencial de Lennard-Jones          (25 pts · ~20 min)
 # ====================================================================
 #
 # El potencial de Lennard-Jones modela la interacción entre dos átomos
@@ -79,7 +79,7 @@ plt.grid()
 plt.show()
 
 # ====================================================================
-# PROBLEMA 2 — Distribución de Maxwell-Boltzmann   (25 pts · ~20 min)
+# PROBLEMA 2 - Distribución de Maxwell-Boltzmann   (25 pts · ~20 min)
 # ====================================================================
 #
 # La distribución de rapideces de Maxwell-Boltzmann es:
@@ -150,7 +150,7 @@ plt.show()
 
 
 # ====================================================================
-# PROBLEMA 3 — Oscilador armónico amortiguado      (25 pts · ~25 min)
+# PROBLEMA 3 - Oscilador armónico amortiguado      (25 pts · ~25 min)
 # ====================================================================
 #
 # Un oscilador amortiguado obedece la ecuación:
@@ -243,7 +243,7 @@ print(f"Error máximo |x_numérico − x_analítico|: {error_maximo:.6f}")
 
 
 # ====================================================================
-# PROBLEMA 4 — Ajuste de datos + Análisis de Fourier (25 pts · ~25 min)
+# PROBLEMA 4 - Ajuste de datos + Análisis de Fourier (25 pts · ~25 min)
 # ====================================================================
 #
 # ── Parte A: Ajuste de decaimiento radiactivo (15 pts) ──
@@ -376,5 +376,5 @@ print(f"Frecuencias dominantes: {frecuencias_dominantes[0]:.2f} Hz, {frecuencias
 # --- Escriba su código aquí ---
 
 print("\n" + "=" * 50)
-print("  FIN DEL EXAMEN — Verifique sus gráficas y salidas")
+print("  FIN DEL EXAMEN - Verifique sus gráficas y salidas")
 print("=" * 50)

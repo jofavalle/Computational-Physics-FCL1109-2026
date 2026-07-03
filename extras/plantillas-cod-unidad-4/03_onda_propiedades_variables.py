@@ -1,5 +1,5 @@
 """
-PLANTILLA 03 — Ecuación de onda con propiedades variables T(x) y ρ(x)
+PLANTILLA 03 - Ecuación de onda con propiedades variables T(x) y ρ(x)
 =======================================================================
 Ecuación diferencial:
     ρ(x) ∂²y/∂t² = ∂/∂x [T(x) ∂y/∂x] - κ ρ(x) ∂y/∂t
@@ -19,7 +19,7 @@ MODELOS disponibles:
   - "exponencial": T(x) = T₀ exp(αx),  ρ(x) = ρ₀ exp(αx)
   - "catenaria":   T(x) = T₀ cosh(ρ₀gx/T₀),  ρ(x) = ρ₀ (uniforme)
 
-Fuente: clase_21-04-26.py  |  Landau Listing 4.2 (CatFriction.py — caso catenaria)
+Fuente: clase_21-04-26.py  |  Landau Listing 4.2 (CatFriction.py - caso catenaria)
 Algoritmo: T en semipuntos y amortiguamiento κ son la transcripción directa del Listing 4.2.
 Solo usa: numpy, matplotlib
 """
@@ -63,14 +63,14 @@ print(f"Modelo: {modelo}")
 print(f"v_max = {vmax:.4f} m/s,  dt = {dt:.6f} s")
 
 # =============================================================================
-# CONDICIONES INICIALES — pulso gaussiano
+# CONDICIONES INICIALES - pulso gaussiano
 # =============================================================================
 y     = np.exp(-200 * (x - 0.5)**2)   # pulso angosto centrado en x=0.5
 y_old = y.copy()
 y_new = np.zeros(Nx)
 
 # =============================================================================
-# ALGORITMO CENTRAL — diferencias finitas con T variable
+# ALGORITMO CENTRAL - diferencias finitas con T variable
 # =============================================================================
 Nt   = 2000
 pasos_guardar = {0, 200, 500, 1000, 1800}
@@ -115,7 +115,7 @@ for paso, y_snap in instantaneas.items():
     ax.plot(x, y_snap, label=f'n = {paso}')
 ax.set_xlabel('x [m]')
 ax.set_ylabel('y [m]')
-ax.set_title(f'Onda con {modelo} — T(x), ρ(x) variables')
+ax.set_title(f'Onda con {modelo} - T(x), ρ(x) variables')
 ax.legend(fontsize=8)
 ax.grid(True, alpha=0.3)
 

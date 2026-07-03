@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # =============================================================================
-# PARCIAL 3 — SIMULACRO D
+# PARCIAL 3 - SIMULACRO D
 # Tema  : Oscilador Armónico Cuántico (OAC)
 # Método: RK4 manual + Condición de paridad + Bisección en energía
 # Ref.  : Landau Listing 6.1 (HOnumeric.py)
@@ -178,6 +178,6 @@ axes[1].set(xlabel='x [u.r.]', ylabel=r'$|\psi_n(x)|^2$',
 axes[1].legend(fontsize=9)
 axes[1].grid(True, alpha=0.3)
 
-fig.suptitle('Oscilador Armónico Cuántico — RK4 + Bisección en energía', fontsize=13)
+fig.suptitle('Oscilador Armónico Cuántico - RK4 + Bisección en energía', fontsize=13)
 plt.tight_layout()
 plt.show()

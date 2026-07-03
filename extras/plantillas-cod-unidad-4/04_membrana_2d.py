@@ -1,5 +1,5 @@
 """
-PLANTILLA 04 — Membrana vibrante 2D
+PLANTILLA 04 - Membrana vibrante 2D
 =====================================
 Ecuación diferencial:
     ∂²u/∂t² = c² (∂²u/∂x² + ∂²u/∂y²)
@@ -43,7 +43,7 @@ assert r <= 1.0 / np.sqrt(2), (
 print(f"r = {r:.4f}  (CFL 2D estable ✓, límite = {1/np.sqrt(2):.4f})")
 
 # =============================================================================
-# CONDICIONES INICIALES — pulso gaussiano centrado
+# CONDICIONES INICIALES - pulso gaussiano centrado
 # =============================================================================
 u      = np.zeros((N, N))
 u_prev = np.zeros((N, N))
@@ -64,7 +64,7 @@ for i in range(N):
 u_prev = u.copy()
 
 # =============================================================================
-# ALGORITMO CENTRAL — paso temporal 2D
+# ALGORITMO CENTRAL - paso temporal 2D
 # =============================================================================
 Nt              = 300
 pasos_visualizar = [0, 50, 150, 299]
@@ -98,7 +98,7 @@ for n in range(Nt):
         instantaneas[n] = u.copy()
 
 # =============================================================================
-# VISUALIZACIÓN — mapas de calor en 4 instantes
+# VISUALIZACIÓN - mapas de calor en 4 instantes
 # =============================================================================
 fig, axes = plt.subplots(2, 2, figsize=(11, 9))
 

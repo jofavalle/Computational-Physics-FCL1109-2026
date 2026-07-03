@@ -1,6 +1,6 @@
 # =============================================================================
-# PARCIAL 3 — REFERENCIA RÁPIDA DE ALGORITMOS
-# Mecánica cuántica computacional — sin fcl1109, solo numpy
+# PARCIAL 3 - REFERENCIA RÁPIDA DE ALGORITMOS
+# Mecánica cuántica computacional - sin fcl1109, solo numpy
 #
 # Usar este archivo como guía de estudio. Memorizar cada bloque antes del
 # examen: cubrir el código y reproducirlo desde cero.
@@ -49,7 +49,7 @@ def biseccion(f, a, b, eps=1e-10, Nmax=200):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# 3. POZO CUADRADO — ECUACIONES TRASCENDENTES
+# 3. POZO CUADRADO - ECUACIONES TRASCENDENTES
 # ══════════════════════════════════════════════════════════════════════════════
 # Unidades: ħ = 1, m = 1/2 → ħ²/2m = 1,  ancho 2a con a = 1
 # E_B = −E > 0 es la energía de enlace
@@ -69,7 +69,7 @@ def f_impar(E_B, V_0):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# 4. SHOOTING METHOD — TISE  (clase_04-06-26 → QuantumEigenCall.py)
+# 4. SHOOTING METHOD - TISE  (clase_04-06-26 → QuantumEigenCall.py)
 # ══════════════════════════════════════════════════════════════════════════════
 # Ecuación: ψ'' = −(2μ/ħ²)·(E − V(x))·ψ  ≡  −ESCALA·(E−V)·ψ
 # Estado:   y = [ψ, ψ'],   y' = [y[1],  −ESCALA·(E−V(x))·y[0]]
@@ -114,7 +114,7 @@ def mismatch(E, h, N_paso, V, ESCALA=0.4829):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# 5. TDSE — LEAPFROG SPLIT REAL/IMAGINARIO  (clase_09-06-26, Landau 6.10)
+# 5. TDSE - LEAPFROG SPLIT REAL/IMAGINARIO  (clase_09-06-26, Landau 6.10)
 # ══════════════════════════════════════════════════════════════════════════════
 # ψ = R + iI,  β = Δt/Δx²,   condición de estabilidad: β < 0.5
 #
@@ -144,7 +144,7 @@ def tdse_paso(R, I, V, beta, dt):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# 6. OSCILADOR ARMÓNICO — RK4 + PARIDAD  (Landau Listing 6.1)
+# 6. OSCILADOR ARMÓNICO - RK4 + PARIDAD  (Landau Listing 6.1)
 # ══════════════════════════════════════════════════════════════════════════════
 # TISE: ψ'' = (x² − E)·ψ,   V(x) = x²,   E_n = 2n + 1
 # CC asintótica: ψ(x_max) → 0
@@ -180,7 +180,7 @@ def psi_xmax_oa(E, paridad, x_arr, h):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# DEMO RÁPIDO — verificar que los bloques funcionan
+# DEMO RÁPIDO - verificar que los bloques funcionan
 # ══════════════════════════════════════════════════════════════════════════════
 if __name__ == '__main__':
     # ── OAC: primeros 3 estados ──

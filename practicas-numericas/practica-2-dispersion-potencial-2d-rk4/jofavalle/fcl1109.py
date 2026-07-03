@@ -1,5 +1,5 @@
 """
-Librería Física Computacional Común (LFCC) — «fcl1109.py»
+Librería Física Computacional Común (LFCC) - «fcl1109.py»
 ============================================================
 
 Librería de métodos numéricos desarrollada para el curso FCL1109.
@@ -41,12 +41,12 @@ def derivada_adelante(f, x, h):
     el error se reduce aproximadamente a la mitad también.
 
     Parámetros:
-        f : función    — La función a derivar. Debe aceptar un número y devolver un número.
-        x : float      — El punto donde queremos evaluar la derivada.
-        h : float      — El tamaño del paso. Valores típicos: 1e-5 a 1e-8.
+        f : función    - La función a derivar. Debe aceptar un número y devolver un número.
+        x : float      - El punto donde queremos evaluar la derivada.
+        h : float      - El tamaño del paso. Valores típicos: 1e-5 a 1e-8.
 
     Retorna:
-        float — Aproximación numérica de f'(x).
+        float - Aproximación numérica de f'(x).
 
     Ejemplo:
         >>> derivada_adelante(np.sin, 0.0, 1e-5)
@@ -68,12 +68,12 @@ def derivada_central(f, x, h):
     derivada hacia adelante para el mismo valor de h.
 
     Parámetros:
-        f : función    — La función a derivar.
-        x : float      — El punto donde queremos evaluar la derivada.
-        h : float      — El tamaño del paso. Valores típicos: 1e-5 a 1e-8.
+        f : función    - La función a derivar.
+        x : float      - El punto donde queremos evaluar la derivada.
+        h : float      - El tamaño del paso. Valores típicos: 1e-5 a 1e-8.
 
     Retorna:
-        float — Aproximación numérica de f'(x).
+        float - Aproximación numérica de f'(x).
 
     Ejemplo:
         >>> derivada_central(lambda x: x**3, 2.0, 1e-5)
@@ -93,12 +93,12 @@ def derivada_enesima(f, x, n):
     Usa el paso global _h_default (= 1e-5) definido al inicio del archivo.
 
     Parámetros:
-        f : función    — La función a derivar.
-        x : float      — El punto donde evaluar la derivada.
-        n : int        — El orden de la derivada (0 = la función misma, 1 = primera, 2 = segunda, etc.)
+        f : función    - La función a derivar.
+        x : float      - El punto donde evaluar la derivada.
+        n : int        - El orden de la derivada (0 = la función misma, 1 = primera, 2 = segunda, etc.)
 
     Retorna:
-        float — Aproximación numérica de f⁽ⁿ⁾(x).
+        float - Aproximación numérica de f⁽ⁿ⁾(x).
 
     Nota:
         La precisión disminuye conforme n aumenta, porque los errores numéricos
@@ -139,13 +139,13 @@ def trapecio(f, a, b, n):
     Tiene un error de orden O(h²), proporcional a la segunda derivada de f.
 
     Parámetros:
-        f : función    — La función a integrar. Debe poder evaluarse con arrays de NumPy.
-        a : float      — Límite inferior de integración.
-        b : float      — Límite superior de integración.
-        n : int        — Número de subintervalos (más grande = más preciso).
+        f : función    - La función a integrar. Debe poder evaluarse con arrays de NumPy.
+        a : float      - Límite inferior de integración.
+        b : float      - Límite superior de integración.
+        n : int        - Número de subintervalos (más grande = más preciso).
 
     Retorna:
-        float — Aproximación numérica de ∫ₐᵇ f(x)dx.
+        float - Aproximación numérica de ∫ₐᵇ f(x)dx.
 
     Ejemplo:
         >>> trapecio(lambda x: x**2, 0, 1, 1000)
@@ -180,13 +180,13 @@ def simpson(f, a, b, n):
     Tiene un error de orden O(h⁴), mucho más preciso que el trapecio.
 
     Parámetros:
-        f : función    — La función a integrar. Debe poder evaluarse con arrays de NumPy.
-        a : float      — Límite inferior de integración.
-        b : float      — Límite superior de integración.
-        n : int        — Número de subintervalos (se ajusta a par si es impar).
+        f : función    - La función a integrar. Debe poder evaluarse con arrays de NumPy.
+        a : float      - Límite inferior de integración.
+        b : float      - Límite superior de integración.
+        n : int        - Número de subintervalos (se ajusta a par si es impar).
 
     Retorna:
-        float — Aproximación numérica de ∫ₐᵇ f(x)dx.
+        float - Aproximación numérica de ∫ₐᵇ f(x)dx.
 
     Ejemplo:
         >>> simpson(lambda x: x**2, 0, 1, 1000)
@@ -223,13 +223,13 @@ def montecarlo(f, a, b, N):
     lo que lo hace especialmente útil para integrales multidimensionales.
 
     Parámetros:
-        f : función    — La función a integrar. Debe poder evaluarse con arrays de NumPy.
-        a : float      — Límite inferior de integración.
-        b : float      — Límite superior de integración.
-        N : int        — Número de puntos aleatorios (más grande = más preciso pero más lento).
+        f : función    - La función a integrar. Debe poder evaluarse con arrays de NumPy.
+        a : float      - Límite inferior de integración.
+        b : float      - Límite superior de integración.
+        N : int        - Número de puntos aleatorios (más grande = más preciso pero más lento).
 
     Retorna:
-        float — Aproximación numérica de ∫ₐᵇ f(x)dx.
+        float - Aproximación numérica de ∫ₐᵇ f(x)dx.
 
     Ejemplo:
         >>> np.random.seed(42)
@@ -262,10 +262,10 @@ def cambio_variable(z):
     Dado un valor z ∈ (0, 1), devuelve el correspondiente x ∈ (0, ∞).
 
     Parámetros:
-        z : float — Valor en el intervalo (0, 1).
+        z : float - Valor en el intervalo (0, 1).
 
     Retorna:
-        float — El valor x = z/(1-z) en el intervalo (0, ∞).
+        float - El valor x = z/(1-z) en el intervalo (0, ∞).
 
     Ejemplo:
         >>> cambio_variable(0.5)
@@ -284,10 +284,10 @@ def jacobiano(z):
     por |dx/dz| para compensar la «deformación» del intervalo.
 
     Parámetros:
-        z : float — Valor en el intervalo (0, 1).
+        z : float - Valor en el intervalo (0, 1).
 
     Retorna:
-        float — El jacobiano 1/(1-z)².
+        float - El jacobiano 1/(1-z)².
 
     Ejemplo:
         >>> jacobiano(0.5)
@@ -305,11 +305,11 @@ def integrando_transformado(f, z):
     con límites cercanos a [0, 1], por ejemplo (1e-6, 1 - 1e-6).
 
     Parámetros:
-        f : función    — La función original que queremos integrar de 0 a ∞.
-        z : float      — Punto en (0, 1) donde evaluar el integrando transformado.
+        f : función    - La función original que queremos integrar de 0 a ∞.
+        z : float      - Punto en (0, 1) donde evaluar el integrando transformado.
 
     Retorna:
-        float — Valor del integrando transformado en z.
+        float - Valor del integrando transformado en z.
 
     Ejemplo:
         Para calcular ∫₀^∞ e^(-x) dx = 1:
@@ -330,27 +330,27 @@ def integral_impropia(f, a, b, n=1000, metodo=None):
     luego se evalúa con el método numérico indicado (Simpson por defecto).
 
     Casos soportados:
-        1. ∫ₐ^∞  f(x)dx   — Solo el límite superior es infinito.
+        1. ∫ₐ^∞  f(x)dx   - Solo el límite superior es infinito.
            Cambio: x = a + z/(1-z),  dx = 1/(1-z)² dz,  z ∈ [0, 1]
 
-        2. ∫₋∞^b  f(x)dx  — Solo el límite inferior es infinito.
+        2. ∫₋∞^b  f(x)dx  - Solo el límite inferior es infinito.
            Cambio: x = b - z/(1-z),  dx = 1/(1-z)² dz,  z ∈ [0, 1]
            (se refleja el eje, recorriendo de b hacia -∞)
 
-        3. ∫₋∞^∞  f(x)dx  — Ambos límites son infinitos.
+        3. ∫₋∞^∞  f(x)dx  - Ambos límites son infinitos.
            Se parte en dos: ∫₋∞^0 f(x)dx + ∫₀^∞ f(x)dx
            y se aplican los casos 2 y 1 respectivamente.
 
     Parámetros:
-        f      : función — La función a integrar. Debe aceptar float/array.
-        a      : float   — Límite inferior. Usar -np.inf para -∞.
-        b      : float   — Límite superior. Usar np.inf para +∞.
-        n      : int     — Número de subintervalos para el método numérico (default: 1000).
-        metodo : función — Método de integración a usar (default: simpson).
+        f      : función - La función a integrar. Debe aceptar float/array.
+        a      : float   - Límite inferior. Usar -np.inf para -∞.
+        b      : float   - Límite superior. Usar np.inf para +∞.
+        n      : int     - Número de subintervalos para el método numérico (default: 1000).
+        metodo : función - Método de integración a usar (default: simpson).
                            Debe tener firma metodo(f, a, b, n).
 
     Retorna:
-        float — Aproximación numérica de la integral.
+        float - Aproximación numérica de la integral.
 
     Ejemplos:
         >>> integral_impropia(lambda x: np.exp(-x), 0, np.inf)
@@ -374,20 +374,20 @@ def integral_impropia(f, a, b, n=1000, metodo=None):
     b_inf = (b == np.inf)
 
     if a_inf and b_inf:
-        # Caso 3: ∫₋∞^∞ — partir en ∫₋∞^0 + ∫₀^∞
+        # Caso 3: ∫₋∞^∞ - partir en ∫₋∞^0 + ∫₀^∞
         I1 = integral_impropia(f, -np.inf, 0, n, metodo)
         I2 = integral_impropia(f, 0, np.inf, n, metodo)
         return I1 + I2
 
     elif b_inf:
-        # Caso 1: ∫ₐ^∞ — cambio x = a + z/(1-z)
+        # Caso 1: ∫ₐ^∞ - cambio x = a + z/(1-z)
         def g(z):
             x = a + z / (1.0 - z)
             return f(x) / (1.0 - z)**2
         return metodo(g, eps, 1 - eps, n)
 
     elif a_inf:
-        # Caso 2: ∫₋∞^b — cambio x = b - z/(1-z)
+        # Caso 2: ∫₋∞^b - cambio x = b - z/(1-z)
         def g(z):
             x = b - z / (1.0 - z)
             return f(x) / (1.0 - z)**2
@@ -423,14 +423,14 @@ def euler(f, t, x, h):
     hay que llamarla repetidamente en un bucle.
 
     Parámetros:
-        f : función        — El lado derecho de la EDO dx/dt = f(t, x).
+        f : función        - El lado derecho de la EDO dx/dt = f(t, x).
                              Debe tener firma f(t, x) → dx/dt.
-        t : float          — El tiempo actual.
-        x : float o array  — El estado actual (escalar para 1 EDO, array para sistemas).
-        h : float          — El tamaño del paso temporal.
+        t : float          - El tiempo actual.
+        x : float o array  - El estado actual (escalar para 1 EDO, array para sistemas).
+        h : float          - El tamaño del paso temporal.
 
     Retorna:
-        float o array — El nuevo estado x(t + h).
+        float o array - El nuevo estado x(t + h).
 
     Ejemplo (EDO escalar):
         Para dx/dt = -x con x(0) = 1, integrar hasta t = 1 con dt = 0.001:
@@ -469,13 +469,13 @@ def rk4(f, t, x, h):
     (x es un array de NumPy), lo que permite resolver sistemas acoplados.
 
     Parámetros:
-        t : float          — El tiempo actual.
-        h : float          — El tamaño del paso temporal.
-        x : float o array  — El estado actual (escalar para 1 EDO, array para sistemas).
-        f : función        — El lado derecho de la EDO. Debe tener firma f(t, x) → dx/dt.
+        t : float          - El tiempo actual.
+        h : float          - El tamaño del paso temporal.
+        x : float o array  - El estado actual (escalar para 1 EDO, array para sistemas).
+        f : función        - El lado derecho de la EDO. Debe tener firma f(t, x) → dx/dt.
 
     Retorna:
-        float o array — El nuevo estado x(t + h).
+        float o array - El nuevo estado x(t + h).
 
     Ejemplo (EDO escalar):
         Para dx/dt = -x con x(0) = 1:
@@ -519,11 +519,11 @@ def minimos_cuadrados(A, b):
     Para un polinomio de grado mayor, A es de tamaño (grado+1) × (grado+1).
 
     Parámetros:
-        A : array 2D (n×n)  — La matriz de coeficientes del sistema normal.
-        b : array 1D (n)    — El vector del lado derecho.
+        A : array 2D (n×n)  - La matriz de coeficientes del sistema normal.
+        b : array 1D (n)    - El vector del lado derecho.
 
     Retorna:
-        array 1D (n) — Los coeficientes del ajuste [a₀, a₁, ..., aₙ₋₁].
+        array 1D (n) - Los coeficientes del ajuste [a₀, a₁, ..., aₙ₋₁].
 
     Ejemplo:
         >>> A = np.array([[20, 10], [10, 90]])
@@ -551,12 +551,12 @@ def chi_cuadrada(y_observado, y_ajustado, sigma):
         - Si χ²/ν << 1, las incertidumbres están sobreestimadas.
 
     Parámetros:
-        y_observado : array — Valores medidos experimentalmente.
-        y_ajustado  : array — Valores predichos por el modelo.
-        sigma       : array — Incertidumbres de cada medición.
+        y_observado : array - Valores medidos experimentalmente.
+        y_ajustado  : array - Valores predichos por el modelo.
+        sigma       : array - Incertidumbres de cada medición.
 
     Retorna:
-        float — El valor de χ².
+        float - El valor de χ².
 
     Ejemplo:
         >>> y_obs = np.array([1.1, 2.0, 2.9])
@@ -570,7 +570,7 @@ def chi_cuadrada(y_observado, y_ajustado, sigma):
 
 
 # ============================================================================
-# 5. BÚSQUEDA DE RAÍCES – NEWTON-RAPHSON
+# 5. BÚSQUEDA DE RAÍCES - NEWTON-RAPHSON
 # ============================================================================
 
 def newton_raphson(f, x, dx, eps, Nmax):
@@ -589,14 +589,14 @@ def newton_raphson(f, x, dx, eps, Nmax):
     iteración) si la estimación inicial está suficientemente cerca de la raíz.
 
     Parámetros:
-        f    : función — La función cuya raíz buscamos.
-        x    : float   — Estimación inicial de la raíz.
-        dx   : float   — Paso para calcular la derivada numérica (típico: 1e-6).
-        eps  : float   — Tolerancia: el algoritmo se detiene cuando |f(x)| ≤ eps.
-        Nmax : int     — Número máximo de iteraciones (protección contra no-convergencia).
+        f    : función - La función cuya raíz buscamos.
+        x    : float   - Estimación inicial de la raíz.
+        dx   : float   - Paso para calcular la derivada numérica (típico: 1e-6).
+        eps  : float   - Tolerancia: el algoritmo se detiene cuando |f(x)| ≤ eps.
+        Nmax : int     - Número máximo de iteraciones (protección contra no-convergencia).
 
     Retorna:
-        float — La raíz aproximada.
+        float - La raíz aproximada.
 
     Nota:
         Si el método no converge en Nmax iteraciones, imprime un aviso por consola
@@ -643,10 +643,10 @@ def dft(x):
     es preferible usar fft() que tiene complejidad O(N·log N).
 
     Parámetros:
-        x : array — La señal de entrada (N muestras, valores reales).
+        x : array - La señal de entrada (N muestras, valores reales).
 
     Retorna:
-        array complejo — Los N/2 + 1 coeficientes de Fourier X[k].
+        array complejo - Los N/2 + 1 coeficientes de Fourier X[k].
 
     Ejemplo:
         >>> señal = np.cos(2 * np.pi * 3 * np.arange(64) / 64)  # coseno de freq=3
@@ -682,10 +682,10 @@ def idft(X):
     las frecuencias negativas a partir de la simetría hermitiana.
 
     Parámetros:
-        X : array complejo — Los N/2 + 1 coeficientes de Fourier (salida de dft()).
+        X : array complejo - Los N/2 + 1 coeficientes de Fourier (salida de dft()).
 
     Retorna:
-        array complejo — La señal reconstruida (la parte imaginaria debería ser ≈ 0
+        array complejo - La señal reconstruida (la parte imaginaria debería ser ≈ 0
                          si la señal original era real).
 
     Ejemplo:
@@ -728,10 +728,10 @@ def fft(x):
     (frecuencias positivas y negativas), igual que np.fft.fft().
 
     Parámetros:
-        x : array o lista — La señal de entrada (N muestras, N debe ser potencia de 2).
+        x : array o lista - La señal de entrada (N muestras, N debe ser potencia de 2).
 
     Retorna:
-        lista de complejos — Los N coeficientes de Fourier.
+        lista de complejos - Los N coeficientes de Fourier.
 
     Ejemplo:
         >>> señal = np.cos(2 * np.pi * 3 * np.arange(64) / 64)
@@ -769,10 +769,10 @@ def ifft(X):
     Fórmula: x[n] = (1/N) · FFT(X*)* 
 
     Parámetros:
-        X : lista de complejos — Los N coeficientes de Fourier (salida de fft()).
+        X : lista de complejos - Los N coeficientes de Fourier (salida de fft()).
 
     Retorna:
-        lista de complejos — La señal reconstruida en el dominio del tiempo.
+        lista de complejos - La señal reconstruida en el dominio del tiempo.
 
     Ejemplo:
         >>> X = fft(señal)
@@ -1015,7 +1015,7 @@ def ifft(X):
 #   # Desde una lista (conversión explícita)
 #   x = np.array([1.0, 2.0, 3.0])
 #
-#   # N puntos equiespaciados en [a, b] — el más usado para grillas de tiempo/espacio
+#   # N puntos equiespaciados en [a, b] - el más usado para grillas de tiempo/espacio
 #   t = np.linspace(0.0, 10.0, 1000)    # incluye ambos extremos
 #
 #   # Array de ceros para pre-asignar (ver patrón de integración abajo)
@@ -1128,15 +1128,15 @@ def ifft(X):
 # puede ser un array de NumPy. Si f está definida con operaciones de lista,
 # puede fallar o dar resultados incorrectos:
 #
-#   # Incorrecto — no acepta arrays:
+#   # Incorrecto - no acepta arrays:
 #   def f(x):
 #       return x**2 + 1              # esto sí funciona con arrays (NumPy lo maneja)
 #
 #   def f(x):
-#       return [xi**2 + 1 for xi in x]   # devuelve lista, no array — puede romper
+#       return [xi**2 + 1 for xi in x]   # devuelve lista, no array - puede romper
 #                                          # operaciones posteriores
 #
-#   # Correcto — retorna array directamente:
+#   # Correcto - retorna array directamente:
 #   f = lambda x: x**2 + 1               # NumPy extiende ** y + a arrays
 #   f = lambda x: np.exp(-x**2)          # np.exp acepta arrays
 #

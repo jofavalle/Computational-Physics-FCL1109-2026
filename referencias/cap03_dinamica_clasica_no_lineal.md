@@ -1,6 +1,6 @@
-# Capítulo 3 — Dinámica clásica y no lineal
+# Capítulo 3 - Dinámica clásica y no lineal
 > Referencia: Landau & Páez, *Computational Problems for Physics* (2018), Cap. 3  
-> Curso: FCO4101 — Física Computacional, UES 2026
+> Curso: FCO4101 - Física Computacional, UES 2026
 
 ---
 
@@ -63,7 +63,7 @@ Parámetros clave:
 | Símbolo | Significado | Valor típico (Landau) |
 |---------|-------------|----------------------|
 | `q` | coeficiente de amortiguamiento | 0.5 |
-| `F_d` | amplitud de fuerza externa | 0.5 – 1.2 |
+| `F_d` | amplitud de fuerza externa | 0.5 - 1.2 |
 | `Omega_d` | frecuencia de forzamiento | 2/3 |
 
 ```python
@@ -140,7 +140,7 @@ for r in r_vals:
 
 ---
 
-## 3.6 Integración numérica — RK4 (método preferido del curso)
+## 3.6 Integración numérica - RK4 (método preferido del curso)
 
 ### Fórmula general
 

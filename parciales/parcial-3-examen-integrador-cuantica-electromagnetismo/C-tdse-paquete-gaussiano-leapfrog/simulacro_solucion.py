@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # =============================================================================
-# PARCIAL 3 — SIMULACRO C
+# PARCIAL 3 - SIMULACRO C
 # Tema  : Ecuación de Schrödinger Dependiente del Tiempo (TDSE)
 # Método: Leapfrog split real/imaginario (Crank-Nicolson explícito)
 # Ref.  : clase_09-06-26, Landau Listings 6.9 / 6.10
@@ -91,13 +91,13 @@ R_new = np.zeros(Nx + 1)
 I_new = np.zeros(Nx + 1)
 
 for n in range(Nt):
-    # — Paso 1: actualizar R con I del instante anterior —
+    # - Paso 1: actualizar R con I del instante anterior -
     R_new[1:-1] = (R[1:-1]
                    - beta * (I[2:] + I[:-2] - 2.0 * I[1:-1])
                    + dt * V[1:-1] * I[1:-1])
     R_new[0] = R_new[-1] = 0.0   # CC
 
-    # — Paso 2: actualizar I con R_new recién calculado —
+    # - Paso 2: actualizar I con R_new recién calculado -
     I_new[1:-1] = (I[1:-1]
                    + beta * (R_new[2:] + R_new[:-2] - 2.0 * R_new[1:-1])
                    - dt * V[1:-1] * R_new[1:-1])
@@ -132,7 +132,7 @@ for idx, (n_snap, color) in enumerate(zip(instantes_snap[:-1], colores)):
     axes[0, 0].plot(x, prob, color=color, lw=2,
                     label=f't = {n_snap * dt:.4f}')
 axes[0, 0].set(xlabel='x [u.r.]', ylabel=r'$|\psi(x,t)|^2$',
-               title='Densidad de probabilidad — evolución temporal')
+               title='Densidad de probabilidad - evolución temporal')
 axes[0, 0].legend(fontsize=9)
 axes[0, 0].grid(True, alpha=0.3)
 
@@ -185,7 +185,7 @@ axes[1, 1].set(xlabel='t [u.r.]', ylabel=r'$\int|\psi|^2\,dx$',
 axes[1, 1].legend()
 axes[1, 1].grid(True, alpha=0.3)
 
-fig.suptitle(f'TDSE Leapfrog — Paquete gaussiano en pozo infinito'
+fig.suptitle(f'TDSE Leapfrog - Paquete gaussiano en pozo infinito'
              f'  ($L={L}$, $x_0={x0}$, $\\sigma={sigma}$, $k_0={k0:.1f}$)',
              fontsize=12)
 plt.tight_layout()

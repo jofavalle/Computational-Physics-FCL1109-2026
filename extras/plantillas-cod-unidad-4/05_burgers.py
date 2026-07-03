@@ -1,5 +1,5 @@
 """
-PLANTILLA 05 — Ecuación de Burgers (advección-difusión no lineal)
+PLANTILLA 05 - Ecuación de Burgers (advección-difusión no lineal)
 ==================================================================
 Ecuación diferencial:
     ∂u/∂t = ε ∂²u/∂x² - μ u ∂u/∂x

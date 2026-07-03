@@ -16,11 +16,11 @@ Este repositorio documenta el trabajo de tres estudiantes a lo largo de todo el 
 
 | Semanas | Unidad | Referencia Landau | Material en este repo |
 |---|---|---|---|
-| 1–5 | Fundamentos computacionales y análisis de datos | Cap. 1–2 | [notebooks/00-fundamentos-computacionales](notebooks/00-fundamentos-computacionales/) |
-| 6–8 | Dinámica clásica y no lineal (osciladores, caos, órbitas) | Cap. 3 | [notebooks/01-dinamica-clasica-no-lineal](notebooks/01-dinamica-clasica-no-lineal/), [referencias/cap03_dinamica_clasica_no_lineal.md](referencias/cap03_dinamica_clasica_no_lineal.md) |
-| 9–13 | Ecuaciones de onda y dinámica de fluidos (FTCS, Crank-Nicolson, FFT) | Cap. 4 | [notebooks/02-ecuaciones-onda-fluidos](notebooks/02-ecuaciones-onda-fluidos/), [extras/plantillas-cod-unidad-4/](extras/plantillas-cod-unidad-4/), [referencias/cap04_ecuaciones_onda_fluidos.md](referencias/cap04_ecuaciones_onda_fluidos.md) |
-| 14–15 | Electricidad y magnetismo (Laplace, Poisson, FDTD, SOR) | Cap. 5 | [notebooks/03-electricidad-magnetismo](notebooks/03-electricidad-magnetismo/), [referencias/cap05_electricidad_magnetismo.md](referencias/cap05_electricidad_magnetismo.md) |
-| 16–17 | Mecánica cuántica | Cap. 6 | [notebooks/04-mecanica-cuantica](notebooks/04-mecanica-cuantica/), [referencias/cap06_mecanica_cuantica.md](referencias/cap06_mecanica_cuantica.md) |
+| 1-5 | Fundamentos computacionales y análisis de datos | Cap. 1-2 | [notebooks/00-fundamentos-computacionales](notebooks/00-fundamentos-computacionales/) |
+| 6-8 | Dinámica clásica y no lineal (osciladores, caos, órbitas) | Cap. 3 | [notebooks/01-dinamica-clasica-no-lineal](notebooks/01-dinamica-clasica-no-lineal/), [referencias/cap03_dinamica_clasica_no_lineal.md](referencias/cap03_dinamica_clasica_no_lineal.md) |
+| 9-13 | Ecuaciones de onda y dinámica de fluidos (FTCS, Crank-Nicolson, FFT) | Cap. 4 | [notebooks/02-ecuaciones-onda-fluidos](notebooks/02-ecuaciones-onda-fluidos/), [extras/plantillas-cod-unidad-4/](extras/plantillas-cod-unidad-4/), [referencias/cap04_ecuaciones_onda_fluidos.md](referencias/cap04_ecuaciones_onda_fluidos.md) |
+| 14-15 | Electricidad y magnetismo (Laplace, Poisson, FDTD, SOR) | Cap. 5 | [notebooks/03-electricidad-magnetismo](notebooks/03-electricidad-magnetismo/), [referencias/cap05_electricidad_magnetismo.md](referencias/cap05_electricidad_magnetismo.md) |
+| 16-17 | Mecánica cuántica | Cap. 6 | [notebooks/04-mecanica-cuantica](notebooks/04-mecanica-cuantica/), [referencias/cap06_mecanica_cuantica.md](referencias/cap06_mecanica_cuantica.md) |
 | 18 | Termodinámica y física estadística | Cap. 7 | [parciales/parcial-3-...](parciales/parcial-3-examen-integrador-cuantica-electromagnetismo/) |
 
 Evaluación: 4 prácticas numéricas (40 %) + 3 exámenes parciales (60 %). Programa completo en [referencias/programa_fco4101.md](referencias/programa_fco4101.md).
@@ -29,7 +29,7 @@ Evaluación: 4 prácticas numéricas (40 %) + 3 exámenes parciales (60 %). Prog
 
 | Carpeta | Contenido |
 |---|---|
-| [seminarios-investigacion/](seminarios-investigacion/) | **Proyectos finales de investigación** (uno por estudiante) — la pieza más avanzada del portafolio: integrales de camino de Feynman con Monte Carlo/cadenas de Markov, caos en el mapa logístico, estados coherentes cuánticos |
+| [seminarios-investigacion/](seminarios-investigacion/) | **Proyectos finales de investigación** (uno por estudiante) - la pieza más avanzada del portafolio: integrales de camino de Feynman con Monte Carlo/cadenas de Markov, caos en el mapa logístico, estados coherentes cuánticos |
 | [practicas-numericas/](practicas-numericas/) | Las 3 prácticas numéricas formales del curso, resueltas por los 3 estudiantes |
 | [parciales/](parciales/) | Exámenes parciales (onda 1D, examen integrador de cuántica y electromagnetismo) |
 | [notebooks/](notebooks/) | Notebooks de cada clase, organizados por unidad temática ([índice](notebooks/INDEX.md)) |
@@ -53,9 +53,9 @@ Evaluación: 4 prácticas numéricas (40 %) + 3 exámenes parciales (60 %). Prog
 
 Los tres seminarios finales (ver [seminarios-investigacion/](seminarios-investigacion/)) son la evidencia más completa de dominio del curso:
 
-- **jofavalle** — *Integral de camino de Feynman mediante Monte Carlo cuántico y cadenas de Markov (algoritmo de Metropolis)*: obtiene el estado fundamental del oscilador armónico cuántico muestreando trayectorias en tiempo imaginario, sin resolver la ecuación de Schrödinger.
-- **cesarp03** — *Diagrama de bifurcación del mapa logístico*: transición de la dinámica estable a la caótica mediante iteración de mapas y análisis de bifurcaciones.
-- **aalexanderrz** — *Estados coherentes de Glauber*: dinámica de superposiciones cuasi-clásicas del oscilador armónico cuántico mediante expansión en polinomios de Hermite.
+- **jofavalle** - *Integral de camino de Feynman mediante Monte Carlo cuántico y cadenas de Markov (algoritmo de Metropolis)*: obtiene el estado fundamental del oscilador armónico cuántico muestreando trayectorias en tiempo imaginario, sin resolver la ecuación de Schrödinger.
+- **cesarp03** - *Diagrama de bifurcación del mapa logístico*: transición de la dinámica estable a la caótica mediante iteración de mapas y análisis de bifurcaciones.
+- **aalexanderrz** - *Estados coherentes de Glauber*: dinámica de superposiciones cuasi-clásicas del oscilador armónico cuántico mediante expansión en polinomios de Hermite.
 
 ## Entorno de ejecución
 

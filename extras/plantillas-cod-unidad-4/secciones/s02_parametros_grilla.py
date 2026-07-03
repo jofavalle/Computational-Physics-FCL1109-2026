@@ -10,7 +10,7 @@ La verificación SIEMPRE va con assert o if/raise.
 import numpy as np
 
 # =============================================================================
-# PATRÓN 1 — Onda 1D (ecuación de onda, leapfrog)
+# PATRÓN 1 - Onda 1D (ecuación de onda, leapfrog)
 # =============================================================================
 L  = 1.0    # [m]   longitud del dominio
 c  = 1.0    # [m/s] velocidad de propagación
@@ -26,7 +26,7 @@ x = np.linspace(0, L, Nx)      # [0, L] con Nx puntos
 
 
 # =============================================================================
-# PATRÓN 2 — Onda con propiedades variables T(x), ρ(x)
+# PATRÓN 2 - Onda con propiedades variables T(x), ρ(x)
 # =============================================================================
 # (dt depende de la velocidad MÁXIMA local)
 vmax = np.max(np.sqrt(T / rho))     # calcular después de definir T, rho
@@ -34,7 +34,7 @@ dt   = 0.4 * dx / vmax             # factor conservador
 
 
 # =============================================================================
-# PATRÓN 3 — Calor/difusión FTCS
+# PATRÓN 3 - Calor/difusión FTCS
 # =============================================================================
 alpha = 0.01   # [m²/s] difusividad térmica
 Nx    = 100
@@ -49,7 +49,7 @@ x = np.linspace(0, L, Nx)
 
 
 # =============================================================================
-# PATRÓN 4 — Grilla 2D (membrana vibrante, Laplace, N-S)
+# PATRÓN 4 - Grilla 2D (membrana vibrante, Laplace, N-S)
 # =============================================================================
 Nx, Ny = 71, 71          # nodos por dimensión
 L      = 1.0             # [m] tamaño del dominio cuadrado
@@ -70,7 +70,7 @@ u_next = np.zeros((Nx, Ny))
 
 
 # =============================================================================
-# PATRÓN 5 — Navier-Stokes (ψ-ω)
+# PATRÓN 5 - Navier-Stokes (ψ-ω)
 # =============================================================================
 Nx, Ny = 70, 24     # nodos del canal
 h      = 1.0        # paso de grilla [m]  (usa h en lugar de dx)
@@ -84,7 +84,7 @@ w   = np.zeros((Nx, Ny))    # vorticidad
 
 
 # =============================================================================
-# NOTAS RÁPIDAS — qué usa linspace vs arange
+# NOTAS RÁPIDAS - qué usa linspace vs arange
 # =============================================================================
 # np.linspace(0, L, N)  → N puntos de 0 a L INCLUSIVE  →  dx = L/(N-1)
 # np.arange(N) * dx     → N puntos de 0 a (N-1)*dx     →  dx elegido

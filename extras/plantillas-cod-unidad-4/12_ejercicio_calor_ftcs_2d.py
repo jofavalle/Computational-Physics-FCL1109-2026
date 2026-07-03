@@ -70,7 +70,7 @@ titulo = ax.set_title('')
 
 def actualizar(paso):
     im.set_data(T_save[paso].T)
-    titulo.set_text(f'Difusión 2D FTCS  —  t = {paso * dt:.2f} s')
+    titulo.set_text(f'Difusión 2D FTCS  -  t = {paso * dt:.2f} s')
     return im, titulo
 
 ani = FuncAnimation(

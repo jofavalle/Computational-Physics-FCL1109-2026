@@ -3,10 +3,10 @@ SECCIÓN: LOOPS DE INTEGRACIÓN / ALGORITMOS CENTRALES
 ======================================================
 Los 4 patrones de loop que aparecen en todos los scripts de la unidad 4:
 
-  A. Leapfrog vectorizado  — onda 1D/2D
-  B. Loop doble (i,j)      — onda 2D, N-S, Laplace
-  C. FTCS vectorizado      — calor/difusión
-  D. SOR iterativo         — Laplace, Poisson, N-S
+  A. Leapfrog vectorizado  - onda 1D/2D
+  B. Loop doble (i,j)      - onda 2D, N-S, Laplace
+  C. FTCS vectorizado      - calor/difusión
+  D. SOR iterativo         - Laplace, Poisson, N-S
 
 El patrón de "rotar arreglos" es clave: entender y_old → y → y_new.
 """
@@ -14,7 +14,7 @@ El patrón de "rotar arreglos" es clave: entender y_old → y → y_new.
 import numpy as np
 
 # ===========================================================================
-# A. LEAPFROG VECTORIZADO — Onda 1D  (lo más rápido de escribir)
+# A. LEAPFROG VECTORIZADO - Onda 1D  (lo más rápido de escribir)
 # ===========================================================================
 # Solo actualiza nodos interiores [1:-1]; los bordes son CC
 r2 = (c * dt / dx)**2   # r al cuadrado
@@ -34,7 +34,7 @@ for n in range(Nt - 1):
 
 
 # ===========================================================================
-# B1. LEAPFROG CON LOOP for i — Onda 1D  (más legible, más lento)
+# B1. LEAPFROG CON LOOP for i - Onda 1D  (más legible, más lento)
 # ===========================================================================
 for n in range(1, Nt - 1):
     for i in range(1, Nx - 1):
@@ -49,7 +49,7 @@ for n in range(1, Nt - 1):
 
 
 # ===========================================================================
-# B2. LOOP DOBLE for i, for j — Membrana 2D
+# B2. LOOP DOBLE for i, for j - Membrana 2D
 # ===========================================================================
 for paso in range(Nt):
     for i in range(1, N - 1):
@@ -85,7 +85,7 @@ for paso in range(Nt):
 
 
 # ===========================================================================
-# C. FTCS VECTORIZADO — Calor/Difusión 1D
+# C. FTCS VECTORIZADO - Calor/Difusión 1D
 # ===========================================================================
 r_ftcs = alpha * dt / dx**2    # debe ser ≤ 0.5
 
@@ -99,7 +99,7 @@ for n in range(Nt):
 
 
 # ===========================================================================
-# D. SOR ITERATIVO — Laplace/Poisson 2D (Gauss-Seidel + relajación)
+# D. SOR ITERATIVO - Laplace/Poisson 2D (Gauss-Seidel + relajación)
 # ===========================================================================
 omega = 1.6          # parámetro de relajación: 1 → Gauss-Seidel, ~1.9 → SOR óptimo
 tol   = 1e-4
@@ -151,7 +151,7 @@ for it in range(max_iter):
 
 
 # ===========================================================================
-# LAPLACIANO CON np.roll — Membrana 2D sin loops (clase_28-04-26)
+# LAPLACIANO CON np.roll - Membrana 2D sin loops (clase_28-04-26)
 # ===========================================================================
 def laplacian(u):
     return (

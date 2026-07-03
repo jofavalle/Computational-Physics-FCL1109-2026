@@ -1,11 +1,11 @@
 """
-PLANTILLA 06b — Ecuación de calor — Tres estilos de visualización
+PLANTILLA 06b - Ecuación de calor - Tres estilos de visualización
 ==================================================================
 Misma simulación FTCS que 06_calor_ftcs.py, pero con tres figuras:
 
-  Figura 1 — Snapshots + error (visualización original de la plantilla)
-  Figura 2 — Mapa espacio-tiempo con imshow
-  Figura 3 — Animación con FuncAnimation
+  Figura 1 - Snapshots + error (visualización original de la plantilla)
+  Figura 2 - Mapa espacio-tiempo con imshow
+  Figura 3 - Animación con FuncAnimation
 
 Solo usa: numpy, matplotlib
 """
@@ -47,7 +47,7 @@ T[0]  = T_izq
 T[-1] = T_der
 
 # =============================================================================
-# ALGORITMO CENTRAL — FTCS
+# ALGORITMO CENTRAL - FTCS
 # Guardamos TODA la evolución en T_matrix para el mapa y la animación.
 # Los snapshots para la figura 1 se extraen de T_matrix al final.
 # =============================================================================
@@ -68,7 +68,7 @@ for n in range(1, Nt):
 T_estacionaria = T_izq + (T_der - T_izq) * x / L
 
 # =============================================================================
-# FIGURA 1 — Snapshots + panel de error (visualización original)
+# FIGURA 1 - Snapshots + panel de error (visualización original)
 # =============================================================================
 pasos_snap = [0, Nt // 10, Nt // 4, Nt // 2, Nt - 1]
 
@@ -98,11 +98,11 @@ ax2.set_title('Error respecto a solución estacionaria')
 ax2.legend(fontsize=8)
 ax2.grid(True, alpha=0.3)
 
-fig1.suptitle('Figura 1 — Snapshots temporales', fontsize=13)
+fig1.suptitle('Figura 1 - Snapshots temporales', fontsize=13)
 plt.tight_layout()
 
 # =============================================================================
-# FIGURA 2 — Mapa espacio-tiempo con imshow
+# FIGURA 2 - Mapa espacio-tiempo con imshow
 # Eje X = posición a lo largo de la barra
 # Eje Y = tiempo (de abajo = t=0 hacia arriba = t final)
 # Color = temperatura
@@ -127,11 +127,11 @@ ax3.axhline(y=(Nt - 1) * dt, color='cyan', linewidth=1, linestyle='--',
             label='t final')
 ax3.legend(fontsize=9)
 
-fig2.suptitle('Figura 2 — Mapa espacio-tiempo', fontsize=13)
+fig2.suptitle('Figura 2 - Mapa espacio-tiempo', fontsize=13)
 plt.tight_layout()
 
 # =============================================================================
-# FIGURA 3 — Animación con FuncAnimation
+# FIGURA 3 - Animación con FuncAnimation
 # Se recorren frames cada 'paso_anim' pasos para que no sea demasiado lenta.
 # =============================================================================
 paso_anim = Nt // 150        # ~150 frames en total
@@ -153,7 +153,7 @@ titulo = ax4.set_title('')
 def actualizar(n):
     """Actualiza la curva y el título en cada frame."""
     linea.set_ydata(T_matrix[n])
-    titulo.set_text(f'Difusión FTCS  —  t = {n*dt:.4f} s')
+    titulo.set_text(f'Difusión FTCS  -  t = {n*dt:.4f} s')
     return linea, titulo
 
 ani = FuncAnimation(
@@ -164,7 +164,7 @@ ani = FuncAnimation(
     blit=True
 )
 
-fig3.suptitle('Figura 3 — Animación', fontsize=13)
+fig3.suptitle('Figura 3 - Animación', fontsize=13)
 plt.tight_layout()
 
 # Mostrar las tres figuras

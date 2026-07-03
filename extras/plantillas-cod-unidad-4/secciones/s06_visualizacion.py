@@ -7,16 +7,16 @@ en los scripts y notebooks de la unidad 4.
 ÍNDICE:
   V1.  Figura simple: plot con múltiples líneas (instantáneas de onda)
   V2.  Subplots (2×2 y 1×2)
-  V3.  imshow — campo 2D como mapa de calor
-  V4.  contourf + contour — equipotenciales y lineas de nivel
-  V5.  streamplot — líneas de corriente (N-S)
-  V6.  quiver — campo vectorial con flechas
-  V7.  stem — espectro de amplitudes (modos / FFT)
-  V8.  semilogy — escala logarítmica
-  V9.  plot_surface 3D — superficie (Laplace, ring soliton)
-  V10. FuncAnimation — animación de una línea
-  V11. meshgrid — construcción estándar para 2D
-  V12. colorbar — agregar barra de colores
+  V3.  imshow - campo 2D como mapa de calor
+  V4.  contourf + contour - equipotenciales y lineas de nivel
+  V5.  streamplot - líneas de corriente (N-S)
+  V6.  quiver - campo vectorial con flechas
+  V7.  stem - espectro de amplitudes (modos / FFT)
+  V8.  semilogy - escala logarítmica
+  V9.  plot_surface 3D - superficie (Laplace, ring soliton)
+  V10. FuncAnimation - animación de una línea
+  V11. meshgrid - construcción estándar para 2D
+  V12. colorbar - agregar barra de colores
 """
 
 import numpy as np
@@ -36,7 +36,7 @@ vy = np.random.rand(N, N) - 0.5
 
 
 # =============================================================================
-# V1. PLOT CON MÚLTIPLES LÍNEAS — instantáneas de la onda en distintos tiempos
+# V1. PLOT CON MÚLTIPLES LÍNEAS - instantáneas de la onda en distintos tiempos
 # =============================================================================
 # Patrón: iterar sobre los tiempos de interés y graficar cada uno con label
 
@@ -56,7 +56,7 @@ plt.show()
 
 
 # =============================================================================
-# V2. SUBPLOTS — cuatro paneles (2×2) o dos paneles (1×2)
+# V2. SUBPLOTS - cuatro paneles (2×2) o dos paneles (1×2)
 # =============================================================================
 
 # --- 2 filas × 2 columnas ---
@@ -90,7 +90,7 @@ plt.show()
 
 
 # =============================================================================
-# V3. IMSHOW — campo 2D como mapa de calor
+# V3. IMSHOW - campo 2D como mapa de calor
 # =============================================================================
 # ⚠ imshow muestra la TRANSPUESTA visual: u[i,j] → columna i, fila j
 #   Para que x sea horizontal e y vertical: usar u.T con origin='lower'
@@ -107,7 +107,7 @@ im = ax.imshow(
 plt.colorbar(im, ax=ax, label='u(x,y)')
 ax.set_xlabel('x [m]')
 ax.set_ylabel('y [m]')
-ax.set_title('Campo 2D — imshow')
+ax.set_title('Campo 2D - imshow')
 plt.tight_layout()
 plt.show()
 
@@ -119,7 +119,7 @@ plt.show()
 
 
 # =============================================================================
-# V4. CONTOURF + CONTOUR — equipotenciales y líneas de nivel
+# V4. CONTOURF + CONTOUR - equipotenciales y líneas de nivel
 # =============================================================================
 # contourf: relleno de color por nivel
 # contour:  líneas negras encima (más legible)
@@ -137,7 +137,7 @@ ax.set_title('Líneas equipotenciales')
 plt.tight_layout()
 plt.show()
 
-# Variante: solo contourf (sin líneas) — para N-S vorticidad
+# Variante: solo contourf (sin líneas) - para N-S vorticidad
 plt.figure(figsize=(10, 5))
 plt.contourf(X, Y, u2d, levels=40)
 plt.colorbar(label='ω(x,y)')
@@ -147,7 +147,7 @@ plt.show()
 
 
 # =============================================================================
-# V5. STREAMPLOT — líneas de corriente (N-S)
+# V5. STREAMPLOT - líneas de corriente (N-S)
 # =============================================================================
 # ⚠ streamplot espera X, Y con meshgrid, y los campos vx, vy con la misma orientación
 
@@ -170,7 +170,7 @@ plt.show()
 
 
 # =============================================================================
-# V6. QUIVER — campo vectorial con flechas
+# V6. QUIVER - campo vectorial con flechas
 # =============================================================================
 # Se suele submuestrear para no saturar la figura
 
@@ -192,7 +192,7 @@ plt.show()
 
 
 # =============================================================================
-# V7. STEM — espectro de amplitudes (modos normales / FFT)
+# V7. STEM - espectro de amplitudes (modos normales / FFT)
 # =============================================================================
 n_modos = np.arange(1, 11)
 amplitudes = np.exp(-0.3 * n_modos)   # ejemplo
@@ -211,7 +211,7 @@ plt.show()
 
 
 # =============================================================================
-# V8. SEMILOGY — escala logarítmica en el eje y (errores, potencia espectral)
+# V8. SEMILOGY - escala logarítmica en el eje y (errores, potencia espectral)
 # =============================================================================
 fig, ax = plt.subplots(figsize=(9, 4))
 ax.semilogy(x, np.abs(y) + 1e-14, color='red')   # +1e-14 evita log(0)
@@ -224,7 +224,7 @@ plt.show()
 
 
 # =============================================================================
-# V9. PLOT_SURFACE 3D — superficie (Laplace, ring soliton, clase_28-04-26)
+# V9. PLOT_SURFACE 3D - superficie (Laplace, ring soliton, clase_28-04-26)
 # =============================================================================
 fig = plt.figure(figsize=(10, 7))
 ax3d = fig.add_subplot(111, projection='3d')
@@ -237,7 +237,7 @@ ax3d.plot_surface(
 ax3d.set_xlabel('X')
 ax3d.set_ylabel('Y')
 ax3d.set_zlabel('V')
-ax3d.set_title('Potencial eléctrico — Superficie 3D')
+ax3d.set_title('Potencial eléctrico - Superficie 3D')
 plt.show()
 
 # Variante: 4 superficies en subplots 2×2 (clase_28-04-26)
@@ -250,7 +250,7 @@ plt.show()
 
 
 # =============================================================================
-# V10. FUNCANIMATION — animar una línea 1D (onda, Burgers)
+# V10. FUNCANIMATION - animar una línea 1D (onda, Burgers)
 # =============================================================================
 fig, ax = plt.subplots(figsize=(10, 5))
 line, = ax.plot(x, y)          # coma después de line: desempaqueta la tupla
@@ -295,7 +295,7 @@ def update_rapido(frame):
 
 
 # =============================================================================
-# V10b. FUNCANIMATION — animar un campo 2D con imshow
+# V10b. FUNCANIMATION - animar un campo 2D con imshow
 # =============================================================================
 fig2, ax2 = plt.subplots()
 im_anim = ax2.imshow(u2d, animated=True, cmap='viridis', vmin=-1, vmax=1)
@@ -311,7 +311,7 @@ plt.show()
 
 
 # =============================================================================
-# V11. MESHGRID — construcción estándar para campos 2D
+# V11. MESHGRID - construcción estándar para campos 2D
 # =============================================================================
 Nx, Ny = 50, 40
 dx, dy = 0.4, 0.4
@@ -329,7 +329,7 @@ X_xy, Y_xy = np.meshgrid(x_1d, y_1d)             # forma (Ny, Nx)
 
 
 # =============================================================================
-# V12. COLORBAR — agregar barra de colores (resumen de usos)
+# V12. COLORBAR - agregar barra de colores (resumen de usos)
 # =============================================================================
 fig, axes = plt.subplots(1, 3, figsize=(15, 4))
 

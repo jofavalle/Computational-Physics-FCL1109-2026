@@ -1,4 +1,4 @@
-# Referencias — Física Computacional FCO4101
+# Referencias - Física Computacional FCO4101
 > Universidad de El Salvador · Ciclo I 2026  
 > Basado en: Landau & Páez, *Computational Problems for Physics*, CRC Press 2018
 
@@ -15,7 +15,7 @@
 
 ---
 
-## Métodos numéricos — resumen rápido
+## Métodos numéricos - resumen rápido
 
 | Método | Cuándo usarlo | Orden de error |
 |--------|--------------|---------------|

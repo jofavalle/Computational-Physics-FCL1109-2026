@@ -2,13 +2,13 @@
 
 Notebooks de cada sesión del curso, organizados por unidad temática según el programa (ver [referencias/programa_fco4101.md](../referencias/programa_fco4101.md)). Cada unidad tiene su propio archivo de referencia resumido en `referencias/`.
 
-## 00 — Fundamentos computacionales
+## 00 - Fundamentos computacionales
 
 | Notebook | Tema | Algoritmo clave |
 |---|---|---|
 | [clase_27-03-26.ipynb](00-fundamentos-computacionales/clase_27-03-26.ipynb) | Ecuación de Van der Pol (oscilador no lineal autoexcitado) | RK4, método de Euler |
 
-## 01 — Dinámica clásica y no lineal ([referencias/cap03_dinamica_clasica_no_lineal.md](../referencias/cap03_dinamica_clasica_no_lineal.md))
+## 01 - Dinámica clásica y no lineal ([referencias/cap03_dinamica_clasica_no_lineal.md](../referencias/cap03_dinamica_clasica_no_lineal.md))
 
 | Notebook | Tema | Algoritmo clave |
 |---|---|---|
@@ -17,7 +17,7 @@ Notebooks de cada sesión del curso, organizados por unidad temática según el 
 | [clase_10-04-26.ipynb](01-dinamica-clasica-no-lineal/clase_10-04-26.ipynb) | Órbitas 2D (elípticas e hiperbólicas) | RK4, espacio de fase |
 | [clase_28-04-26.ipynb](01-dinamica-clasica-no-lineal/clase_28-04-26.ipynb) | Péndulos acoplados / solitones anulares 2D | Leapfrog 2D |
 
-## 02 — Ecuaciones de onda y dinámica de fluidos ([referencias/cap04_ecuaciones_onda_fluidos.md](../referencias/cap04_ecuaciones_onda_fluidos.md))
+## 02 - Ecuaciones de onda y dinámica de fluidos ([referencias/cap04_ecuaciones_onda_fluidos.md](../referencias/cap04_ecuaciones_onda_fluidos.md))
 
 | Notebook | Tema | Algoritmo clave |
 |---|---|---|
@@ -30,7 +30,7 @@ Notebooks de cada sesión del curso, organizados por unidad temática según el 
 | [clase_07-05-26.ipynb](02-ecuaciones-onda-fluidos/clase_07-05-26.ipynb) | Navier-Stokes con vorticidad (∇²ψ = -ω) | SOR iterativo |
 | [clase_08-05-26.ipynb](02-ecuaciones-onda-fluidos/clase_08-05-26.ipynb) | Hidrodinámica: tanque de Torricelli | SOR, ley de Bernoulli |
 
-## 03 — Electricidad y magnetismo ([referencias/cap05_electricidad_magnetismo.md](../referencias/cap05_electricidad_magnetismo.md))
+## 03 - Electricidad y magnetismo ([referencias/cap05_electricidad_magnetismo.md](../referencias/cap05_electricidad_magnetismo.md))
 
 | Notebook | Tema | Algoritmo clave |
 |---|---|---|
@@ -39,7 +39,7 @@ Notebooks de cada sesión del curso, organizados por unidad temática según el 
 | [clase_21-05-26.ipynb](03-electricidad-magnetismo/clase_21-05-26.ipynb) | FDTD con medio dieléctrico (vacío-dieléctrico-vacío) | FDTD, análisis de dirección de propagación |
 | [clase_28-05-26.ipynb](03-electricidad-magnetismo/clase_28-05-26.ipynb) | Cilindro dieléctrico en campo eléctrico uniforme | Laplace con ε(x,y) variable |
 
-## 04 — Mecánica cuántica ([referencias/cap06_mecanica_cuantica.md](../referencias/cap06_mecanica_cuantica.md))
+## 04 - Mecánica cuántica ([referencias/cap06_mecanica_cuantica.md](../referencias/cap06_mecanica_cuantica.md))
 
 | Notebook | Tema | Algoritmo clave |
 |---|---|---|

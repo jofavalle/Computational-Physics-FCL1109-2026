@@ -1,10 +1,10 @@
-# Capítulo 5 — Electricidad y magnetismo
+# Capítulo 5 - Electricidad y magnetismo
 > Referencia: Landau & Páez, *Computational Problems for Physics* (2018), Cap. 5  
-> Curso: FCO4101 — Física Computacional, UES 2026
+> Curso: FCO4101 - Física Computacional, UES 2026
 
 ---
 
-## 5.1 Potencial electrostático — Ecuación de Laplace y Poisson
+## 5.1 Potencial electrostático - Ecuación de Laplace y Poisson
 
 ### Ecuación de Laplace (región sin cargas)
 $$\nabla^2 V = 0$$
@@ -61,7 +61,7 @@ def gauss_seidel(V, rho, dx, epsilon_0=8.854e-12, tol=1e-5):
     return V
 ```
 
-### SOR — Successive Over-Relaxation (más rápido)
+### SOR - Successive Over-Relaxation (más rápido)
 $$V_{i,j}^{\text{nuevo}} = (1-\omega)V_{i,j}^{\text{old}} + \frac{\omega}{4}\left(V_{i+1,j}+V_{i-1,j}+V_{i,j+1}+V_{i,j-1}\right)$$
 
 ```python
@@ -133,13 +133,13 @@ def helmholtz(z_array, R, I, mu0=4*np.pi*1e-7):
 
 ---
 
-## 5.5 Ondas electromagnéticas — Ecuaciones de Maxwell
+## 5.5 Ondas electromagnéticas - Ecuaciones de Maxwell
 
 ### Forma 1D (polarización en x, propagación en z)
 
 $$\frac{\partial E_x}{\partial t} = -\frac{1}{\mu_0}\frac{\partial B_y}{\partial z}, \qquad \frac{\partial B_y}{\partial t} = -\frac{1}{\epsilon_0}\frac{\partial E_x}{\partial z} \cdot \frac{1}{c^2}$$
 
-### Algoritmo FDTD (Finite-Difference Time-Domain) — Yee scheme
+### Algoritmo FDTD (Finite-Difference Time-Domain) - Yee scheme
 
 E y B se evalúan en puntos de grilla intercalados (media celda de diferencia):
 
@@ -207,10 +207,10 @@ def graficar_potencial_y_campo(x, y, V, Ex, Ey):
 
 ```python
 # Constantes SI
-epsilon_0 = 8.854187817e-12   # F/m — permitividad del vacío
-mu_0      = 4 * np.pi * 1e-7  # H/m — permeabilidad del vacío
-c_luz     = 2.99792458e8      # m/s — velocidad de la luz
-k_e       = 1 / (4*np.pi*epsilon_0)  # N·m²/C² — constante de Coulomb
+epsilon_0 = 8.854187817e-12   # F/m - permitividad del vacío
+mu_0      = 4 * np.pi * 1e-7  # H/m - permeabilidad del vacío
+c_luz     = 2.99792458e8      # m/s - velocidad de la luz
+k_e       = 1 / (4*np.pi*epsilon_0)  # N·m²/C² - constante de Coulomb
 ```
 
 ---

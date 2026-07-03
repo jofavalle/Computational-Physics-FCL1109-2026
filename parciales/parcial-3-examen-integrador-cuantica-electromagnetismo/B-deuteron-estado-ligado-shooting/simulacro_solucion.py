@@ -1,8 +1,8 @@
 """
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║        UNIVERSIDAD DE EL SALVADOR — FACULTAD DE CIENCIAS NATURALES            ║
-║                    FÍSICA COMPUTACIONAL  —  FCO4101                            ║
-║                    PARCIAL III  ·  SIMULACRO  B  —  SOLUCIÓN                   ║
+║        UNIVERSIDAD DE EL SALVADOR - FACULTAD DE CIENCIAS NATURALES            ║
+║                    FÍSICA COMPUTACIONAL  -  FCO4101                            ║
+║                    PARCIAL III  ·  SIMULACRO  B  -  SOLUCIÓN                   ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
   PROBLEMA: Estados ligados del deuterón por el MÉTODO DE DISPARO (shooting)
@@ -60,7 +60,7 @@ def V(x):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 1 — Sistema de EDOs y paso de Runge-Kutta 4
+# ÍTEM 1 - Sistema de EDOs y paso de Runge-Kutta 4
 # ══════════════════════════════════════════════════════════════════════════════
 def rhs(x, y, E):
     """Lado derecho ('right-hand side') del sistema y' = f(x,y).
@@ -84,7 +84,7 @@ def rk4_paso(x, y, h, E):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 2 — Función de mismatch
+# ÍTEM 2 - Función de mismatch
 # ══════════════════════════════════════════════════════════════════════════════
 # Continuidad de la derivada logarítmica ⇔ conservación de la corriente:
 # ---------------------------------------------------------------------
@@ -139,7 +139,7 @@ def mismatch(E):
 
 def wronskiano(E):
     """W(E) = ψ_L ψ'_R − ψ'_L ψ_R en x_match (normalizado).  También vale 0 en los
-    autovalores, pero —a diferencia de mismatch()— es SUAVE (no tiene polos donde
+    autovalores, pero -a diferencia de mismatch()- es SUAVE (no tiene polos donde
     ψ se anula). Por eso lo usamos para BARRER y contar todos los estados."""
     _, yL, yR, im = _integrar(E, N_MATCH, X_MAX)
     L  = yL[im] / abs(yL[im, 0])   # dividir por la amplitud quita la escala arbitraria
@@ -148,7 +148,7 @@ def wronskiano(E):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 3 — Bisección sobre mismatch(E)  →  estado fundamental
+# ÍTEM 3 - Bisección sobre mismatch(E)  →  estado fundamental
 # ══════════════════════════════════════════════════════════════════════════════
 def biseccion(f, a, b, tol=TOL_E, Nmax=200):
     """Raíz de f en [a, b] por bisección (parte el intervalo a la mitad
@@ -165,7 +165,7 @@ def biseccion(f, a, b, tol=TOL_E, Nmax=200):
     return 0.5*(a+b)
 
 print("═"*64)
-print("ÍTEM 3 — Búsqueda del estado fundamental por bisección")
+print("ÍTEM 3 - Búsqueda del estado fundamental por bisección")
 print("═"*64)
 # sorted((p,q)) ordena la pareja de menor a mayor → a=-18.7 (menor), b=-15.45 (mayor).
 a, b = sorted((E_min0, E_max0))     # [-18.7, -15.45]
@@ -191,7 +191,7 @@ print(f"  · El menos ligado     = {max(niveles):.4f} MeV")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 4 — Re-integración de alta resolución y gráfica de ψ(x)
+# ÍTEM 4 - Re-integración de alta resolución y gráfica de ψ(x)
 # ══════════════════════════════════════════════════════════════════════════════
 # Ya tenemos la energía; ahora reconstruimos la función de onda completa con más
 # puntos (N_PLOT) para graficarla bien.
@@ -216,7 +216,7 @@ nodos = np.sum(np.diff(np.sign(psi[mask])) != 0)
 simetria = "SIMÉTRICA (par)" if psi[0]*psi[-1] > 0 else "ANTISIMÉTRICA (impar)"
 
 print("\n" + "═"*64)
-print("ÍTEM 4 — Función de onda del estado fundamental")
+print("ÍTEM 4 - Función de onda del estado fundamental")
 print("═"*64)
 print(f"  Paridad: {simetria}   ·   nodos = {nodos}")
 print("  El estado base es PAR (∝cos kx, sin nodos): es la configuración de")
@@ -234,7 +234,7 @@ ax[0].legend(); ax[0].grid(alpha=0.3)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 5 — Densidad de probabilidad y probabilidades dentro/fuera
+# ÍTEM 5 - Densidad de probabilidad y probabilidades dentro/fuera
 # ══════════════════════════════════════════════════════════════════════════════
 dens = psi**2                           # densidad de probabilidad |ψ|² (psi al cuadrado)
 norm = np.trapezoid(dens, x)            # ∫|ψ|² dx por la regla del trapecio (integración numérica)
@@ -251,7 +251,7 @@ izq, der = x <= -R_pozo, x >= R_pozo
 P_out = np.trapezoid(dens[izq], x[izq]) + np.trapezoid(dens[der], x[der])
 
 print("\n" + "═"*64)
-print("ÍTEM 5 — Densidad de probabilidad")
+print("ÍTEM 5 - Densidad de probabilidad")
 print("═"*64)
 print(f"  P(|x| <  R) dentro del pozo = {P_in:.5f}  ({100*P_in:.2f} %)")
 print(f"  P(|x| ≥  R) fuera  del pozo = {P_out:.5f}  ({100*P_out:.2f} %)")
@@ -267,16 +267,16 @@ ax[1].axvspan(-R_pozo, R_pozo, color='gold', alpha=0.18)
 ax[1].set(xlabel='x [fm]', ylabel=r'$|\psi(x)|^2$',
           title=f'Densidad normalizada  (P_dentro = {100*P_in:.1f}%)')
 ax[1].grid(alpha=0.3)
-fig.suptitle(f'Deuterón — pozo cuadrado  $V_0={V_0}$ MeV, $R={R_pozo}$ fm  '
+fig.suptitle(f'Deuterón - pozo cuadrado  $V_0={V_0}$ MeV, $R={R_pozo}$ fm  '
              f'→  $E={E_fund:.3f}$ MeV', fontsize=13)
 plt.tight_layout()
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 6 — Variación de V₀ y condición de umbral
+# ÍTEM 6 - Variación de V₀ y condición de umbral
 # ══════════════════════════════════════════════════════════════════════════════
 print("\n" + "═"*64)
-print("ÍTEM 6 — Pozo menos profundo (V₀ = 10 MeV) y umbral de ligadura")
+print("ÍTEM 6 - Pozo menos profundo (V₀ = 10 MeV) y umbral de ligadura")
 print("═"*64)
 
 # Cambiamos V_0 a 10. Como V_0 es una variable GLOBAL, la función V(x) (definida

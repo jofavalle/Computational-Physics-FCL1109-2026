@@ -1,6 +1,6 @@
 """
 ╔══════════════════════════════════════════════════════════════════════╗
-║              EXAMEN SIMULACRO — FÍSICA COMPUTACIONAL               ║
+║              EXAMEN SIMULACRO - FÍSICA COMPUTACIONAL               ║
 ║                         FCL1109 · 2026                             ║
 ╠══════════════════════════════════════════════════════════════════════╣
 ║  Duración : 1 hora 30 minutos                                     ║
@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 import fcl1109 as fc
 
 # ====================================================================
-# PROBLEMA 1 — Potencial de Lennard-Jones          (25 pts · ~20 min)
+# PROBLEMA 1 - Potencial de Lennard-Jones          (25 pts · ~20 min)
 # ====================================================================
 #
 # El potencial de Lennard-Jones modela la interacción entre dos átomos
@@ -52,7 +52,7 @@ import fcl1109 as fc
 
 
 # ====================================================================
-# PROBLEMA 2 — Distribución de Maxwell-Boltzmann   (25 pts · ~20 min)
+# PROBLEMA 2 - Distribución de Maxwell-Boltzmann   (25 pts · ~20 min)
 # ====================================================================
 #
 # La distribución de rapideces de Maxwell-Boltzmann es:
@@ -86,7 +86,7 @@ import fcl1109 as fc
 
 
 # ====================================================================
-# PROBLEMA 3 — Oscilador armónico amortiguado      (25 pts · ~25 min)
+# PROBLEMA 3 - Oscilador armónico amortiguado      (25 pts · ~25 min)
 # ====================================================================
 #
 # Un oscilador amortiguado obedece la ecuación:
@@ -123,7 +123,7 @@ import fcl1109 as fc
 
 
 # ====================================================================
-# PROBLEMA 4 — Ajuste de datos + Análisis de Fourier (25 pts · ~25 min)
+# PROBLEMA 4 - Ajuste de datos + Análisis de Fourier (25 pts · ~25 min)
 # ====================================================================
 #
 # ── Parte A: Ajuste de decaimiento radiactivo (15 pts) ──
@@ -171,5 +171,5 @@ import fcl1109 as fc
 
 
 print("\n" + "=" * 50)
-print("  FIN DEL EXAMEN — Verifique sus gráficas y salidas")
+print("  FIN DEL EXAMEN - Verifique sus gráficas y salidas")
 print("=" * 50)

@@ -1,5 +1,5 @@
 """
-PLANTILLA 02 — Modos normales de la cuerda vibrante
+PLANTILLA 02 - Modos normales de la cuerda vibrante
 ====================================================
 Solución analítica:
     y(x,t) = Σ Bₙ sin(nπx/L) cos(nπct/L)

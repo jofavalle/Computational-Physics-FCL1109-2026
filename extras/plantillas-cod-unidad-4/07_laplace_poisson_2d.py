@@ -1,5 +1,5 @@
 """
-PLANTILLA 07 — Ecuaciones de Laplace y Poisson 2D
+PLANTILLA 07 - Ecuaciones de Laplace y Poisson 2D
 ==================================================
 Ecuación de Laplace (sin fuentes):
     ∇²V = 0   →   ∂²V/∂x² + ∂²V/∂y² = 0
@@ -40,7 +40,7 @@ dx  = 1.0       # [m] paso de grilla (dx = dy)
 eps0 = 1.0      # permitividad (usar 8.854e-12 para SI; aquí adimensional)
 
 # =============================================================================
-# CONDICIONES DE FRONTERA — LAPLACE: capacitor de placas paralelas
+# CONDICIONES DE FRONTERA - LAPLACE: capacitor de placas paralelas
 # =============================================================================
 # Caja externa aterrizada (V=0 en los 4 bordes)
 # Placa superior (y alta) a +V_top, placa inferior (y baja) a -V_bot
@@ -78,7 +78,7 @@ rho = np.zeros((N, N))
 # rho[60, 30] = -100.0
 
 # =============================================================================
-# ITERACIÓN — GAUSS-SEIDEL + SOR
+# ITERACIÓN - GAUSS-SEIDEL + SOR
 # =============================================================================
 omega       = 1.6         # parámetro SOR (1 → G-S, ~1.9 → más rápido)
 tolerancia  = 1e-4
@@ -134,7 +134,7 @@ plt.colorbar(cf, ax=ax, label='V [V]')
 ax.contour(X, Y, V.T, levels=20, colors='black', linewidths=0.5)
 ax.set_xlabel('x')
 ax.set_ylabel('y')
-ax.set_title('Líneas equipotenciales — Laplace/Poisson')
+ax.set_title('Líneas equipotenciales - Laplace/Poisson')
 
 # Panel derecho: campo eléctrico (quiver)
 ax2 = axes[1]

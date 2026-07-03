@@ -2,7 +2,7 @@
 
 Las 3 prácticas numéricas formales del curso FCO4101 (40 % de la nota final). Cada práctica agrupa las entregas de los 3 estudiantes: [jofavalle](https://github.com/jofavalle) (AV18012), [cesarp03](https://github.com/cesarp03) (PA22006) y [aalexanderrz](https://github.com/aalexanderrz) (RZ22004), cada uno en su propia subcarpeta.
 
-## Práctica 1 — [Fundamentos numéricos: derivadas, integrales y EDOs clásicas](practica-1-fundamentos-numericos-edo-integrales/)
+## Práctica 1 - [Fundamentos numéricos: derivadas, integrales y EDOs clásicas](practica-1-fundamentos-numericos-edo-integrales/)
 
 | Estudiante | Problema | Tema físico | Técnica numérica |
 |---|---|---|---|
@@ -31,7 +31,7 @@ Los 3 estudiantes resuelven la trayectoria de dispersión de una partícula inci
 | cesarp03 | [dispersion_potencial_2d_rk4.ipynb](practica-2-dispersion-potencial-2d-rk4/cesarp03/dispersion_potencial_2d_rk4.ipynb) |
 | aalexanderrz | [dispersion_potencial_2d_rk4.ipynb](practica-2-dispersion-potencial-2d-rk4/aalexanderrz/dispersion_potencial_2d_rk4.ipynb) |
 
-## Práctica 3 — [Ecuaciones de Euler para un fluido compresible](practica-3-euler-fluido-compresible-lax-friedrichs/)
+## Práctica 3 - [Ecuaciones de Euler para un fluido compresible](practica-3-euler-fluido-compresible-lax-friedrichs/)
 
 Resolución del sistema de Euler 1D (continuidad, momento, energía) en forma conservativa con el esquema de Lax-Friedrichs, estudiando fenómenos como ondas sonoras, efecto Doppler, propagación bidireccional, conservación de integrales, convergencia numérica, estabilidad (CFL) y régimen no lineal (ondas de choque).
 

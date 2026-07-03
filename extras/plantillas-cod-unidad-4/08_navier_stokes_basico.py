@@ -1,5 +1,5 @@
 """
-PLANTILLA 08 — Navier-Stokes 2D: función de corriente ψ y vorticidad ω
+PLANTILLA 08 - Navier-Stokes 2D: función de corriente ψ y vorticidad ω
 ========================================================================
 Las ecuaciones de Navier-Stokes incompresibles en 2D se reformulan usando:
   - ψ(x,y): función de corriente (streamfunction)
@@ -25,7 +25,7 @@ Número de Reynolds:
     R = V₀ * h / ν   (donde V₀ es la velocidad de referencia)
 
 Problema: flujo en un canal con tapa superior deslizante (lid-driven cavity)
-Fuente: clase_05-05-26.py  |  Landau Listing 4.9 (Beam.py) — versión simplificada sin viga
+Fuente: clase_05-05-26.py  |  Landau Listing 4.9 (Beam.py) - versión simplificada sin viga
 Algoritmo SOR: r1 = ω*((Σψ + h²·w)/4 − ψ)  equivale al relax() de Landau.
 Nota: clase_05-05-26 usa r1 = ω*(Σu − 4u + h²w) sin el /4; es el mismo SOR con ω_eff 4×.
 Solo usa: numpy, matplotlib
@@ -54,7 +54,7 @@ psi = np.zeros((Nx + 1, Ny + 1))   # función de corriente ψ
 w   = np.zeros((Nx + 1, Ny + 1))   # vorticidad ω
 
 # =============================================================================
-# CONDICIONES DE FRONTERA — Lid-driven cavity
+# CONDICIONES DE FRONTERA - Lid-driven cavity
 # =============================================================================
 def aplicar_frontera():
     # Tapa superior (y = Ny): se mueve a velocidad V0 en x

@@ -1,5 +1,5 @@
 """
-PLANTILLA 06 — Ecuación de calor (difusión térmica) — Esquema FTCS
+PLANTILLA 06 - Ecuación de calor (difusión térmica) - Esquema FTCS
 ====================================================================
 Ecuación diferencial:
     ∂T/∂t = α ∂²T/∂x²
@@ -61,7 +61,7 @@ T[0]  = T_izq
 T[-1] = T_der
 
 # =============================================================================
-# ALGORITMO CENTRAL — FTCS
+# ALGORITMO CENTRAL - FTCS
 # =============================================================================
 pasos_guardar = {0, Nt//10, Nt//4, Nt//2, Nt - 1}
 instantaneas  = {0: T.copy()}

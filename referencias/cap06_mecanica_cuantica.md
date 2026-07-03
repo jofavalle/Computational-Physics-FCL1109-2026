@@ -1,7 +1,7 @@
-# Capítulo 6 — Mecánica cuántica
+# Capítulo 6 - Mecánica cuántica
 > Referencia: Landau & Páez, *Computational Problems for Physics* (2018), Cap. 6
-> Curso: FCO4101 — Física Computacional, UES 2026
-> Unidad 5 (semanas 16–17) · Práctica numérica 4
+> Curso: FCO4101 - Física Computacional, UES 2026
+> Unidad 5 (semanas 16-17) · Práctica numérica 4
 
 ---
 
@@ -42,7 +42,7 @@ def f_impar(EB, V0):
     return k / np.tan(k) + np.sqrt(EB)
 ```
 
-### 6.2.2 Potencial arbitrario (EDO + búsqueda) — método de *matching*
+### 6.2.2 Potencial arbitrario (EDO + búsqueda) - método de *matching*
 
 La ecuación de Schrödinger independiente del tiempo en forma de EDO:
 
@@ -152,7 +152,7 @@ def f_HO(x, y, n):
     return np.array([y[1], -(2*n + 1 - x**2) * y[0]])
 ```
 
-- Para `n` grande (20–30) la densidad `|ψ|²` se acumula cerca de los **puntos de retorno clásicos**.
+- Para `n` grande (20-30) la densidad `|ψ|²` se acumula cerca de los **puntos de retorno clásicos**.
 - Verificación analítica: `ψ_n(x) = H_n(x) e^{−x²/2}` (polinomios de Hermite).
 
 ---
@@ -212,7 +212,7 @@ Paquete cuyo centro oscila con el periodo clásico (no cambia de forma):
 
 $$|\psi(x,t)|^2 = \frac{\alpha}{\sqrt{\pi}}\,e^{-\alpha^2[x - a\cos(\omega t)]^2}$$
 
-### 6.7.3 Solución directa de la PDE (leapfrog) — **núcleo del capítulo**
+### 6.7.3 Solución directa de la PDE (leapfrog) - **núcleo del capítulo**
 
 Se escribe `ψ = R + iI` y la ecuación se desdobla en dos PDEs acopladas. Algoritmo de diferencias finitas (futuro = presente + cambio), con `β = Δt/Δx²`:
 
@@ -281,7 +281,7 @@ $$R_{i,j}^{n+1} = R_{i,j}^n - \frac{\Delta t}{\Delta x^2}\left(I_{i+1,j}^n + I_{
 
 ## 6.9 Mecánica cuántica matricial
 
-### 6.9.1–6.9.3 Estados ligados en espacio de momentos (ecuación integral)
+### 6.9.1-6.9.3 Estados ligados en espacio de momentos (ecuación integral)
 
 La ecuación de Schrödinger en espacio `k` es una **ecuación integral** que se discretiza con cuadratura de Gauss en `N` puntos `k_j` con pesos `w_j`, convirtiéndola en un problema matricial de autovalores `[H][ψ] = E[ψ]`:
 
@@ -342,7 +342,7 @@ La pequeña violación de CP (`ε ≈ 0.0023`) introduce además oscilación por
 
 ### 6.10.3 Transiciones en doble pozo
 
-Una perturbación `ΔE` que baja la barrera permite la transición `P(L→R) = sin²(ΔE·t/ħ)` — la esencia de las oscilaciones de kaones. Se simula con la PDE dependiente del tiempo (`TwoWells.py`).
+Una perturbación `ΔE` que baja la barrera permite la transición `P(L→R) = sin²(ΔE·t/ħ)` - la esencia de las oscilaciones de kaones. Se simula con la PDE dependiente del tiempo (`TwoWells.py`).
 
 ### 6.10.4 Qubits y entrelazamiento
 
@@ -421,7 +421,7 @@ fact    = 2*940 / 197.33**2   # ≈ 0.04829  (m ≈ 940 MeV, nucleón)
 ## Problemas típicos del libro (Cap. 6)
 
 - **6.2** Estados ligados del pozo: bisección (semianalítico) vs rk4-matching vs Numerov
-- **6.2.4** Klein-Gordon: estados del bario piónico (`Z=56`), separación 2S–2P
+- **6.2.4** Klein-Gordon: estados del bario piónico (`Z=56`), separación 2S-2P
 - **6.3** Decaimiento espontáneo Monte Carlo: `ln N(t)` vs `t`, fluctuaciones
 - **6.4** Oscilador armónico: paridad, puntos de retorno clásicos, comparar con Hermite
 - **6.5/6.6** Legendre `P_ℓ^m`, armónicos esféricos, densidad radial del hidrógeno

@@ -1,5 +1,5 @@
 """
-PLANTILLA 01 — Ecuación de onda 1D con diferencias finitas
+PLANTILLA 01 - Ecuación de onda 1D con diferencias finitas
 ===========================================================
 Ecuación diferencial:
     ∂²y/∂t² = c² ∂²y/∂x²
@@ -14,7 +14,7 @@ Discretización (diferencias finitas centradas en espacio y tiempo):
 Con amortiguamiento (fricción viscosa):
     y[i, n+1] = (1/(1+κ*dt)) * [2*y[i,n]*(1+κ*dt) - y[i,n-1]
                 + r²*(y[i+1,n] - 2*y[i,n] + y[i-1,n])]
-    — o equivalentemente, ver la sección de amortiguamiento abajo —
+    - o equivalentemente, ver la sección de amortiguamiento abajo -
 
 Fuente: clase_14-04-26.ipynb, clase_16-04-26.ipynb  |  Landau Listing 4.1 (EqStringMovMat.py)
 Algoritmo: leapfrog idéntico al de Landau; xi[i,2] ↔ y_nuevo, xi[i,1] ↔ y_actual, xi[i,0] ↔ y_anterior.
@@ -76,7 +76,7 @@ def aplicar_frontera(y):
     return y
 
 # =============================================================================
-# INTEGRACIÓN TEMPORAL — ALGORITMO CENTRAL
+# INTEGRACIÓN TEMPORAL - ALGORITMO CENTRAL
 # =============================================================================
 # Guardamos algunas instantáneas para graficar
 pasos_guardar = [0, 50, 100, 200, 400]

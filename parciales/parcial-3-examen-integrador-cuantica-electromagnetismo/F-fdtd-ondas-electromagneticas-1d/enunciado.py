@@ -1,11 +1,11 @@
 """
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║        UNIVERSIDAD DE EL SALVADOR — FACULTAD DE CIENCIAS NATURALES            ║
-║                    FÍSICA COMPUTACIONAL  —  FCO4101                            ║
+║        UNIVERSIDAD DE EL SALVADOR - FACULTAD DE CIENCIAS NATURALES            ║
+║                    FÍSICA COMPUTACIONAL  -  FCO4101                            ║
 ║                    PARCIAL III  ·  SIMULACRO  F                              ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
-  PROBLEMA: Propagación de Ondas Electromagnéticas en 1D — Método FDTD
+  PROBLEMA: Propagación de Ondas Electromagnéticas en 1D - Método FDTD
   ────────────────────────────────────────────────────────────────────
 
   Una onda electromagnética que viaja en la dirección z (con el campo eléctrico
@@ -33,7 +33,7 @@
 
         E_x[i] ← E_x[i] + (β/ε_r[i]) (B_y[i−1] − B_y[i])
 
-  CONDICIÓN DE ESTABILIDAD (Courant–Friedrichs–Lewy, 1D):
+  CONDICIÓN DE ESTABILIDAD (Courant-Friedrichs-Lewy, 1D):
         β = c·Δt/Δz ≤ 1
   Si β > 1 la solución numérica DIVERGE (crece sin control), aunque la física
   sea estable: es el mismo fenómeno que viste en la ecuación de onda 1D.

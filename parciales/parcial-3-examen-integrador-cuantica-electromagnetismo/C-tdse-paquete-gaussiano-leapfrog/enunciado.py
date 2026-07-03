@@ -1,7 +1,7 @@
 """
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║        UNIVERSIDAD DE EL SALVADOR — FACULTAD DE CIENCIAS NATURALES          ║
-║                    FÍSICA COMPUTACIONAL  —  FCO4101                          ║
+║        UNIVERSIDAD DE EL SALVADOR - FACULTAD DE CIENCIAS NATURALES          ║
+║                    FÍSICA COMPUTACIONAL  -  FCO4101                          ║
 ║                    PARCIAL III  ·  SIMULACRO  C                              ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
@@ -40,7 +40,7 @@
               R(0, t) = R(L, t) = 0
               I(0, t) = I(L, t) = 0
 
-  Condición inicial — paquete de onda gaussiano con impulso k₀:
+  Condición inicial - paquete de onda gaussiano con impulso k₀:
 
               ψ(x, 0) = N·exp[−(x−x₀)²/(2σ₀²)] · e^{ik₀x}
 
@@ -75,8 +75,8 @@
   4. Ejecute la simulación durante Nt pasos y guarde instantáneas de |ψ(x,t)|²
      en al menos 4 instantes distintos. Grafique las instantáneas superpuestas
      en un mismo panel. Describa cualitativamente:
-        — ¿El paquete se desplaza? ¿En qué dirección y con qué rapidez?
-        — ¿El ancho del paquete cambia con el tiempo? Explique este efecto
+        - ¿El paquete se desplaza? ¿En qué dirección y con qué rapidez?
+        - ¿El ancho del paquete cambia con el tiempo? Explique este efecto
           usando la relación de dispersión E = k² (unidades reducidas).
 
   5. En cada paso de tiempo calcule la norma  N(t) = ∫₀ᴸ |ψ(x,t)|² dx.
@@ -133,10 +133,10 @@ def tdse_paso(R, I, V, beta, dt):
     R_new = R.copy()
     I_new = I.copy()
 
-    # Paso 1 — TODO: actualizar R_new[1:-1] y aplicar CC
+    # Paso 1 - TODO: actualizar R_new[1:-1] y aplicar CC
     # R_new[1:-1] = R[1:-1] − β·(I[i+1]+I[i−1]−2I[i]) + Δt·V·I
 
-    # Paso 2 — TODO: actualizar I_new[1:-1] usando R_new y aplicar CC
+    # Paso 2 - TODO: actualizar I_new[1:-1] usando R_new y aplicar CC
     # I_new[1:-1] = I[1:-1] + β·(R_new[i+1]+R_new[i−1]−2R_new[i]) − Δt·V·R_new
 
     return R_new, I_new

@@ -1,8 +1,8 @@
 """
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║        UNIVERSIDAD DE EL SALVADOR — FACULTAD DE CIENCIAS NATURALES            ║
-║                    FÍSICA COMPUTACIONAL  —  FCO4101                            ║
-║                    PARCIAL III  ·  SIMULACRO  A  —  SOLUCIÓN                   ║
+║        UNIVERSIDAD DE EL SALVADOR - FACULTAD DE CIENCIAS NATURALES            ║
+║                    FÍSICA COMPUTACIONAL  -  FCO4101                            ║
+║                    PARCIAL III  ·  SIMULACRO  A  -  SOLUCIÓN                   ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
   PROBLEMA: Cuantización en un Pozo Cuadrado Finito Simétrico (1D)
@@ -50,7 +50,7 @@ a   = 1.0    # [u.r.] semiancho (fijado por las unidades reducidas)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 1 — Ecuaciones trascendentes
+# ÍTEM 1 - Ecuaciones trascendentes
 # ══════════════════════════════════════════════════════════════════════════════
 # ¿Por qué deben anularse en los autovalores?
 # -------------------------------------------
@@ -79,7 +79,7 @@ def f_impar(E_B):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 2 — Bisección
+# ÍTEM 2 - Bisección
 # ══════════════════════════════════════════════════════════════════════════════
 # La BISECCIÓN es el método más simple para hallar una raíz (un x donde f(x)=0):
 # si f cambia de signo entre a y b, hay una raíz en medio. Partimos el intervalo
@@ -116,7 +116,7 @@ def biseccion(f, a, b, eps=1e-12, Nmax=200):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 3 — Búsqueda de TODAS las energías ligadas
+# ÍTEM 3 - Búsqueda de TODAS las energías ligadas
 # ══════════════════════════════════════════════════════════════════════════════
 # Idea: la bisección necesita un intervalo donde f cambie de signo. Como no sabemos
 # de antemano dónde están las raíces, "barremos" todo el rango (0, V₀) en muchos
@@ -157,7 +157,7 @@ todos = sorted([(eb, 'par')   for eb in raices_par] +
 # print(...) imprime en pantalla. Las f-strings (f"...") permiten incrustar valores
 # entre llaves {}. ':>3' alinea a la derecha en 3 espacios; '.8f' = 8 decimales.
 print("═" * 60)                          # "═"*60 repite el carácter 60 veces
-print(f"ÍTEM 3 — Espectro de estados ligados   (V₀ = {V_0},  a = {a})")
+print(f"ÍTEM 3 - Espectro de estados ligados   (V₀ = {V_0},  a = {a})")
 print("═" * 60)
 print(f"{'n':>3}  {'Paridad':>9}  {'E_B [u.r.]':>14}  {'E = -E_B [u.r.]':>17}")
 # enumerate(lista) entrega de a pares (índice, elemento): aquí n=0,1,2,... y el par (eb, paridad).
@@ -179,7 +179,7 @@ print("\nEl estado base (n=0) es PAR: es la solución sin nodos (mínima energí
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 4 — Gráfica de las ecuaciones trascendentes
+# ÍTEM 4 - Gráfica de las ecuaciones trascendentes
 # ══════════════════════════════════════════════════════════════════════════════
 # Idea visual: dibujar por separado el lado izquierdo (tan/cot) y el lado derecho
 # (√E_B) de las ecuaciones. Donde las dos curvas se CRUZAN está una raíz/autovalor.
@@ -203,7 +203,7 @@ g_impar = np.where(np.abs(g_impar) < 25, g_impar, np.nan)
 # figsize=(ancho, alto) en pulgadas.
 fig, axes = plt.subplots(1, 2, figsize=(13, 5.2))
 
-# Panel izquierdo — estados pares
+# Panel izquierdo - estados pares
 # .plot(x, y, 'b', lw=2, label=...) dibuja la curva y(x). 'b'=azul, lw=grosor de línea.
 # label es el texto para la leyenda. La 'r' antes de '...' es una "raw string" que
 # evita que Python interprete '\'; sirve para escribir fórmulas LaTeX ($...$).
@@ -219,7 +219,7 @@ axes[0].set(xlim=(0, V_0), ylim=(-2, 15), xlabel=r'$E_B$ [u.r.]',
 axes[0].legend(fontsize=8, loc='upper right')   # muestra la leyenda (los 'label')
 axes[0].grid(alpha=0.3)                          # cuadrícula tenue (alpha=transparencia)
 
-# Panel derecho — estados impares (misma lógica)
+# Panel derecho - estados impares (misma lógica)
 axes[1].plot(E_plot, g_impar, 'g', lw=2, label=r'$-\sqrt{V_0-E_B}\,\cot\sqrt{V_0-E_B}$')
 axes[1].plot(E_plot, sqrt_E, 'r--', lw=2, label=r'$\sqrt{E_B}$')
 for eb in raices_impar:
@@ -231,7 +231,7 @@ axes[1].set(xlim=(0, V_0), ylim=(-2, 15), xlabel=r'$E_B$ [u.r.]',
 axes[1].legend(fontsize=8, loc='upper right')
 axes[1].grid(alpha=0.3)
 
-fig.suptitle(f'Pozo cuadrado finito — ecuaciones de cuantización '   # título general
+fig.suptitle(f'Pozo cuadrado finito - ecuaciones de cuantización '   # título general
              f'($V_0={V_0}$, $a={a}$)', fontsize=13)
 plt.tight_layout()    # ajusta los márgenes para que nada se solape
 
@@ -240,7 +240,7 @@ plt.tight_layout()    # ajusta los márgenes para que nada se solape
 # supera un múltiplo de π/2 aparece un nuevo estado, alternando par/impar).
 # Para V₀ = 5:  √5 ≈ 2.236  →  ⌈2·2.236/π⌉ = ⌈1.42⌉ = 2 estados (1 par + 1 impar).
 print("\n" + "═" * 60)
-print("ÍTEM 4 — Nº de estados ligados  ≈ ⌈2√V₀/π⌉")
+print("ÍTEM 4 - Nº de estados ligados  ≈ ⌈2√V₀/π⌉")
 print("═" * 60)
 for Vtest in (5.0, 25.0, 100.0):                  # probamos tres profundidades
     # np.ceil = redondeo hacia arriba (techo ⌈⌉); int() lo convierte a entero.
@@ -249,7 +249,7 @@ print("  Crece monótonamente con V₀ (∝ √V₀).  Para V₀ = 5 hay 2 estad
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 5 — Función de onda del estado base ψ₀(x)
+# ÍTEM 5 - Función de onda del estado base ψ₀(x)
 # ══════════════════════════════════════════════════════════════════════════════
 # Ya conocemos las energías; ahora construimos la FORMA de la función de onda del
 # estado fundamental (el más ligado) y la normalizamos (área bajo |ψ|² igual a 1).
@@ -284,7 +284,7 @@ x_norm = np.linspace(-3*a, 3*a, 200001)
 # (suma de áreas de trapecios bajo la curva). Es integración numérica.
 norma  = np.trapezoid(psi0(x_norm)**2, x_norm)
 print("\n" + "═" * 60)
-print("ÍTEM 5 — Estado base")
+print("ÍTEM 5 - Estado base")
 print("═" * 60)
 print(f"  E_B0 = {E_B0:.8f},  k = {k:.6f},  κ = {kap:.6f}")
 print(f"  A = {A:.6f},  B = {B:.6f}")
@@ -310,12 +310,12 @@ ax[1].set(xlabel='x [u.r.]', ylabel=r'$|\psi_0(x)|^2$',
           title='Densidad de probabilidad')
 ax[1].legend(); ax[1].grid(alpha=0.3)
 
-fig2.suptitle('Pozo cuadrado finito — estado fundamental', fontsize=13)
+fig2.suptitle('Pozo cuadrado finito - estado fundamental', fontsize=13)
 plt.tight_layout()
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 6 — Probabilidad fuera del pozo (efecto túnel)
+# ÍTEM 6 - Probabilidad fuera del pozo (efecto túnel)
 # ══════════════════════════════════════════════════════════════════════════════
 # Queremos P_ext = probabilidad de hallar la partícula FUERA del pozo (|x|>a).
 # Hay dos formas: (1) la fórmula exacta (analítica) y (2) integrar numéricamente.
@@ -337,7 +337,7 @@ P_ext_num = (np.trapezoid((psi0(x_norm)**2)[izq], x_norm[izq]) +
              np.trapezoid((psi0(x_norm)**2)[der], x_norm[der]))
 
 print("\n" + "═" * 60)
-print("ÍTEM 6 — Probabilidad de hallar la partícula FUERA del pozo")
+print("ÍTEM 6 - Probabilidad de hallar la partícula FUERA del pozo")
 print("═" * 60)
 print(f"  P_ext (analítico) = {P_ext_analitico:.6f}  ({100*P_ext_analitico:.3f} %)")
 print(f"  P_ext (numérico)  = {P_ext_num:.6f}  ({100*P_ext_num:.3f} %)")

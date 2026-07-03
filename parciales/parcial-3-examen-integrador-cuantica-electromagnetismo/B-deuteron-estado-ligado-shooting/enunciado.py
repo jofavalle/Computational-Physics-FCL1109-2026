@@ -1,7 +1,7 @@
 """
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║        UNIVERSIDAD DE EL SALVADOR — FACULTAD DE CIENCIAS NATURALES          ║
-║                    FÍSICA COMPUTACIONAL  —  FCO4101                          ║
+║        UNIVERSIDAD DE EL SALVADOR - FACULTAD DE CIENCIAS NATURALES          ║
+║                    FÍSICA COMPUTACIONAL  -  FCO4101                          ║
 ║                    PARCIAL III  ·  SIMULACRO  B                              ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
@@ -46,9 +46,9 @@
     4. Aplicar bisección sobre f(E) en el intervalo de búsqueda.
 
   Condiciones de frontera asintóticas:
-    — Para x → ±∞ (E < 0):   ψ ~ e^{∓κ|x|}  con  κ = √(−2μE/ħ²)
-    — Condición inicial izquierda: ψ_L(x_min) ≃ ε,  ψ'_L(x_min) = κ·ε
-    — Condición inicial derecha:   ψ_R(x_max) ≃ ε,  ψ'_R(x_max) = −κ·ε
+    - Para x → ±∞ (E < 0):   ψ ~ e^{∓κ|x|}  con  κ = √(−2μE/ħ²)
+    - Condición inicial izquierda: ψ_L(x_min) ≃ ε,  ψ'_L(x_min) = κ·ε
+    - Condición inicial derecha:   ψ_R(x_max) ≃ ε,  ψ'_R(x_max) = −κ·ε
 
   Parámetros numéricos:
     h = 0.04 fm  (paso de integración)
@@ -84,8 +84,8 @@
 
   5. Grafique la densidad de probabilidad |ψ(x)|² normalizada tal que
      ∫|ψ|² dx = 1. Calcule y reporte:
-        — La probabilidad de encontrar el nucleón dentro del pozo (|x| < R)
-        — La probabilidad de encontrar el nucleón fuera del pozo (|x| ≥ R)
+        - La probabilidad de encontrar el nucleón dentro del pozo (|x| < R)
+        - La probabilidad de encontrar el nucleón fuera del pozo (|x| ≥ R)
      Comente el resultado en términos del alcance de la fuerza nuclear.
 
   6. Modifique el potencial para V₀ = 10 MeV y repita la búsqueda.

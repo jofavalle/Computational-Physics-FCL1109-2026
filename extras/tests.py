@@ -39,14 +39,14 @@ print(f"  Error: {abs(dc_sin - esperado_cos):.2e}")
 assert abs(dc_sin - esperado_cos) < 1e-8, "derivada_central falló para sin(x)"
 print("  ✓ derivada_central con sin(x) OK\n")
 
-# Test derivada_enesima — orden 0 (debe devolver f(x))
+# Test derivada_enesima - orden 0 (debe devolver f(x))
 nd0 = fc.derivada_enesima(f, x0, 0)
 print(f"derivada_enesima(x³, x={x0}, n=0) = {nd0}")
 print(f"  Valor esperado: {f(x0)}")
 assert nd0 == f(x0), "derivada_enesima n=0 falló"
 print("  ✓ derivada_enesima n=0 OK\n")
 
-# Test derivada_enesima — primera derivada
+# Test derivada_enesima - primera derivada
 nd1 = fc.derivada_enesima(f, x0, 1)
 print(f"derivada_enesima(x³, x={x0}, n=1) = {nd1:.10f}")
 print(f"  Valor esperado: {esperado_d}")
@@ -54,7 +54,7 @@ print(f"  Error: {abs(nd1 - esperado_d):.2e}")
 assert abs(nd1 - esperado_d) < 1e-4, "derivada_enesima n=1 falló"
 print("  ✓ derivada_enesima n=1 OK\n")
 
-# Test derivada_enesima — segunda derivada
+# Test derivada_enesima - segunda derivada
 nd2 = fc.derivada_enesima(f, x0, 2)
 esperado_2 = 6 * x0  # f''(2) = 12
 print(f"derivada_enesima(x³, x={x0}, n=2) = {nd2:.6f}")
@@ -225,7 +225,7 @@ print(f"  Error: {abs(I6 - np.pi):.2e}")
 assert abs(I6 - np.pi) < 1e-3, "integral_impropia (-∞, ∞) Lorentziana falló"
 print("  ✓ integral_impropia (-∞, ∞) Lorentziana OK\n")
 
-# Test 7: caso finito — integral_impropia debe delegar a simpson
+# Test 7: caso finito - integral_impropia debe delegar a simpson
 I7 = fc.integral_impropia(lambda x: x**2, 0, 1)
 print(f"integral_impropia(x², 0, 1) = {I7:.10f}")
 print(f"  Valor exacto: 0.3333333333")
@@ -402,7 +402,7 @@ ax.text(0.05, 0.95, texto, transform=ax.transAxes, fontsize=10,
 
 ax.set_xlabel('x')
 ax.set_ylabel('y')
-ax.set_title('Ajuste por Mínimos Cuadrados — Polinomio de grado 3')
+ax.set_title('Ajuste por Mínimos Cuadrados - Polinomio de grado 3')
 ax.legend(loc='lower right')
 ax.grid(True, alpha=0.3)
 plt.tight_layout()

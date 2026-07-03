@@ -1,8 +1,8 @@
 """
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║        UNIVERSIDAD DE EL SALVADOR — FACULTAD DE CIENCIAS NATURALES            ║
-║                    FÍSICA COMPUTACIONAL  —  FCO4101                            ║
-║                    PARCIAL III  ·  SIMULACRO  E  —  SOLUCIÓN                   ║
+║        UNIVERSIDAD DE EL SALVADOR - FACULTAD DE CIENCIAS NATURALES            ║
+║                    FÍSICA COMPUTACIONAL  -  FCO4101                            ║
+║                    PARCIAL III  ·  SIMULACRO  E  -  SOLUCIÓN                   ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
   Cuadrupolo de placas cargadas + ELECTRODO CENTRAL a potencial fijo (500 V),
@@ -10,8 +10,8 @@
 
   Resolvemos la ecuación de Poisson  ∇²V = −ρ/ε₀  con condiciones de Dirichlet
   MIXTAS (paredes a 0 V, electrodo a 500 V) mediante diferencias finitas y
-  sobrerelajación sucesiva (SOR).  Esta combinación —carga prescrita (ρ) +
-  potencial prescrito en conductores— es la base del cálculo de capacitores.
+  sobrerelajación sucesiva (SOR).  Esta combinación -carga prescrita (ρ) +
+  potencial prescrito en conductores- es la base del cálculo de capacitores.
 
   IDEA GENERAL: discretizamos el espacio en una rejilla N×N de puntos (nodos).
   El potencial V deja de ser una función continua y pasa a ser una MATRIZ V[i,j]
@@ -62,7 +62,7 @@ PLACAS = [(slice(15, 35), slice(15, 35), +rho0, 'red',  '+ρ₀'),   # sup-izq
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 1 — Densidad de carga, electrodo y condiciones de contorno
+# ÍTEM 1 - Densidad de carga, electrodo y condiciones de contorno
 # ══════════════════════════════════════════════════════════════════════════════
 # Sistema físico: el cuadrupolo (dos cargas + y dos −) es una fuente de carga
 # (término ρ de Poisson); el electrodo central es un CONDUCTOR a potencial fijo
@@ -104,7 +104,7 @@ def construir_fuentes():
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 2 — Actualización SOR (esquema rojo-negro vectorizado)
+# ÍTEM 2 - Actualización SOR (esquema rojo-negro vectorizado)
 # ══════════════════════════════════════════════════════════════════════════════
 # Jacobi / Gauss-Seidel / SOR (tres formas de iterar el promedio de vecinos):
 #   · Jacobi: cada V[i,j] nuevo usa SOLO valores de la iteración anterior →
@@ -168,13 +168,13 @@ def resolver_sor(omega, rho, fija, V_dir, tol=tol, N_iter=N_iter):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 3 — Resolver hasta convergencia y registrar el historial
+# ÍTEM 3 - Resolver hasta convergencia y registrar el historial
 # ══════════════════════════════════════════════════════════════════════════════
 # Llamamos a las funciones. La asignación múltiple desempaqueta las 4 matrices.
 rho, electrodo, fija, V_dir = construir_fuentes()
 
 print("═" * 64)
-print(f"ÍTEM 3 — Convergencia SOR  (ω = {omega},  tol = {tol})")
+print(f"ÍTEM 3 - Convergencia SOR  (ω = {omega},  tol = {tol})")
 print("═" * 64)
 V, hist = resolver_sor(omega, rho, fija, V_dir)    # resolvemos con el ω por defecto
 print(f"  Convergencia en {len(hist)} iteraciones.")     # len(hist) = nº de iteraciones hechas
@@ -184,7 +184,7 @@ print(f"  ω óptimo teórico 2/(1+π/N) = {omega_opt:.4f}")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 5 (cálculo) — Campo eléctrico  E = −∇V
+# ÍTEM 5 (cálculo) - Campo eléctrico  E = −∇V
 # ══════════════════════════════════════════════════════════════════════════════
 # El campo es menos el gradiente del potencial. Aproximamos las derivadas por
 # "diferencias centrales": ∂V/∂x ≈ (V[j+1] − V[j-1]) / (2Δ) (pendiente usando los
@@ -198,7 +198,7 @@ E_mag = np.hypot(Ex, Ey)   # np.hypot(a,b) = √(a²+b²): magnitud del campo en
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 6 — Carga y capacitancia del electrodo (ley de Gauss en 2D)
+# ÍTEM 6 - Carga y capacitancia del electrodo (ley de Gauss en 2D)
 # ══════════════════════════════════════════════════════════════════════════════
 # Por Gauss:  Q_enc/ε₀ = ∮ E·n̂ dl  sobre un lazo cerrado.  Tomamos un cuadrado
 # que rodea SÓLO al electrodo (sin encerrar las placas, que están en índices
@@ -219,24 +219,24 @@ Q_elec = epsilon0 * flujo       # carga encerrada = ε₀ × flujo
 C_elec = Q_elec / V_elec        # capacitancia C = Q / V (definición de capacitor)
 
 print("\n" + "═" * 64)
-print("ÍTEM 6 — Carga y capacitancia del electrodo (ley de Gauss 2D)")
+print("ÍTEM 6 - Carga y capacitancia del electrodo (ley de Gauss 2D)")
 print("═" * 64)
 print(f"  Flujo ∮E·n̂ dl alrededor del electrodo = {flujo:.3f}")
 print(f"  Carga del electrodo  Q_e = ε₀·flujo    = {Q_elec:.3f} (u.r.)")
 print(f"  Capacitancia         C   = Q_e / V_e   = {C_elec:.5f} (u.r.)")
 print("  Q_e > 0: el electrodo positivo emite líneas de campo hacia la caja")
 print("  aterrizada (su carga inducida negativa) → es un capacitor de placas")
-print("  concéntricas (electrodo–caja) con el cuadrupolo como perturbación.")
+print("  concéntricas (electrodo-caja) con el cuadrupolo como perturbación.")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ÍTEM 7 — Comparación de eficiencia entre valores de ω
+# ÍTEM 7 - Comparación de eficiencia entre valores de ω
 # ══════════════════════════════════════════════════════════════════════════════
 # Resolvemos el MISMO problema con tres ω distintos y comparamos cuántas
 # iteraciones tarda cada uno. Como 'resolver_sor' es una función reutilizable,
 # basta con llamarla en un bucle.
 print("\n" + "═" * 64)
-print("ÍTEM 7 — Eficiencia vs. ω")
+print("ÍTEM 7 - Eficiencia vs. ω")
 print("═" * 64)
 historiales = {}    # diccionario: asociará cada ω con su lista de errores {ω: historial}
 for w in (1.0, 1.85, 1.95):
@@ -280,7 +280,7 @@ ax1 = fig1.add_subplot(1, 2, 1, projection='3d')
 # plot_surface dibuja V[i,j] como una superficie/relieve. cmap = mapa de colores.
 ax1.plot_surface(X, Y, V, cmap='coolwarm', edgecolor='none')
 ax1.set(xlabel='x', ylabel='y', zlabel='V [V]',
-        title='Potencial V(x,y) — pico central = electrodo a 500 V')
+        title='Potencial V(x,y) - pico central = electrodo a 500 V')
 
 ax2 = fig1.add_subplot(1, 2, 2)               # panel 2, en 2D
 # contourf = mapa de color relleno por niveles; contour = sólo las líneas (equipotenciales).
@@ -290,7 +290,7 @@ dibujar_placas(ax2)
 plt.colorbar(cf, ax=ax2, label='V [V]')       # barra de color que asocia color↔valor de V
 ax2.set(xlabel='x', ylabel='y', title='Equipotenciales + placas y electrodo',
         aspect='equal')                        # aspect='equal' → no deforma el círculo
-fig1.suptitle('ÍTEM 4 — Potencial: cuadrupolo + electrodo central (500 V)',
+fig1.suptitle('ÍTEM 4 - Potencial: cuadrupolo + electrodo central (500 V)',
               fontsize=13)
 plt.tight_layout()
 
@@ -307,7 +307,7 @@ ax3.quiver(X[::paso, ::paso], Y[::paso, ::paso],
            (Ex/E_safe)[::paso, ::paso], (Ey/E_safe)[::paso, ::paso],
            E_mag[::paso, ::paso], cmap='plasma', scale=35)
 dibujar_placas(ax3)
-ax3.set(xlabel='x', ylabel='y', title='ÍTEM 5 — Campo E = −∇V (sobre equipot.)',
+ax3.set(xlabel='x', ylabel='y', title='ÍTEM 5 - Campo E = −∇V (sobre equipot.)',
         aspect='equal')
 
 ax4 = fig2.add_subplot(1, 2, 2)
@@ -318,14 +318,14 @@ for w, h in historiales.items():
     ax4.semilogy(h, lw=2, label=f"{etiqueta}: {len(h)} iter")
 ax4.axhline(tol, color='red', ls='--', lw=1, label=f'tol = {tol}')   # línea de la tolerancia
 ax4.set(xlabel='Iteración', ylabel='Error máx. |ΔV|',
-        title='ÍTEM 7 — Convergencia para distintos ω')
+        title='ÍTEM 7 - Convergencia para distintos ω')
 ax4.legend(fontsize=9); ax4.grid(alpha=0.3)
 plt.tight_layout()
 
 # ── Comentarios físicos finales (ítems 4 y 5) ────────────────────────────────
 # f"""...""" es una f-string de varias líneas: imprime el bloque con los valores ya sustituidos.
 print("\n" + "═" * 64)
-print("ÍTEMS 4 y 5 — Interpretación física")
+print("ÍTEMS 4 y 5 - Interpretación física")
 print("═" * 64)
 print(f"""  · Simetría: el potencial YA NO es antisimétrico ni nulo en las diagonales.
     El cuadrupolo solo daría V=0 en las diagonales, pero el electrodo central

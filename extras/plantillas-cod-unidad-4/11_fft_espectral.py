@@ -1,5 +1,5 @@
 """
-PLANTILLA 11 — Análisis espectral con FFT (Transformada Rápida de Fourier)
+PLANTILLA 11 - Análisis espectral con FFT (Transformada Rápida de Fourier)
 ===========================================================================
 La FFT descompone una señal en sus componentes de frecuencia.
 

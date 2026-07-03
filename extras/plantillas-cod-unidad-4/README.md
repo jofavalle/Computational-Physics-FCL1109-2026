@@ -1,5 +1,5 @@
-# Plantillas de Código — Unidad 4: Ecuaciones de onda y dinámica de fluidos
-> FCO4101 — Física Computacional, UES 2026  
+# Plantillas de Código - Unidad 4: Ecuaciones de onda y dinámica de fluidos
+> FCO4101 - Física Computacional, UES 2026  
 > Referencia: Landau & Páez, *Computational Problems for Physics*, Cap. 4  
 > ⚠ Solo se usan **numpy** y **matplotlib** (sin fcl1109, sin scipy)
 
@@ -24,7 +24,7 @@ Todo script de la unidad 4 sigue este esqueleto (estudiar en orden):
 | Archivo | Contenido |
 |---------|-----------|
 | `s01_importaciones.py` | numpy, matplotlib, mpl_toolkits, FuncAnimation |
-| `s02_parametros_grilla.py` | Onda 1D, onda 2D, calor, N-S — con assert de estabilidad |
+| `s02_parametros_grilla.py` | Onda 1D, onda 2D, calor, N-S - con assert de estabilidad |
 | `s03_condiciones_iniciales.py` | Gaussiana, triángulo, seno, escalón, ruido, 2D |
 | `s04_condiciones_frontera.py` | Dirichlet, Neumann, periódica, máscara obstáculos |
 | `s05_loops_integracion.py` | Leapfrog 1D/2D, FTCS, SOR Laplace, SOR N-S, np.roll |
@@ -58,7 +58,7 @@ Todo script de la unidad 4 sigue este esqueleto (estudiar en orden):
 | **Onda 1D** (CFL) | `r ≤ 1` | `r = c·dt/dx` |
 | **Onda 2D** (CFL 2D) | `r ≤ 1/√2 ≈ 0.707` | `r = c·dt/dx` |
 | **Calor FTCS** (Von Neumann) | `r ≤ 0.5` | `r = α·dt/dx²` |
-| **N-S / SOR** | iterativo, `ω ∈ (0,2)` | `ω ≈ 0.1–1.9` |
+| **N-S / SOR** | iterativo, `ω ∈ (0,2)` | `ω ≈ 0.1-1.9` |
 | **Crank-Nicolson** | incondicionalmente estable | no se implementa sin scipy |
 
 > **Regla rápida para dt:**  

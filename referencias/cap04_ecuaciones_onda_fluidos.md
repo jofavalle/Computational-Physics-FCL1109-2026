@@ -1,6 +1,6 @@
-# Capítulo 4 — Ecuaciones de onda y dinámica de fluidos
+# Capítulo 4 - Ecuaciones de onda y dinámica de fluidos
 > Referencia: Landau & Páez, *Computational Problems for Physics* (2018), Cap. 4  
-> Curso: FCO4101 — Física Computacional, UES 2026
+> Curso: FCO4101 - Física Computacional, UES 2026
 
 ---
 
@@ -74,7 +74,7 @@ $$\frac{\partial T}{\partial t} = \alpha \frac{\partial^2 T}{\partial x^2}$$
 
 donde `α` es la difusividad térmica.
 
-### Esquema explícito (FTCS — Forward Time, Centered Space)
+### Esquema explícito (FTCS - Forward Time, Centered Space)
 
 $$T_i^{n+1} = T_i^n + \alpha \frac{\Delta t}{(\Delta x)^2}\left(T_{i+1}^n - 2T_i^n + T_{i-1}^n\right)$$
 
@@ -158,7 +158,7 @@ phi_nuevo[1:-1, 1:-1] = 0.25 * (
 
 ---
 
-## 4.5 Dinámica de fluidos — Ecuaciones de Navier-Stokes (simplificadas)
+## 4.5 Dinámica de fluidos - Ecuaciones de Navier-Stokes (simplificadas)
 
 ### Ecuación de continuidad (fluido incompresible)
 

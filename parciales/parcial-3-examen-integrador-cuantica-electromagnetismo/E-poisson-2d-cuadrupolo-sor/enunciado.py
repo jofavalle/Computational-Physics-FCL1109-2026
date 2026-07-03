@@ -1,7 +1,7 @@
 """
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║        UNIVERSIDAD DE EL SALVADOR — FACULTAD DE CIENCIAS NATURALES            ║
-║                    FÍSICA COMPUTACIONAL  —  FCO4101                            ║
+║        UNIVERSIDAD DE EL SALVADOR - FACULTAD DE CIENCIAS NATURALES            ║
+║                    FÍSICA COMPUTACIONAL  -  FCO4101                            ║
 ║                    PARCIAL III  ·  SIMULACRO  E                              ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
@@ -92,7 +92,7 @@
      superposición de la parte antisimétrica y la parte simétrica).
 
   2. Implemente la actualización SOR (**).  CLAVE: los nodos prescritos (paredes
-     y electrodo) deben permanecer FIJOS — nunca se actualizan.  Explique la
+     y electrodo) deben permanecer FIJOS - nunca se actualizan.  Explique la
      diferencia entre Jacobi, Gauss-Seidel y SOR, por qué SOR converge más
      rápido, y qué ocurre si ω ≥ 2.  ¿Por qué fijar el electrodo equivale a la
      condición física de un conductor a potencial constante (E = 0 en su seno)?
@@ -110,10 +110,10 @@
 
   5. Calcule el campo eléctrico E = −∇V (diferencias centrales) y grafique sus
      líneas (quiver diezmado o streamplot) sobre las equipotenciales.  Describa:
-        — ¿Hacia dónde apuntan las líneas cerca del electrodo (+500 V) y cerca
+        - ¿Hacia dónde apuntan las líneas cerca del electrodo (+500 V) y cerca
           de cada placa?
-        — ¿Cuánto vale E dentro del electrodo?  ¿Por qué?
-        — Relación entre líneas de campo y equipotenciales.
+        - ¿Cuánto vale E dentro del electrodo?  ¿Por qué?
+        - Relación entre líneas de campo y equipotenciales.
 
   6. (Capacitor) Estime la carga total sobre el electrodo central aplicando la
      ley de Gauss en 2D sobre un lazo rectangular que lo rodee (sin encerrar las

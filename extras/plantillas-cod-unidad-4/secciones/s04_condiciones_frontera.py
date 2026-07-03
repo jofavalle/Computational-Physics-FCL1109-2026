@@ -11,7 +11,7 @@ REGLA: las CC se aplican DESPUÉS de calcular los nodos interiores,
 import numpy as np
 
 # =============================================================================
-# CAMPO 1D — BORDES DE UN VECTOR u[0..N-1]
+# CAMPO 1D - BORDES DE UN VECTOR u[0..N-1]
 # =============================================================================
 
 # --- Dirichlet: valor fijo (cuerda fija, temperatura fija) ---
@@ -31,7 +31,7 @@ u[-1] = u[1]       # u[N-1] = u[1]
 
 
 # =============================================================================
-# CAMPO 2D — BORDES DE UNA MATRIZ u[Nx, Ny]
+# CAMPO 2D - BORDES DE UNA MATRIZ u[Nx, Ny]
 # =============================================================================
 
 # --- Dirichlet: todos los bordes a cero ---

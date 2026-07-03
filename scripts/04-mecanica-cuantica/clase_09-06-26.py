@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from scipy import special
 import mpmath as mp
 
-# Listing 6.17 (Landau) — Funciones de onda regulares de dispersión de Coulomb
+# Listing 6.17 (Landau) - Funciones de onda regulares de dispersión de Coulomb
 # Caso: partícula alfa sobre núcleo de oro (Elab = 7 MeV)
 # Unidades: masas en MeV/c^2, hbar*c en MeV·fm, r en fm
 

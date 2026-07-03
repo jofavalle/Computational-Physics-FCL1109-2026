@@ -1,5 +1,5 @@
 """
-PLANTILLA 09 — Navier-Stokes 2D con obstáculo rectangular (viga)
+PLANTILLA 09 - Navier-Stokes 2D con obstáculo rectangular (viga)
 =================================================================
 Misma formulación ψ-ω que la plantilla 08, pero con una viga rectangular
 dentro del dominio. Las celdas interiores de la viga se saltean en el loop.
@@ -92,7 +92,7 @@ def relajar():
             # --- ω: ecuación de transporte de vorticidad ---
             a1 = w[i+1,j] + w[i-1,j] + w[i,j+1] + w[i,j-1]
 
-            # término convectivo — signo según Landau Listing 4.9 y clase_08-05-26.py
+            # término convectivo - signo según Landau Listing 4.9 y clase_08-05-26.py
             # de ∂ω/∂t + ψ_y·∂ω/∂x − ψ_x·∂ω/∂y = ν·∇²ω se obtiene:
             # ω_GS = (Σω − (R/4)·(a2 − a3)) / 4  ≡  (Σω + (R/4)·(a3 − a2)) / 4
             a2 = (psi[i, j+1] - psi[i, j-1]) * (w[i+1, j] - w[i-1, j])  # ψ_y · ω_x (×4h²)

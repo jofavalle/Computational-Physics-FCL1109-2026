@@ -1,7 +1,7 @@
 """
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║        UNIVERSIDAD DE EL SALVADOR — FACULTAD DE CIENCIAS NATURALES          ║
-║                    FÍSICA COMPUTACIONAL  —  FCO4101                          ║
+║        UNIVERSIDAD DE EL SALVADOR - FACULTAD DE CIENCIAS NATURALES          ║
+║                    FÍSICA COMPUTACIONAL  -  FCO4101                          ║
 ║                    PARCIAL III  ·  SIMULACRO  D                              ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
@@ -76,16 +76,16 @@
   4. Para cada uno de los primeros 4 estados, re-integre y construya la
      función de onda completa ψ_n(x) en el dominio (−x_max, x_max)
      usando la simetría de paridad:
-        — ψ_n(−x) = +ψ_n(x)  para estados pares
-        — ψ_n(−x) = −ψ_n(x)  para estados impares
+        - ψ_n(−x) = +ψ_n(x)  para estados pares
+        - ψ_n(−x) = −ψ_n(x)  para estados impares
      Normalice cada función de onda.  Grafique ψ_n(x) + E_n (desplazadas
      verticalmente por su energía) junto con el potencial V(x) = x².
 
   5. Cuente el número de nodos (ceros) de cada ψ_n(x) en el interior.
      ¿Qué relación existe entre el número de nodos y n? Grafique |ψ_n(x)|²
      para n = 0, 1, 2, 3 y discuta:
-        — ¿Cuál es la región clásicamente permitida para cada n?
-        — ¿Cómo se explica la presencia de ψ_n ≠ 0 fuera de esa región?
+        - ¿Cuál es la región clásicamente permitida para cada n?
+        - ¿Cómo se explica la presencia de ψ_n ≠ 0 fuera de esa región?
 
   6. Verifique numéricamente la ortogonalidad de los autoestados:
 

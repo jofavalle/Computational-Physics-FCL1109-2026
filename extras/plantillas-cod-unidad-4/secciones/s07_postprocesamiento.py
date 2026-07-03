@@ -96,7 +96,7 @@ if error_max < tolerancia:
 
 
 # =============================================================================
-# 7. VELOCIDAD LOCAL v(x) = sqrt(T(x)/rho(x)) — onda con propiedades variables
+# 7. VELOCIDAD LOCAL v(x) = sqrt(T(x)/rho(x)) - onda con propiedades variables
 # =============================================================================
 v_local = np.sqrt(T / rho)
 vmax    = np.max(v_local)

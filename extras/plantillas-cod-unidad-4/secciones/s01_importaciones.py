@@ -4,7 +4,7 @@ SECCIÓN: IMPORTACIONES
 Patrón estándar de imports que aparece en todos los scripts de la unidad 4.
 
 Regla de oro: importar SOLO lo que se va a usar.
-En el parcial no hay fcl1109 ni scipy — solo numpy y matplotlib.
+En el parcial no hay fcl1109 ni scipy - solo numpy y matplotlib.
 """
 
 # --- Bloque mínimo (onda, calor, Laplace) ---

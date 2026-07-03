@@ -54,7 +54,7 @@ u = envolvente * np.sin(k * x + phi)
 
 
 # =============================================================================
-# CAMPO 2D — construido sobre meshgrid
+# CAMPO 2D - construido sobre meshgrid
 # =============================================================================
 # Se asume que ya existe: X, Y de meshgrid (indexing='ij')
 

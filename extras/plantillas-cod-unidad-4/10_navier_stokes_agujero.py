@@ -1,5 +1,5 @@
 """
-PLANTILLA 10 — Navier-Stokes 2D con geometría de boquilla / agujero
+PLANTILLA 10 - Navier-Stokes 2D con geometría de boquilla / agujero
 ====================================================================
 Problema: flujo a través de un agujero en la pared inferior del dominio.
 La boquilla introduce velocidades verticales (vy < 0 hacia abajo).

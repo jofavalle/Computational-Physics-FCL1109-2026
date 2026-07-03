@@ -1,7 +1,7 @@
 """
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║        UNIVERSIDAD DE EL SALVADOR — FACULTAD DE CIENCIAS NATURALES          ║
-║                    FÍSICA COMPUTACIONAL  —  FCO4101                          ║
+║        UNIVERSIDAD DE EL SALVADOR - FACULTAD DE CIENCIAS NATURALES          ║
+║                    FÍSICA COMPUTACIONAL  -  FCO4101                          ║
 ║                    PARCIAL III  ·  SIMULACRO  A                              ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
@@ -33,9 +33,9 @@
   Las raíces de (1) y (2) son las energías ligadas del sistema.
 
   Condiciones de frontera:
-    — ψ(x) crece como e^{+√(E_B) · x} para x → −∞ (región izquierda)
-    — ψ(x) decae como e^{−√(E_B) · x} para x → +∞ (región derecha)
-    — ψ(x) oscila como cos(k x) / sin(k x) dentro del pozo, k = √(V₀ − E_B)
+    - ψ(x) crece como e^{+√(E_B) · x} para x → −∞ (región izquierda)
+    - ψ(x) decae como e^{−√(E_B) · x} para x → +∞ (región derecha)
+    - ψ(x) oscila como cos(k x) / sin(k x) dentro del pozo, k = √(V₀ − E_B)
 
   Parámetro del pozo: V₀ = 25  [unidades reducidas]
 
@@ -54,10 +54,10 @@
 
   3. Escanee el intervalo (0, V₀) y encuentre TODAS las energías ligadas del
      sistema. Para cada estado reporte:
-        — El número cuántico n (comenzando desde n = 0 en el estado base)
-        — La paridad (simétrico / antisimétrico)
-        — La energía de enlace E_B
-        — La energía propia E = −E_B
+        - El número cuántico n (comenzando desde n = 0 en el estado base)
+        - La paridad (simétrico / antisimétrico)
+        - La energía de enlace E_B
+        - La energía propia E = −E_B
      Explique por qué el estado base siempre es simétrico para este potencial.
 
   4. Grafique simultáneamente:
@@ -69,16 +69,16 @@
 
   5. Para el estado base (n = 0) construya la función de onda completa ψ₀(x)
      en el dominio x ∈ [−3a, 3a]:
-        — Dentro del pozo:   ψ₀(x) = A cos(k x)
-        — Fuera del pozo:    ψ₀(x) = B e^{−κ|x|},  κ = √(E_B₀)
+        - Dentro del pozo:   ψ₀(x) = A cos(k x)
+        - Fuera del pozo:    ψ₀(x) = B e^{−κ|x|},  κ = √(E_B₀)
      Determine A y B de la condición de continuidad en x = a y normalice.
      Grafique ψ₀(x) y |ψ₀(x)|².
 
   6. Interprete físicamente la densidad de probabilidad |ψ₀(x)|²:
-        — ¿Dónde es más probable encontrar la partícula?
-        — ¿Puede la partícula estar fuera del pozo? Justifique en términos
+        - ¿Dónde es más probable encontrar la partícula?
+        - ¿Puede la partícula estar fuera del pozo? Justifique en términos
           de la mecánica clásica vs. la cuántica (efecto túnel).
-        — Estime la probabilidad de encontrar la partícula fuera del pozo
+        - Estime la probabilidad de encontrar la partícula fuera del pozo
           calculando  P_ext = ∫_{|x|>a} |ψ₀|² dx.
 """
 
