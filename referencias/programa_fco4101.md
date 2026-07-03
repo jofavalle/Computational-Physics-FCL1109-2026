@@ -1,4 +1,4 @@
-# Programa - Física Computacional FCO4101
+# Programa - Física Computacional FCL1109
 > Universidad de El Salvador · Facultad de Ciencias Naturales y Matemática  
 > Escuela de Física · Ciclo I 2026 · 18 semanas  
 > Profesor: Raúl Henríquez Ortiz

@@ -1,5 +1,5 @@
 # Plantillas de Código - Unidad 4: Ecuaciones de onda y dinámica de fluidos
-> FCO4101 - Física Computacional, UES 2026  
+> FCL1109 - Física Computacional, UES 2026  
 > Referencia: Landau & Páez, *Computational Problems for Physics*, Cap. 4  
 > ⚠ Solo se usan **numpy** y **matplotlib** (sin fcl1109, sin scipy)
 

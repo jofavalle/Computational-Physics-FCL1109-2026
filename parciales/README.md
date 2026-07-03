@@ -1,6 +1,6 @@
 # Parciales
 
-Exámenes parciales del curso FCO4101 (60 % de la nota final).
+Exámenes parciales del curso FCL1109 (60 % de la nota final).
 
 ## [Parcial 2 - Ecuación de onda 1D: modos normales](parcial-2-onda-1d-modos-normales-leapfrog/)
 

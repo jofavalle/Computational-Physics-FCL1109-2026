@@ -1,7 +1,7 @@
 """
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║        UNIVERSIDAD DE EL SALVADOR - FACULTAD DE CIENCIAS NATURALES            ║
-║                    FÍSICA COMPUTACIONAL  -  FCO4101                            ║
+║                    FÍSICA COMPUTACIONAL  -  FCL1109                            ║
 ║                    PARCIAL III  ·  SIMULACRO  F  -  SOLUCIÓN                   ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 

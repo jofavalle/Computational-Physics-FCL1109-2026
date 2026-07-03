@@ -1,4 +1,4 @@
-# Referencias - Física Computacional FCO4101
+# Referencias - Física Computacional FCL1109
 > Universidad de El Salvador · Ciclo I 2026  
 > Basado en: Landau & Páez, *Computational Problems for Physics*, CRC Press 2018
 

@@ -1,6 +1,6 @@
 # Seminarios de investigación
 
-Proyectos finales de investigación del curso FCO4101, la pieza central del portafolio: cada estudiante eligió un tema avanzado de física computacional, lo implementó desde cero y lo presentó formalmente (documento/presentación + código).
+Proyectos finales de investigación del curso FCL1109, la pieza central del portafolio: cada estudiante eligió un tema avanzado de física computacional, lo implementó desde cero y lo presentó formalmente (documento/presentación + código).
 
 ## [jofavalle - Integral de camino de Feynman mediante Monte Carlo cuántico y cadenas de Markov](jofavalle-integral-camino-feynman-montecarlo/)
 

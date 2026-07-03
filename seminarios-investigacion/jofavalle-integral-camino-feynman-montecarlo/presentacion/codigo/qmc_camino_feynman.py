@@ -1,7 +1,7 @@
 """
 Integral de camino de Feynman por Monte Carlo cuántico (algoritmo de Metropolis).
 
-Seminario de Física Computacional (FCO4101) - Universidad de El Salvador.
+Seminario de Física Computacional (FCL1109) - Universidad de El Salvador.
 Tema: Feynman Path Integral Quantum Mechanics.
 Bibliografía principal: Landau & Páez, Computational Problems for Physics (2018),
 sección 6.11 y listado 6.24 (programa QMC.py).

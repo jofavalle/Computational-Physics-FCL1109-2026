@@ -1,6 +1,6 @@
 # Prácticas numéricas
 
-Las 3 prácticas numéricas formales del curso FCO4101 (40 % de la nota final). Cada práctica agrupa las entregas de los 3 estudiantes: [jofavalle](https://github.com/jofavalle) (AV18012), [cesarp03](https://github.com/cesarp03) (PA22006) y [aalexanderrz](https://github.com/aalexanderrz) (RZ22004), cada uno en su propia subcarpeta.
+Las 3 prácticas numéricas formales del curso FCL1109 (40 % de la nota final). Cada práctica agrupa las entregas de los 3 estudiantes: [jofavalle](https://github.com/jofavalle) (AV18012), [cesarp03](https://github.com/cesarp03) (PA22006) y [aalexanderrz](https://github.com/aalexanderrz) (RZ22004), cada uno en su propia subcarpeta.
 
 ## Práctica 1 - [Fundamentos numéricos: derivadas, integrales y EDOs clásicas](practica-1-fundamentos-numericos-edo-integrales/)
 

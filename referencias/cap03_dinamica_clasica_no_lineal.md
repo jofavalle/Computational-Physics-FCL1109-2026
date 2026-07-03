@@ -1,6 +1,6 @@
 # Capítulo 3 - Dinámica clásica y no lineal
 > Referencia: Landau & Páez, *Computational Problems for Physics* (2018), Cap. 3  
-> Curso: FCO4101 - Física Computacional, UES 2026
+> Curso: FCL1109 - Física Computacional, UES 2026
 
 ---
 
