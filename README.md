@@ -1,4 +1,4 @@
-# Física Computacional (FCO4101) — Portafolio del curso
+# Física Computacional (FCO4101) - Portafolio del curso
 
 Repositorio del curso **FCO4101 (Física Computacional)**, Escuela de Física, Facultad de Ciencias Naturales y Matemática, Universidad de El Salvador, Ciclo I 2026. Libro de referencia principal: Landau & Páez, *Computational Problems for Physics* (CRC Press, 2018).
 
