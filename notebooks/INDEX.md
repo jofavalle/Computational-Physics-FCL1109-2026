@@ -1,6 +1,6 @@
 # Índice de notebooks de clase
 
-Notebooks de cada sesión del curso, organizados por unidad temática según el programa (ver [referencias/programa_fco4101.md](../referencias/programa_fco4101.md)). Cada unidad tiene su propio archivo de referencia resumido en `referencias/`.
+Notebooks de cada sesión del curso, organizados por unidad temática según el programa (ver [referencias/programa_fcl1109.md](../referencias/programa_fcl1109.md)). Cada unidad tiene su propio archivo de referencia resumido en `referencias/`.
 
 ## 00 - Fundamentos computacionales
 

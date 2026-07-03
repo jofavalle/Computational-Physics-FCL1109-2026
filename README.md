@@ -23,7 +23,7 @@ Este repositorio documenta el trabajo de tres estudiantes a lo largo de todo el 
 | 16-17 | Mecánica cuántica | Cap. 6 | [notebooks/04-mecanica-cuantica](notebooks/04-mecanica-cuantica/), [referencias/cap06_mecanica_cuantica.md](referencias/cap06_mecanica_cuantica.md) |
 | 18 | Termodinámica y física estadística | Cap. 7 | [parciales/parcial-3-...](parciales/parcial-3-examen-integrador-cuantica-electromagnetismo/) |
 
-Evaluación: 4 prácticas numéricas (40 %) + 3 exámenes parciales (60 %). Programa completo en [referencias/programa_fco4101.md](referencias/programa_fco4101.md).
+Evaluación: 4 prácticas numéricas (40 %) + 3 exámenes parciales (60 %). Programa completo en [referencias/programa_fcl1109.md](referencias/programa_fcl1109.md).
 
 ## Estructura del repositorio
 
