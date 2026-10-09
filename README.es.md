@@ -77,3 +77,9 @@ python3 extras/tests.py
 ```
 
 Algunas prácticas de estudiantes incluyen su propia copia local de `fcl1109.py` (se conservan tal cual para no romper las entregas originales).
+
+## Licencia
+
+- **Código** (los archivos `.py` y las celdas de código de los notebooks): [licencia MIT](LICENSE).
+- **El resto del contenido** (textos, informes, presentaciones y figuras): [Creative Commons Atribución 4.0 Internacional (CC BY 4.0)](LICENSES/CC-BY-4.0.txt).
+- **Quedan excluidos**, porque son del profesor de la asignatura y se incluyen solo como contexto de las soluciones: los enunciados [practica_numerica_2.pdf](practicas-numericas/practica-2-dispersion-potencial-2d-rk4/jofavalle/practica_numerica_2.pdf) y [practica_numerica_3.pdf](practicas-numericas/practica-3-euler-fluido-compresible-lax-friedrichs/jofavalle/practica_numerica_3.pdf), las indicaciones del seminario [indicaciones.pdf](seminarios-investigacion/jofavalle-integral-camino-feynman-montecarlo/indicaciones.pdf) y el programa del curso [referencias/programa_fcl1109.md](referencias/programa_fcl1109.md). Las citas a Landau y Páez conservan los derechos de sus autores.
