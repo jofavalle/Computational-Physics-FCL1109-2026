@@ -61,11 +61,19 @@ Los tres seminarios finales (ver [seminarios-investigacion/](seminarios-investig
 
 ## Entorno de ejecución
 
-Entorno virtual de Python en `.venv/`. La biblioteca `fcl1109.py` (raíz del proyecto) centraliza los métodos numéricos usados en la mayoría de notebooks y scripts:
+Probado con Python 3.11. Las dependencias, fijadas a las versiones con que se verificó, están en [requirements.txt](requirements.txt):
 
 ```bash
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
 source .venv/bin/activate
 python3 scripts/04-mecanica-cuantica/clase_09-06-26.py
+```
+
+La biblioteca `fcl1109.py` (raíz del proyecto) centraliza los métodos numéricos usados en la mayoría de notebooks y scripts. Su batería de pruebas compara cada método con un valor analítico conocido:
+
+```bash
+python3 extras/tests.py
 ```
 
 Algunas prácticas de estudiantes incluyen su propia copia local de `fcl1109.py` (se conservan tal cual para no romper las entregas originales).

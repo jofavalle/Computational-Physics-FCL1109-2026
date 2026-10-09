@@ -1,0 +1,11 @@
+# Dependencias directas del portafolio, fijadas a las versiones con que se verificó
+# (Python 3.11). Instalación:
+#   python3 -m venv .venv
+#   .venv/bin/pip install -r requirements.txt
+
+numpy==2.4.3        # arreglos y álgebra lineal: casi todos los scripts y notebooks
+scipy==1.17.1       # funciones especiales, integración y constantes físicas
+matplotlib==3.10.8  # gráficas, incluidas las 3D (mpl_toolkits)
+mpmath==1.4.1       # aritmética de precisión arbitraria
+ipykernel==7.2.0    # para ejecutar los notebooks con este entorno
+PyQt6==6.10.2       # ventanas interactivas de plt.show()

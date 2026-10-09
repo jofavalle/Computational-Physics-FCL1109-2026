@@ -63,11 +63,19 @@ The three final seminars (see [seminarios-investigacion/](seminarios-investigaci
 
 ## Running the code
 
-Python virtual environment in `.venv/`. The library `fcl1109.py` (repository root) gathers the numerical methods used by most notebooks and scripts:
+Tested with Python 3.11. The dependencies, pinned to the tested versions, are listed in [requirements.txt](requirements.txt):
 
 ```bash
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
 source .venv/bin/activate
 python3 scripts/04-mecanica-cuantica/clase_09-06-26.py
+```
+
+The library `fcl1109.py` (repository root) gathers the numerical methods used by most notebooks and scripts. Its test suite checks each method against a known analytical value:
+
+```bash
+python3 extras/tests.py
 ```
 
 Some student assignments include their own local copy of `fcl1109.py`, kept as-is so that the original submissions still run.
