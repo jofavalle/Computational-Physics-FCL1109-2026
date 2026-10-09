@@ -1,69 +1,73 @@
-# Física Computacional (FCL1109) - Portafolio del curso
+# Computational Physics (FCL1109) - Course Portfolio
 
-Repositorio del curso **FCL1109 (Física Computacional)**, Escuela de Física, Facultad de Ciencias Naturales y Matemática, Universidad de El Salvador, Ciclo I 2026. Libro de referencia principal: Landau & Páez, *Computational Problems for Physics* (CRC Press, 2018).
+English | [Español](README.es.md)
 
-Este repositorio documenta el trabajo de tres estudiantes a lo largo de todo el curso: implementaciones de métodos numéricos, simulaciones de sistemas físicos, prácticas numéricas formales, exámenes parciales y proyectos finales de investigación. Se organiza como un portafolio técnico que demuestra experiencia práctica en **física computacional, métodos numéricos, simulación de sistemas dinámicos, ecuaciones diferenciales parciales, y métodos de Monte Carlo/cadenas de Markov**.
+Repository for the course **FCL1109 (Computational Physics)**, School of Physics, Faculty of Natural Sciences and Mathematics, University of El Salvador (Universidad de El Salvador), first semester of 2026. Main textbook: Landau & Páez, *Computational Problems for Physics* (CRC Press, 2018).
 
-## Estudiantes
+This repository documents the work of three students throughout the whole course: implementations of numerical methods, simulations of physical systems, formal numerical assignments, midterm exams and final research projects. It is organized as a technical portfolio of hands-on work in **computational physics, numerical methods, simulation of dynamical systems, partial differential equations, and Monte Carlo/Markov chain methods**.
 
-| Usuario de GitHub | Código universitario |
+Course materials (code comments, notebooks and reports) are in Spanish, the language of instruction at the University of El Salvador.
+
+## Students
+
+| GitHub user | Student ID |
 |---|---|
 | [jofavalle](https://github.com/jofavalle) | AV18012 |
 | [cesarp03](https://github.com/cesarp03) | PA22006 |
 | [aalexanderrz](https://github.com/aalexanderrz) | RZ22004 |
 
-## Programa del curso
+## Course syllabus
 
-| Semanas | Unidad | Referencia Landau | Material en este repo |
+| Weeks | Unit | Landau chapter | Material in this repository |
 |---|---|---|---|
-| 1-5 | Fundamentos computacionales y análisis de datos | Cap. 1-2 | [notebooks/00-fundamentos-computacionales](notebooks/00-fundamentos-computacionales/) |
-| 6-8 | Dinámica clásica y no lineal (osciladores, caos, órbitas) | Cap. 3 | [notebooks/01-dinamica-clasica-no-lineal](notebooks/01-dinamica-clasica-no-lineal/), [referencias/cap03_dinamica_clasica_no_lineal.md](referencias/cap03_dinamica_clasica_no_lineal.md) |
-| 9-13 | Ecuaciones de onda y dinámica de fluidos (FTCS, Crank-Nicolson, FFT) | Cap. 4 | [notebooks/02-ecuaciones-onda-fluidos](notebooks/02-ecuaciones-onda-fluidos/), [extras/plantillas-cod-unidad-4/](extras/plantillas-cod-unidad-4/), [referencias/cap04_ecuaciones_onda_fluidos.md](referencias/cap04_ecuaciones_onda_fluidos.md) |
-| 14-15 | Electricidad y magnetismo (Laplace, Poisson, FDTD, SOR) | Cap. 5 | [notebooks/03-electricidad-magnetismo](notebooks/03-electricidad-magnetismo/), [referencias/cap05_electricidad_magnetismo.md](referencias/cap05_electricidad_magnetismo.md) |
-| 16-17 | Mecánica cuántica | Cap. 6 | [notebooks/04-mecanica-cuantica](notebooks/04-mecanica-cuantica/), [referencias/cap06_mecanica_cuantica.md](referencias/cap06_mecanica_cuantica.md) |
-| 18 | Termodinámica y física estadística | Cap. 7 | [parciales/parcial-3-...](parciales/parcial-3-examen-integrador-cuantica-electromagnetismo/) |
+| 1-5 | Computational fundamentals and data analysis | Ch. 1-2 | [notebooks/00-fundamentos-computacionales](notebooks/00-fundamentos-computacionales/) |
+| 6-8 | Classical and nonlinear dynamics (oscillators, chaos, orbits) | Ch. 3 | [notebooks/01-dinamica-clasica-no-lineal](notebooks/01-dinamica-clasica-no-lineal/), [referencias/cap03_dinamica_clasica_no_lineal.md](referencias/cap03_dinamica_clasica_no_lineal.md) |
+| 9-13 | Wave equations and fluid dynamics (FTCS, Crank-Nicolson, FFT) | Ch. 4 | [notebooks/02-ecuaciones-onda-fluidos](notebooks/02-ecuaciones-onda-fluidos/), [extras/plantillas-cod-unidad-4/](extras/plantillas-cod-unidad-4/), [referencias/cap04_ecuaciones_onda_fluidos.md](referencias/cap04_ecuaciones_onda_fluidos.md) |
+| 14-15 | Electricity and magnetism (Laplace, Poisson, FDTD, SOR) | Ch. 5 | [notebooks/03-electricidad-magnetismo](notebooks/03-electricidad-magnetismo/), [referencias/cap05_electricidad_magnetismo.md](referencias/cap05_electricidad_magnetismo.md) |
+| 16-17 | Quantum mechanics | Ch. 6 | [notebooks/04-mecanica-cuantica](notebooks/04-mecanica-cuantica/), [referencias/cap06_mecanica_cuantica.md](referencias/cap06_mecanica_cuantica.md) |
+| 18 | Thermodynamics and statistical physics | Ch. 7 | [parciales/parcial-3-...](parciales/parcial-3-examen-integrador-cuantica-electromagnetismo/) |
 
-Evaluación: 4 prácticas numéricas (40 %) + 3 exámenes parciales (60 %). Programa completo en [referencias/programa_fcl1109.md](referencias/programa_fcl1109.md).
+Assessment: 4 numerical assignments (40%) and 3 midterm exams (60%). Full syllabus (in Spanish) in [referencias/programa_fcl1109.md](referencias/programa_fcl1109.md).
 
-## Estructura del repositorio
+## Repository structure
 
-| Carpeta | Contenido |
+| Folder | Contents |
 |---|---|
-| [seminarios-investigacion/](seminarios-investigacion/) | **Proyectos finales de investigación** (uno por estudiante) - la pieza más avanzada del portafolio: integrales de camino de Feynman con Monte Carlo/cadenas de Markov, caos en el mapa logístico, estados coherentes cuánticos |
-| [practicas-numericas/](practicas-numericas/) | Las 3 prácticas numéricas formales del curso, resueltas por los 3 estudiantes |
-| [parciales/](parciales/) | Exámenes parciales (onda 1D, examen integrador de cuántica y electromagnetismo) |
-| [notebooks/](notebooks/) | Notebooks de cada clase, organizados por unidad temática ([índice](notebooks/INDEX.md)) |
-| [scripts/](scripts/) | Scripts equivalentes a las clases, organizados por unidad temática ([índice](scripts/INDEX.md)) |
-| [referencias/](referencias/) | Resúmenes ejecutivos de cada capítulo del libro guía, con los listings originales de Landau como autoridad algorítmica |
-| [extras/](extras/) | Material de repaso y apoyo: exámenes simulacro, datasets (`datos_decaimiento.csv`, `senal_ruido.csv`) y [plantillas-cod-unidad-4/](extras/plantillas-cod-unidad-4/) (biblioteca de plantillas reutilizables para ondas y fluidos, fieles a los algoritmos de Landau) |
-| [fcl1109.py](fcl1109.py) | Biblioteca numérica propia del curso (derivadas, integración, EDOs, ajuste de datos, raíces, Fourier) |
+| [seminarios-investigacion/](seminarios-investigacion/) | **Final research projects** (one per student), the most advanced work in the portfolio: Feynman path integrals with Monte Carlo/Markov chains, chaos in the logistic map, quantum coherent states |
+| [practicas-numericas/](practicas-numericas/) | The 3 formal numerical assignments of the course, solved by each of the 3 students |
+| [parciales/](parciales/) | Midterm exams (1D wave equation; comprehensive exam on quantum mechanics and electromagnetism) |
+| [notebooks/](notebooks/) | Notebooks from each lecture, organized by unit ([index](notebooks/INDEX.md)) |
+| [scripts/](scripts/) | Scripts matching the lectures, organized by unit ([index](scripts/INDEX.md)) |
+| [referencias/](referencias/) | Summaries of chapters 3 to 6 of the textbook and the full course syllabus |
+| [extras/](extras/) | Review and support material: practice exams, datasets (`datos_decaimiento.csv`, `senal_ruido.csv`) and [plantillas-cod-unidad-4/](extras/plantillas-cod-unidad-4/) (a library of reusable templates for waves and fluids that follow Landau's algorithms) |
+| [fcl1109.py](fcl1109.py) | The course's own numerical library (derivatives, integration, ODEs, data fitting, root finding, Fourier analysis) |
 
-## Habilidades técnicas demostradas
+## Technical skills demonstrated
 
-- **Ecuaciones diferenciales ordinarias:** métodos de Euler y Runge-Kutta de 2º y 4º orden (RK2/RK4) aplicados a sistemas caóticos (Lorenz, Rössler), dinámica orbital, oscilador de Van der Pol y proyectiles con fricción.
-- **Ecuaciones diferenciales parciales por diferencias finitas:** esquema leapfrog para la ecuación de onda 1D/2D (cuerdas, membranas, solitones KdV), FTCS y Crank-Nicolson para la ecuación de calor, SOR (sobrerrelajación sucesiva) para Laplace/Poisson y para Navier-Stokes en formulación de vorticidad-función de corriente.
-- **Dinámica de fluidos compresibles:** ecuaciones de Euler 1D con el esquema de Lax-Friedrichs (ondas sonoras, efecto Doppler, ondas de choque).
-- **Electromagnetismo computacional:** FDTD (malla de Yee) para propagación de ondas electromagnéticas en medios homogéneos y dieléctricos.
-- **Mecánica cuántica computacional:** búsqueda de estados ligados (bisección, método de disparo), ecuación de Schrödinger dependiente del tiempo (leapfrog complejo), oscilador armónico cuántico, átomos piónicos.
-- **Métodos de Monte Carlo y cadenas de Markov:** integración Monte Carlo, y el proyecto de investigación insignia que implementa integrales de camino de Feynman mediante Monte Carlo cuántico con el algoritmo de Metropolis (cadena de Markov con criterio de aceptación/rechazo).
-- **Sistemas dinámicos y caos:** atractores extraños, diagramas de bifurcación, sensibilidad a condiciones iniciales, cascadas de duplicación de período.
-- **Análisis numérico general:** diferenciación numérica, integración (trapecio, Simpson, cambio de variable para integrales impropias), ajuste por mínimos cuadrados, prueba de bondad de ajuste (χ²), transformada de Fourier discreta y FFT.
+- **Ordinary differential equations:** Euler and second- and fourth-order Runge-Kutta methods (RK2/RK4) applied to chaotic systems (Lorenz, Rössler), orbital dynamics, the Van der Pol oscillator and projectiles with drag.
+- **Partial differential equations by finite differences:** leapfrog scheme for the 1D/2D wave equation (strings, membranes, KdV solitons), FTCS and Crank-Nicolson for the heat equation, and SOR (successive over-relaxation) for Laplace/Poisson and for Navier-Stokes in the vorticity-stream function formulation.
+- **Compressible fluid dynamics:** 1D Euler equations with the Lax-Friedrichs scheme (sound waves, Doppler effect, shock waves).
+- **Computational electromagnetism:** FDTD (Yee lattice) for electromagnetic wave propagation in homogeneous and dielectric media.
+- **Computational quantum mechanics:** bound-state search (bisection, shooting method), the time-dependent Schrödinger equation (complex leapfrog), the quantum harmonic oscillator and pionic atoms.
+- **Monte Carlo methods and Markov chains:** Monte Carlo integration, and the research project that computes Feynman path integrals through quantum Monte Carlo with the Metropolis algorithm (a Markov chain with an acceptance/rejection criterion).
+- **Dynamical systems and chaos:** strange attractors, bifurcation diagrams, sensitivity to initial conditions and period-doubling cascades.
+- **General numerical analysis:** numerical differentiation, integration (trapezoidal rule, Simpson's rule, change of variables for improper integrals), least-squares fitting, chi-squared goodness-of-fit test (χ²), discrete Fourier transform and FFT.
 
-## Proyectos de investigación destacados
+## Featured research projects
 
-Los tres seminarios finales (ver [seminarios-investigacion/](seminarios-investigacion/)) son la evidencia más completa de dominio del curso:
+The three final seminars (see [seminarios-investigacion/](seminarios-investigacion/)) are the most complete work of the course:
 
-- **jofavalle** - *Integral de camino de Feynman mediante Monte Carlo cuántico y cadenas de Markov (algoritmo de Metropolis)*: obtiene el estado fundamental del oscilador armónico cuántico muestreando trayectorias en tiempo imaginario, sin resolver la ecuación de Schrödinger.
-- **cesarp03** - *Diagrama de bifurcación del mapa logístico*: transición de la dinámica estable a la caótica mediante iteración de mapas y análisis de bifurcaciones.
-- **aalexanderrz** - *Estados coherentes de Glauber*: dinámica de superposiciones cuasi-clásicas del oscilador armónico cuántico mediante expansión en polinomios de Hermite.
+- **jofavalle** - *Feynman path integral through quantum Monte Carlo and Markov chains (Metropolis algorithm)*: obtains the ground state of the quantum harmonic oscillator by sampling imaginary-time paths, without solving the Schrödinger equation.
+- **cesarp03** - *Bifurcation diagram of the logistic map*: the transition from stable to chaotic dynamics, studied through map iteration and bifurcation analysis.
+- **aalexanderrz** - *Glauber coherent states*: dynamics of quasi-classical superpositions of the quantum harmonic oscillator through an expansion in Hermite polynomials.
 
-## Entorno de ejecución
+## Running the code
 
-Entorno virtual de Python en `.venv/`. La biblioteca `fcl1109.py` (raíz del proyecto) centraliza los métodos numéricos usados en la mayoría de notebooks y scripts:
+Python virtual environment in `.venv/`. The library `fcl1109.py` (repository root) gathers the numerical methods used by most notebooks and scripts:
 
 ```bash
 source .venv/bin/activate
 python3 scripts/04-mecanica-cuantica/clase_09-06-26.py
 ```
 
-Algunas prácticas de estudiantes incluyen su propia copia local de `fcl1109.py` (se conservan tal cual para no romper las entregas originales).
+Some student assignments include their own local copy of `fcl1109.py`, kept as-is so that the original submissions still run.
