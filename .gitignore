@@ -2,6 +2,9 @@
 .venv/
 venv/
 
+# Variables de entorno locales
+.env
+
 # Artefactos de compilacion de Python
 __pycache__/
 *.pyc
