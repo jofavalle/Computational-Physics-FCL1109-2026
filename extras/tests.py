@@ -1,4 +1,13 @@
 ''' Script para testear el funcionamimiento de la librería fcl1109.py '''
+import sys
+import tempfile
+from pathlib import Path
+
+# fcl1109.py está en la raíz del repositorio, un nivel por encima de extras/.
+# Python solo añade a sys.path el directorio del script, así que sin esta línea
+# 'import fcl1109' falla salvo que se ejecute con PYTHONPATH=.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 import fcl1109 as fc
 import numpy as np
 
@@ -243,15 +252,15 @@ print()
 # =============================================
 
 # --- Test Euler: dx/dt = -x  =>  x(t) = x₀·e^(-t) ---
-# euler(f, x, h) aplica un paso: x_new = x + h*f(x)
+# euler(f, t, x, h) aplica un paso: x_new = x + h*f(t, x)
 
 x_euler = 1.0       # condición inicial x(0) = 1
 dt = 0.001           # paso pequeño
 t_final = 1.0
 n_pasos = int(t_final / dt)
 
-for _ in range(n_pasos):
-    x_euler = fc.euler(lambda x: -x, x_euler, dt)
+for i in range(n_pasos):
+    x_euler = fc.euler(lambda t, x: -x, i * dt, x_euler, dt)
 
 exacto_euler = np.exp(-t_final)  # e^(-1) ≈ 0.3678794...
 print(f"euler(dx/dt=-x, x₀=1, t=1, dt={dt}) = {x_euler:.10f}")
@@ -265,8 +274,8 @@ x_euler2 = 1.0
 t_final2 = 0.5
 n_pasos2 = int(t_final2 / dt)
 
-for _ in range(n_pasos2):
-    x_euler2 = fc.euler(lambda x: 2*x, x_euler2, dt)
+for i in range(n_pasos2):
+    x_euler2 = fc.euler(lambda t, x: 2*x, i * dt, x_euler2, dt)
 
 exacto_euler2 = np.exp(2 * t_final2)  # e^1
 print(f"euler(dx/dt=2x, x₀=1, t=0.5, dt={dt}) = {x_euler2:.10f}")
@@ -276,7 +285,7 @@ assert abs(x_euler2 - exacto_euler2) < 1e-2, "euler falló para dx/dt = 2x"
 print("  ✓ euler con crecimiento exponencial OK\n")
 
 # --- Test RK4: dx/dt = -x  =>  x(t) = e^(-t) ---
-# rk4(t, h, x, f) con f(t, x)
+# rk4(f, t, x, h) con f(t, x)
 
 x_rk4 = 1.0
 dt_rk4 = 0.01  # paso más grande que Euler y aún así más preciso
@@ -285,7 +294,7 @@ t_final_rk4 = 1.0
 n_pasos_rk4 = int(t_final_rk4 / dt_rk4)
 
 for i in range(n_pasos_rk4):
-    x_rk4 = fc.rk4(t, dt_rk4, x_rk4, lambda t, x: -x)
+    x_rk4 = fc.rk4(lambda t, x: -x, t, x_rk4, dt_rk4)
     t += dt_rk4
 
 exacto_rk4 = np.exp(-t_final_rk4)
@@ -306,7 +315,7 @@ def f_vec(t, x):
     return np.array([-x[0], -2*x[1]])
 
 for i in range(n_pasos_rk4):
-    x_vec = fc.rk4(t, dt_rk4, x_vec, f_vec)
+    x_vec = fc.rk4(f_vec, t, x_vec, dt_rk4)
     t += dt_rk4
 
 exacto_vec = np.array([np.exp(-1.0), np.exp(-2.0)])
@@ -324,8 +333,8 @@ x_r = 1.0
 dt_comp = 0.01
 t = 0.0
 for i in range(100):
-    x_e = fc.euler(lambda x: -x, x_e, dt_comp)
-    x_r = fc.rk4(t, dt_comp, x_r, lambda t, x: -x)
+    x_e = fc.euler(lambda t, x: -x, t, x_e, dt_comp)
+    x_r = fc.rk4(lambda t, x: -x, t, x_r, dt_comp)
     t += dt_comp
 
 err_e = abs(x_e - np.exp(-1.0))
@@ -345,6 +354,8 @@ print()
 # =============================================
 # TESTS DE MÍNIMOS CUADRADOS (polinomio grado 3)
 # =============================================
+import matplotlib
+matplotlib.use("Agg")  # sin ventana: la batería corre de principio a fin sin intervención
 import matplotlib.pyplot as plt
 
 # Datos: polinomio cúbico conocido y = 2 - 3x + 0.5x² + 0.8x³ + ruido
@@ -406,9 +417,12 @@ ax.set_title('Ajuste por Mínimos Cuadrados - Polinomio de grado 3')
 ax.legend(loc='lower right')
 ax.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig('test_minimos_cuadrados.png', dpi=150)
-plt.show()
-print("  Gráfica guardada en test_minimos_cuadrados.png\n")
+# A la carpeta temporal del sistema, no al directorio de trabajo, para que la
+# batería no deje archivos dentro del repositorio.
+ruta_figura = Path(tempfile.gettempdir()) / "test_minimos_cuadrados.png"
+plt.savefig(ruta_figura, dpi=150)
+plt.close(fig)
+print(f"  Gráfica guardada en {ruta_figura}\n")
 
 print("=" * 40)
 print("Tests de mínimos cuadrados pasaron correctamente.")
