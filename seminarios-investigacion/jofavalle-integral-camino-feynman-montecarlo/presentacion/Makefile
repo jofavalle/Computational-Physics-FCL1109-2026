@@ -8,6 +8,10 @@
 #   make watch    Compilacion continua (requiere latexmk)
 # ============================================================================
 
+# bash y no el /bin/sh por defecto: en Debian es dash, que no expande las llaves
+# de 'clean' y deja todos los auxiliares sin borrar.
+SHELL := /bin/bash
+
 MAIN = presentacion
 TEX  = pdflatex
 BIB  = biber
